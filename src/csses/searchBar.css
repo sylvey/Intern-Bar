@@ -1,0 +1,13 @@
+.searchBarContainer{
+    display: flex;
+    flex-direction: row;
+    height: 30px;    
+    width: 100%;
+
+}
+
+.searchBarInput{
+    width: 400px;
+    height: 30px;
+    border-style: solid;
+}
