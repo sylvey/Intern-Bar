@@ -1,0 +1,47 @@
+.page{
+    display: flex;
+    flex-direction: column;
+}
+
+.pageTitle{
+    display: flex;
+    background-color: transparent;
+    height: 40px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+    
+    border-radius: 6px;
+    font-size: 35px;
+
+}
+
+.redBackground{
+    background-color: red;
+}
+
+.fullPage{
+    height: 100vh;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    
+    flex-direction: row;
+}
+.marginTop{
+    margin-top: 60px;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.marginLeft{
+    margin-left: 10%;
+}

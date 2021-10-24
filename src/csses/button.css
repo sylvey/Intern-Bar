@@ -1,8 +1,10 @@
 .button{
     display: flex;
-    background-color: violet;
+    background-color: rgb(177, 175, 175);
     height: 40px;
-    width: 40px;
+    width: 60px;
     align-items: center;
     justify-content: center;
+    /* margin-left: 20px; */
+    border-radius: 6px;
 }
