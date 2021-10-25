@@ -1,14 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import "../csses/App.css";
-import "../csses/button.css";
+import profile from "../hardData/profile";
+import MyProfile from "../Components/myProfile";
 
+function Account(){
 
-const Account = () =>{
     return (
-         <div className = {["page"].join(" ")}>
-            <div className = {["row", "marginTop"].join(" ")}>
+         <div className = "page">
+            <div className = "row marginTop">
                 <p className = "pageTitle">個人檔案</p>
                 <p className = "button">新增</p>
+            </div>
+            <div className="scroll centerVertical" >
+                {
+                    profile.map((item, index)=>{
+                        return(
+                            <MyProfile/>
+                        );
+                    })
+                }
+                
             </div>
             
          </div>

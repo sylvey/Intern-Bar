@@ -7,12 +7,16 @@ const NavigationBar = () =>{
     const login = true;// get login status
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        // collapseOnSelect expand="lg"
+        <Navbar expand="lg" bg="dark" variant="dark">
           <Container>
-          <Navbar.Brand href="/">home</Navbar.Brand>
+          <Navbar.Brand href="/">Project Name</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto">
               <Navbar.Brand>實習職務</Navbar.Brand>
-              <Navbar.Brand>心得分享</Navbar.Brand>
+              <Navbar.Brand>活動資訊</Navbar.Brand>
+              <Navbar.Brand>關於</Navbar.Brand>
             </Nav>
             <Nav>
               {
@@ -37,7 +41,7 @@ const NavigationBar = () =>{
               }
               
             </Nav>
-          {/* </Navbar.Collapse> */}
+          </Navbar.Collapse>
           </Container>
         </Navbar>  
     )

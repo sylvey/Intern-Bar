@@ -1,11 +1,16 @@
 import React from "react";
+import "../csses/App.css";
+import myOwnPost from "../hardData/myOwnPost";
 
-const myPost = () =>{
+const MyPost = () =>{
     return (
-        <div>
-            <h1>myPost</h1>
+        <div className = "page">
+            <div className = "row marginTop">
+                <p className = "pageTitle">我的貼文</p>
+                <p className = "button">新增</p>
+            </div>
         </div>
     )
 }
 
-export default myPost;
+export default MyPost;

@@ -8,7 +8,7 @@ import Home from './pages/home';
 import SignIn from './pages/signIn';
 import LogIn from './pages/logIn';
 import Collection from './pages/collection';
-import myPost from './pages/myPost';
+import MyPost from './pages/myPost';
 import Account from './pages/account';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
             <Route path="/SignIn" component={SignIn}/>
             <Route path="/LogIn" component={LogIn}/>
             <Route path="/Collection" component={Collection}/>
-            <Route path="/MyPost" component={myPost}/>
+            <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>
           </Switch>
       </div>

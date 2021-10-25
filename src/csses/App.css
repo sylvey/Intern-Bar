@@ -1,8 +1,4 @@
-.page{
-    display: flex;
-    flex-direction: column;
-}
-
+/* page Title */
 .pageTitle{
     display: flex;
     background-color: transparent;
@@ -11,10 +7,16 @@
     align-items: center;
     justify-content: center;
     margin-left: 10%;
-    
     border-radius: 6px;
     font-size: 35px;
 
+}
+/* page */
+.page{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    /* background-color: hotpink; */
 }
 
 .redBackground{
@@ -25,17 +27,48 @@
     height: 100vh;
 }
 
+.scroll{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 600px;
+    overflow-y: auto;
+    
+}
+
+.wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 600px;
+    width: 82vw;
+    /* margin-left: 10vw; */
+    /* overflow-y: auto; */
+    /* background-color: hotpink; */
+}
+
+
+/* justify */
 .center{
     justify-content: center;
     align-items: center;
 }
 
-.row{
+.centerVertical{
+    align-items: center;
+}
+
+.centerHorizontal{
     
+    justify-content: center;
+}
+
+.row{  
     flex-direction: row;
 }
+
 .marginTop{
-    margin-top: 60px;
+    margin-top: 10%;
 }
 
 .column{
@@ -45,3 +78,60 @@
 .marginLeft{
     margin-left: 10%;
 }
+
+ /* item */
+.item{
+    display: flex;
+    width: 80%;
+    background-color: honeydew;
+    border-style: solid; 
+    margin-bottom: 20px;
+}
+
+.profile{
+    height: 200px;
+    flex-direction: row;
+}
+
+.textLeftBox{
+    flex: 8;
+    /* margin-top: 12px; */
+    margin-left: 12px;
+}
+
+.buttonRightBox{
+    display: flex;
+    flex:2;
+    flex-direction: row;
+    height: 100%;
+    margin-right: 12px;
+}
+
+/* squareItem */
+
+.squareItem{
+    display: flex;
+    width: 200px;
+    height: 200px;
+    margin-block-start: 0px;
+    margin-right: 5vh;
+    background-color: honeydew;
+    border-style: solid; 
+    margin-bottom: 5vh;
+}
+
+/* button */
+
+.button{
+    display: flex;
+    background-color: rgb(177, 175, 175);
+    height: 40px;
+    width: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+
+
+
