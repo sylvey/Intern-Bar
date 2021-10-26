@@ -3,15 +3,13 @@ import React, {useState} from "react";
 import "../csses/App.css";
 
 
-function MyProfile (props) {
+function Post (props) {
     return(
-        <div className = "item profile center">
+        <div className = "item profile">
             <div className = "textLeftBox">
-                <div>職務名稱：{props.posName}</div>
-                <div>公司名稱：{props.orgName}</div>
-                <div>地點：{props.place}</div>
-                <div>開始日期：{props.startDate}</div>
-                <div>結束日期：{props.endDate}</div>
+                <div>{props.content}</div>
+                <div>{props.posName}</div>
+                <div>{props.orgName}</div>
             </div>
             <div className = "buttonRightBox">
                 <div className = "button marginLeft marginTop">編輯</div>
@@ -22,4 +20,4 @@ function MyProfile (props) {
     );
 }
 
-export default MyProfile;
+export default Post;

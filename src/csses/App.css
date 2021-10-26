@@ -49,6 +49,9 @@
 
 
 /* justify */
+.flex{
+    display: flex;
+}
 .center{
     justify-content: center;
     align-items: center;
@@ -70,7 +73,9 @@
 .marginTop{
     margin-top: 10%;
 }
-
+.marginTopS{
+    margin-Top: 12px;
+}
 .column{
     flex-direction: column;
 }
@@ -128,12 +133,33 @@
 
 .button{
     display: flex;
+    cursor: pointer;
     background-color: rgb(177, 175, 175);
     height: 40px;
     width: 60px;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
+}
+
+/* modal */
+
+.editProfile{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 300px;
+    /* overflow-y: auto; */
+    
+}
+
+.editPost{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 500px;
+    /* overflow-y: auto; */
+    
 }
 
 
