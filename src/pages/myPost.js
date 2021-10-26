@@ -1,8 +1,7 @@
-import NavItem from "@restart/ui/esm/NavItem";
 import React, {useState} from "react";
 import "../csses/App.css";
 import myOwnPost from "../hardData/myOwnPost";
-import Post from "../Components/post";
+import MyPostComponent from "../Components/myPost";
 import EditPost from "../Components/EditPost";
 
 const MyPost = () =>{
@@ -24,7 +23,7 @@ const MyPost = () =>{
                 {
                     myOwnPost.map((item)=>{
                         return(
-                            <Post 
+                            <MyPostComponent 
                                 content = {item.content}
                                 posName = {item.position.posName}
                                 orgName = {item.position.organization.orgName}/>   

@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import "../csses/App.css";
 
 
-function Post (props) {
+function MyPostComponent (props) {
     return(
         <div className = "item profile">
             <div className = "textLeftBox">
@@ -11,11 +11,13 @@ function Post (props) {
                 <div>{props.posName}</div>
                 <div>{props.orgName}</div>
             </div>
-            
-            
+            <div className = "buttonRightBox">
+                <div className = "button marginLeft marginTop">編輯</div>
+                <div className = "button marginLeft marginTop">刪除</div>
+            </div>
             
         </div>
     );
 }
 
-export default Post;
+export default MyPostComponent;
