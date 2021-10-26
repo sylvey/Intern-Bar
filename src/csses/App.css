@@ -79,6 +79,10 @@
     margin-left: 10%;
 }
 
+.marginLeftS{
+    margin-left: 12px;
+}
+
  /* item */
 .item{
     display: flex;
