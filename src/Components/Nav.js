@@ -1,14 +1,16 @@
 import React from "react";
 import { Nav, Navbar, Container, NavDropdown, NavbarBrand } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logInButton from "../image/LogInButton.png";
+import RegisterButton from "../image/RegisterButton.png"
 
 const NavigationBar = () =>{
 
-    const login = true;// get login status
+    const login = false;// get login status
 
     return (
         // collapseOnSelect expand="lg"
-        <Navbar expand="lg" bg="dark" variant="dark">
+        <Navbar expand="lg" bg="light" variant="light">
           <Container>
           <Navbar.Brand href="/">Project Name</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -31,10 +33,18 @@ const NavigationBar = () =>{
                     <NavDropdown.Item>登出</NavDropdown.Item>
                   </NavDropdown>
                 ):(
-                  <Container>
-                    <Navbar.Brand href = "LogIn">登入</Navbar.Brand>
-                    <Navbar.Brand href = "SignIn">註冊</Navbar.Brand>
-                  </Container>
+                  <Nav>
+                    <Navbar.Brand href = "LogIn">
+                        <img src={logInButton}
+                             width = "120vh"
+                             height = "95%"/>
+                    </Navbar.Brand>
+                    <Navbar.Brand href = "SignIn">
+                       <img src={RegisterButton}
+                             width = "120vh"
+                             height = "95%"/>
+                    </Navbar.Brand>
+                  </Nav>
                 )
 
                 

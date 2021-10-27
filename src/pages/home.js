@@ -8,7 +8,7 @@ import posts from "../hardData/posts";
 
 const Home = () =>{
     return (
-        <div>
+        <div className = "page">
             <div className = "row marginTop marginLeft">
                 <SearchBar></SearchBar>
             </div>

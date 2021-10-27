@@ -1,29 +1,27 @@
 import React from "react";
-import "../csses/searchBar.css";
+// import "../csses/searchBar.css";
+import "../csses/App.css";
 import { Dropdown } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import searchButton from "../image/SearchButton.png"
 
 const SearchBar = () =>{
     return (
-        <div className = "searchBarContainer center">
-                <Dropdown>
-                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                    下拉選單
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu variant="dark">
-                    <Dropdown.Item>職位名稱</Dropdown.Item>
-                    <Dropdown.Item>公司名稱</Dropdown.Item>
-                    <Dropdown.Item>開始日期</Dropdown.Item>
-                    <Dropdown.Item>結束日期</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-
-                <input className="searchBarInput marginLeftS" placeholder="Search Post"></input>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png"
-                     width = "18px"
-                     height = "18px"
-                     className = "marginLeftS"/>
+        <div className = "searchBarContainer">
+          <div className = "textLeftBox">
+            <input className="searchBarInput" placeholder="公司名稱"/>
+            <input className="searchBarInput" placeholder="職務名稱"/>
+            <div className = "searchBarDateContainer">
+              <input type = "date" className = "searchBarDate"/>
+              <input type = "date" className = "searchBarDate marginLeft"/>
+            </div>
+          </div>
+          <div className = "buttonRightBox">
+            <img src={searchButton}
+                 class = "searchButton transparentBackground"
+                 width = "80px"
+                 height= "60px"/>
+          </div>
         </div>
         
     )

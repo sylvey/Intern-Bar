@@ -6,11 +6,15 @@ import "../csses/signIn&logIn.css";
 const SignIn = () =>{
     return (
         <div className={["page", "fullPage", "center"].join(" ")} >
-            <div className = {["loginSignIn_Container"].join(" ")}>
-                <p className = {["title"].join(" ")}>Welcome to 實習吧</p>
-                <input className="input" placeholder="帳號"></input>
-                <input className="input" placeholder="密碼"></input>
-                <p className="button">註冊</p>
+            <div className = "logInRegisterSmallPage">
+                <p className = {["title"].join(" ")}>Welcome to ProjectName</p>
+                <input className="searchBarInput" placeholder="帳號"></input>
+                <input className="searchBarInput" placeholder="密碼"></input>
+                <div className="searchBarDateContainer center">
+                    <input type="radio" name="AccountType"/> GENERAL USER
+                    <input type="radio" name="AccountType" className="marginLeft"/> ENTERPRISE
+                </div>
+                <div className="logIn_SignIn_button center">Register</div>
             </div>
         </div>
     )
