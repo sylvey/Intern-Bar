@@ -17,15 +17,21 @@ function EditPost(props){
                   className="editPost">
                 <div className="flex marginTopS">
                     <p>職務名稱</p>
-                    <input className="marginLeftS"/>
+                    <input className="marginLeftS" 
+                          value = {props.posName}
+                          onChange = {props.setPosName}/>
                 </div>
                 <div className="flex marginTopS">
                     <p>公司名稱</p>
-                    <input className="marginLeftS"/>
+                    <input className="marginLeftS" 
+                            value = {props.orgName}
+                            onChange = {props.setOrgName}/>
                 </div>
                 <div className="flex marginTopS">
                     <p>地點名稱</p>
-                    <input className="marginLeftS"/>
+                    <input className="marginLeftS" 
+                            value = {props.place}
+                            onChange = {props.setPlace}/>
                 </div>
                 <div className="flex marginTopS">
                     <p>開始日期</p>
@@ -33,16 +39,20 @@ function EditPost(props){
                 </div>
                 <div className="flex marginTopS">
                     <p>結束日期</p>
-                    <input className="marginLeftS"/>
+                    <input type="date" className="marginLeftS"/>
                 </div>
                 <div className="flex marginTopS">
                     <p>標題</p>
-                    <input className="marginLeftS"/>
+                    <input className="marginLeftS" 
+                            value = {props.title}
+                            onChange = {props.setTitle}/>
                 </div>
                 <div className="flex marginTopS">
                     <p>內文</p>
                     <textarea className="marginLeftS" 
-                           cols="40" rows="7"/>
+                           cols="40" rows="7" 
+                           value = {props.content}
+                           onChange = {props.setContent}/>
                 </div>
             </form>
         </Modal.Body>
@@ -50,7 +60,7 @@ function EditPost(props){
           <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.handleClose}>
+          <Button variant="primary" onClick={props.handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>

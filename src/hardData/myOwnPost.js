@@ -3,6 +3,7 @@ export default[
         userName: "Sophia",
         title: "Title of Post", 
         content: "Content of Post",
+        time: "2021-01-11",
         position:
         {
             id: 1,
@@ -23,6 +24,7 @@ export default[
         userName: "Sophia",
         title: "Title of Post", 
         content: "Content of Post",
+        time: "2021-01-11",
         position:
         {
             id: 1,
@@ -43,6 +45,7 @@ export default[
         userName: "Sophia",
         title: "Title of Post", 
         content: "Content of Post",
+        time: "2021-01-11",
         position:
         {
             id: 1,

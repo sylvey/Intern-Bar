@@ -16,7 +16,7 @@ const SearchBar = () =>{
               <input type = "date" className = "searchBarDate marginLeft"/>
             </div>
           </div>
-          <div className = "buttonRightBox">
+          <div className = "buttonRightBox centerHorizontal">
             <img src={searchButton}
                  class = "searchButton transparentBackground"
                  width = "80px"

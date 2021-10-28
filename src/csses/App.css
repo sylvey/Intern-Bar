@@ -89,10 +89,18 @@
 .marginLeftS{
     margin-left: 12px;
 }
-
 .fullWidth{
     width: 100%;
 }
+.fullHeight{
+    height: 100%;
+}
+.end{
+    justify-content: end;
+    align-items: end;
+}
+
+
  /* item */
 .item{
     display: flex;
@@ -117,11 +125,13 @@
 
 .buttonRightBox{
     display: flex;
-    flex:2;
-    flex-direction: row;
+    flex: 2;
+    /* flex-direction: row; */
     height: 100%;
     margin-right: 12px;
 }
+
+
 
 /* squareItem */
 

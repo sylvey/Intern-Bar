@@ -18,7 +18,9 @@ const Home = () =>{
                         return(
                             <Post 
                                 content = {item.content}
+                                title = {item.title}
                                 posName = {item.position.posName}
+                                time = {item.time}
                                 orgName = {item.position.organization.orgName}/>   
                         );
                     })
