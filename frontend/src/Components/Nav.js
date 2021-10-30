@@ -6,7 +6,7 @@ import RegisterButton from "../image/RegisterButton.png"
 
 const NavigationBar = () =>{
 
-    const login = true;// get login status
+    const login = false;// get login status
 
     return (
         // collapseOnSelect expand="lg"
