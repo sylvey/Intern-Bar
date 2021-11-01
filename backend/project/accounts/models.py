@@ -34,11 +34,16 @@ class Organization(models.Model):
     def __unicode__(self):
         return self.org_name
 
+class Place(models.Model):
+    loc_id = models.AutoField(primary_key=True)
+    city = models.CharField(max_length=50)
+    district = models.CharField(max_length=50)
+
 class Located_In(models.Model):    # Relationship
     # primary key?
     org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='OrgLocatedIn')
-    city = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
+    location = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='LocatedInSite')
+    est_time = models.DateField()
 
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
