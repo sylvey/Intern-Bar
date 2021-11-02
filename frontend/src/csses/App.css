@@ -277,6 +277,16 @@
     color: white;
     
 }
+.submitButton{
+    background-color: transparent;
+    border-style: none;
+    color: white;
+}
+.searchButton{
+    /* display: flex; */
+    cursor: pointer;
+    margin-top: 3vh;
+}
 
 /* searchBar */
 .searchBarContainer{
@@ -321,10 +331,6 @@
     box-sizing: border-box;
 }
 
-.searchButton{
-    /* display: flex; */
-    cursor: pointer;
-    margin-top: 3vh;
-}
+
 
 
