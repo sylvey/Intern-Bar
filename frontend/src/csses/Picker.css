@@ -1,0 +1,43 @@
+.PickerContainer{
+    display: flex;
+    flex-direction: row;
+    width:max-content;
+    margin-top: 6px;
+    /* background-color: tomato; */
+    align-items: center;
+    justify-content: center;
+}
+
+.PickerTitle{
+    display: flex;
+    margin-left: 3px;
+}
+.circleContainer{
+    display: flex;
+    margin-left: 3px;
+    height: 12px;
+    width: 12px;
+    background-color: black;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+}
+.circle{
+    display: flex;
+    height: 11px;
+    width: 11px;
+    background-color: wheat;
+    border-style: solid;
+    border-color: whitesmoke;
+    border-radius: 5.5px;
+}
+
+.circleS{
+    display: flex;
+    height: 11px;
+    width: 11px;
+    background-color: green;
+    border-style: solid;
+    border-color: whitesmoke;
+    border-radius: 5.5px;
+}

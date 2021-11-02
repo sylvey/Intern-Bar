@@ -13,6 +13,8 @@ const MyPost = () =>{
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
+    const [position, setPosition] = useState("choose a current position");
+
     const handleSubmit = ()=>{
         console.log(posName);
         setPosName("");
@@ -64,6 +66,8 @@ const MyPost = () =>{
                     setTitle = {(event)=>setTitle(event.target.value)}
                     content = {content}
                     setContent = {(event)=>setContent(event.target.value)}
+                    position = {position}
+                    setPosition = {setPosition}
                     />
              
             </div>
