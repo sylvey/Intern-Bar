@@ -10,17 +10,17 @@ class User(models.Model):
     def __unicode__(self):
         return self.username
 
-class Works_As(models.Model):    # Relationship
+class Worked_As(models.Model):    # Relationship
     # primary key?
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='UserWorksAs')
-    position = models.ForeignKey('Position', on_delete=models.SET_NULL, related_name='WorksAsPos', null=True)
-    start_time = models.DateField()
-    end_time = models.DateField()
+    experience = models.ForeignKey('Experience', on_delete=models.CASCADE, related_name='WorksAsExp', null=True)
 
-class Position(models.Model):
+class Experience(models.Model):
     pos_id = models.AutoField(primary_key=True)
     pos_name = models.CharField(max_length=100)
     org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='PosInOrg')
+    start_time = models.DateField()
+    end_time = models.DateField()
 
     def __unicode__(self):
         return u'%s %s' % (self.pos_name, self.org_name)
@@ -51,7 +51,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     published_time = models.DateTimeField(auto_now=True)
-    position = models.OneToOneField('Position', on_delete=models.SET_NULL, related_name='AboutPos', null=True)
+    experience = models.OneToOneField('Experience', on_delete=models.CASCADE, related_name='AboutExp', null=True)
 
     def __unicode__(self):
         return self.title
