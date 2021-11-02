@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .serializer import UserSerializer
 
 from .models import *
 
@@ -10,15 +11,21 @@ def signup(request):
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'POST':
-        userId = request.data['userId']
-        pwd = request.data['password']
-        userName = request.data['userName']
-    
-    if(User.objects.filter(user_id = userId).count() == 0): # no existing user
-        User.objects.create(user_id = userId, username = userName, password = pwd, status = False)
-        return Response(status=status.HTTP_201_CREATED)
-    else:
-        message = {"status": "Existing user id"}
-        return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
+        userSerializer = UserSerializer(data = request.data)
+        if userSerializer.is_valid(): #validation of string length, datatype, etc.
+            if userSerializer.create():
+                return Response(status=status.HTTP_201_CREATED)
+            else:
+                message = {"status": "Existing user id"}
+            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(data = userSerializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        
 
+    # if(User.objects.filter(user_id = userId).count() == 0): # no existing user
+    #     User.objects.create(user_id = userId, username = userName, password = pwd, status = False)
+    #     return Response(status=status.HTTP_201_CREATED)
+    # else:
+    #     message = {"status": "Existing user id"}
+    #     return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
 

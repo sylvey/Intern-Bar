@@ -14,8 +14,8 @@ class Experience(models.Model):
     exp_id = models.AutoField(primary_key=True)
     pos_name = models.CharField(max_length=100)
     org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='ExpInOrg')
-    start_time = models.DateField()
-    end_time = models.DateField()
+    start_date = models.DateField()
+    end_date = models.DateField()
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='ExpOfUser')
 
     def __unicode__(self):
@@ -57,7 +57,7 @@ class Comment(models.Model):
     author = models.OneToOneField('User', on_delete=models.SET_NULL, related_name='CommentedByUser', null=True)
     post_attached = models.OneToOneField('Post', on_delete=models.CASCADE, related_name='UnderPost')
     content = models.TextField()
-    publishedTime = models.DateTimeField(auto_now=True)
+    published_time = models.DateTimeField(auto_now=True)
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
