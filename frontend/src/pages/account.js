@@ -8,18 +8,51 @@ import orgs from "../hardData/orgs";
 function Account(){
 
     const [editShow, setEditShow] = useState(false);
+
     const [posName, setPosName] = useState("");
+    const [posError, setPosError] = useState();
     const [orgName, setOrgName] = useState("");
-    const [startTime, setStartTime] = useState({date: new Date()});
-    const [endTime, setEndTime] = useState({date: new Date()});
+    const [startTime, setStartTime] = useState(null);
+    const [startError, setStartError] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+    const [endError, setEndError] = useState(null);
     const [filtered, setFiltered] = useState(orgs);
     const [org, setOrg] = useState({});
+    const [orgSubmitted, setOrgSubmitted] = useState(false);
+    const [orgError, setOrgError] = useState(null);
 
     const handleShow = () =>{
         setEditShow(true);
     }
     const handleClose = () =>{
         setEditShow(false);
+    }
+
+    const validate = () =>{
+        if(posName === "" || startTime == null || endTime == null || !orgSubmitted){
+            if(posName === ""){
+                setPosError("you must fill this field");
+            }
+            if(startTime == null){
+                setStartError("you haven't choose a time");
+            }
+            if(endTime == null){
+                setEndError("you haven't choose a time");
+            }
+            if(!orgSubmitted){
+                setOrgError("you haven't finish adding an organization")
+            }
+            return false;
+        }
+        
+        return true;
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        if(validate()){
+
+            handleClose();
+        }
     }
 
     const handleSetOrg = (e) =>{
@@ -59,12 +92,17 @@ function Account(){
                     })
                 }
                 <EditProfile 
+                    handleSubmit = {handleSubmit}
                     show={editShow} 
                     handleClose = {handleClose}
                     posName = {posName}
+                    posError = {posError}
                     orgName = {orgName}
+                    orgError = {orgError}
                     startTime = {startTime}
+                    startError = {startError}
                     endTime = {endTime}
+                    endError = {endError}
                     setPosName = {(e)=>{setPosName(e.target.value)}}
                     setOrgName = {handleSetOrg}
                     setStartTime = {(e)=>{setStartTime(e.target.value)}}
@@ -72,6 +110,7 @@ function Account(){
                     filtered = {filtered}
                     org = {org}
                     setOrg = {setOrg}
+                    setOrgSubmitted = {setOrgSubmitted}
                 />
                 
             </div>
