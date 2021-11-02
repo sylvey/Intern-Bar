@@ -36,6 +36,43 @@
     overflow-y: auto;
     
 }
+.scrollRow{
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    height: 60px;
+    overflow-x: auto;
+    
+}
+
+.scrollRow::-webkit-scrollbar {
+  width: inherit;
+  height: 7px;
+  border-radius: 6px;
+  /* background-color: red; */
+}
+.scrollRow::-webkit-scrollbar-button{
+  width: 0;
+}
+.scrollRow::-webkit-scrollbar-track-piece{
+  background: transparent;
+  border-radius: 6px;
+}
+.scrollRow::-webkit-scrollbar-corner{
+  border:1px solid red;
+}
+.scrollRow::-webkit-scrollbar-track {
+    width: inherit;
+    /* background-color: palegoldenrod; */
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+ 
+.scrollRow::-webkit-scrollbar-thumb {
+  background-color: rgb(184, 184, 184);
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 8px;
+}
+
 .wrap{
     display: flex;
     flex-direction: row;
@@ -86,6 +123,9 @@
 .marginLeft{
     margin-left: 10%;
 }
+.marginRight{
+    margin-right: 10%;
+}
 .marginLeftS{
     margin-left: 12px;
 }
@@ -98,6 +138,11 @@
 .end{
     justify-content: end;
     align-items: end;
+}
+
+.endSelf{
+    justify-self: end;
+    align-self: end;
 }
 
 
@@ -164,7 +209,40 @@
 .functionalButton{
     /* display: flex; */
     cursor: pointer;
+    
     margin-top: 3vw;
+}
+
+.tagButton{
+    display: flex;
+    cursor: pointer;
+    background-color: rgb(158, 157, 157);
+    height: 15px;
+    width:fit-content;
+    margin:12px;
+    font-size: 9px;
+    align-items: center;
+    padding:3px;
+    justify-content: center;
+    border-radius: 1px;
+    color:ivory;
+    white-space:nowrap;
+}
+
+.tagButtonG{
+    display: flex;
+    cursor: pointer;
+    background-color: rgb(213, 250, 210);
+    height: 15px;
+    width:fit-content;
+    margin:12px;
+    font-size: 9px;
+    align-items: center;
+    padding:3px;
+    justify-content: center;
+    border-radius: 1px;
+    color:rgb(3, 3, 3);
+    white-space:nowrap;
 }
 
 /* modal */
@@ -172,7 +250,7 @@
 .editProfile{
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: inherit;
     height: 300px;
     /* overflow-y: auto; */
     
