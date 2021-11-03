@@ -63,16 +63,16 @@ def logout(request):
             return Response(data = {}, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-def create_post(request):
-    if 'application/json' not in request.content_type:
-        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['POST'])
+# def create_post(request):
+#     if 'application/json' not in request.content_type:
+#         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
-    if request.method == 'POST':
-        postSerializer = PostSerializer(data = request.data)
-        if postSerializer.is_valid(): #validation of string length, datatype, etc.
-            if postSerializer.create():
-                return Response(status=status.HTTP_200_OK)
+#     if request.method == 'POST':
+#         postSerializer = PostSerializer(data = request.data)
+#         if postSerializer.is_valid(): #validation of string length, datatype, etc.
+#             if postSerializer.create():
+#                 return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
