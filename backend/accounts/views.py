@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import UserSerializer
+#PostSerializer
 
 from .models import *
 from .functs import *
@@ -16,7 +17,7 @@ def signup(request):
         if userSerializer.is_valid(): #validation of string length, datatype, etc.
             if userSerializer.create():
                 return Response(status=status.HTTP_201_CREATED)
-            else: 
+            else:
                 message = {"status": "Existing user id"}
             return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
         else:
@@ -59,3 +60,15 @@ def logout(request):
             user.status = False
             user.save(update_fields=['status'])
             return Response(data = {}, status=status.HTTP_200_OK)
+
+
+# @api_view(['POST'])
+# def create_post(request):
+#     if 'application/json' not in request.content_type:
+#         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+#     if request.method == 'POST':
+#         postSerializer = PostSerializer(data = request.data)
+#         if postSerializer.is_valid(): #validation of string length, datatype, etc.
+#             if postSerializer.create():
+#                 return Response(status=status.HTTP_200_OK)

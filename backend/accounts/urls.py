@@ -22,5 +22,6 @@ urlpatterns = [
     ### Add urls in view.py here
     path('user/create', views.signup),
     path('user/login', views.login),
-    path('user/logout', views.logout)
+    path('user/logout', views.logout),
+    # path('user/create_post', views.create_post),
 ]
