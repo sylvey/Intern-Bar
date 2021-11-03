@@ -5,32 +5,13 @@ import MyPostComponent from "../Components/myPost";
 import EditPost from "../Components/EditPost";
 
 const MyPost = () =>{
+
     const [editShow, setEditShow] = useState(false);
-
-    const [posName, setPosName] = useState("");
-    const [orgName, setOrgName] = useState("");
-    const [place, setPlace] = useState("");
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-
-    const [position, setPosition] = useState("choose a current position");
-
-    const handleSubmit = ()=>{
-        console.log(posName);
-        setPosName("");
-        setOrgName("");
-        setPlace("");
-        setTitle("");
-        setContent("");
-        setEditShow(false);
-    }
 
     const handleShow = () =>{
         setEditShow(true);
     }
-    const handleClose = () =>{
-        setEditShow(false);
-    }
+    
 
 
     return (
@@ -54,20 +35,7 @@ const MyPost = () =>{
                 }
                 <EditPost 
                     show={editShow} 
-                    handleClose = {handleClose}
-                    handleSubmit = {handleSubmit}
-                    posName = {posName}
-                    setPosName = {(event)=>setPosName(event.target.value)}
-                    orgName = {orgName}
-                    setOrgName = {(event)=>setOrgName(event.target.value)}
-                    place = {place}
-                    setPlace = {(event)=>setPlace(event.target.value)}
-                    title = {title}
-                    setTitle = {(event)=>setTitle(event.target.value)}
-                    content = {content}
-                    setContent = {(event)=>setContent(event.target.value)}
-                    position = {position}
-                    setPosition = {setPosition}
+                    setEditShow = {setEditShow}
                     />
              
             </div>

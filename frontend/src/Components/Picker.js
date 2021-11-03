@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import "../csses/Picker.css";
 function MyPicker(props){
 
-    useEffect(()=>{
-        console.log(props.value, props.firstValue, props.secondValue);
-    })
+    // useEffect(()=>{
+    //     console.log(props.value, props.firstValue, props.secondValue);
+    // })
     return(
         <div className = "PickerContainer">
             <div className = "circleContainer">

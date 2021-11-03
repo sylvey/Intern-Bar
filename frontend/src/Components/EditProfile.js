@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../csses/App.css'
+import orgs from "../hardData/orgs";
 
 
 
@@ -11,7 +12,57 @@ function EditProfile(props){
     const [place, setPlace] = useState("");
     const [placeError, setPlaceError] = useState(null);
 
-    const validate = () => {
+    const [posName, setPosName] = useState("");
+    const [posError, setPosError] = useState();
+    const [orgName, setOrgName] = useState("");
+    const [startTime, setStartTime] = useState(null);
+    const [startError, setStartError] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+    const [endError, setEndError] = useState(null);
+    const [filtered, setFiltered] = useState(orgs);
+    const [org, setOrg] = useState({});
+    const [orgSubmitted, setOrgSubmitted] = useState(false);
+    const [orgError, setOrgError] = useState(null);
+
+    const validate = () =>{
+        if(posName === "" || startTime == null || endTime == null || !orgSubmitted){
+            if(posName === ""){
+                setPosError("you must fill this field");
+            }
+            if(startTime == null){
+                setStartError("you haven't choose a time");
+            }
+            if(endTime == null){
+                setEndError("you haven't choose a time");
+            }
+            if(!orgSubmitted){
+                setOrgError("you haven't finish adding an organization")
+            }
+            return false;
+        }
+        
+        return true;
+    }
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        if(validate()){
+            props.setEditShow(false);
+        }
+    }
+
+    const handleSetOrg = (e) =>{
+        setOrgName(e.target.value);
+        // console.log(orgName);
+        let tempt = orgs.filter((item)=>{
+            if(item.name.includes(e.target.value)){
+                return item;
+            }
+        });
+        setFiltered(tempt);
+        console.log(tempt);
+    }
+
+    const validateOrg = () => {
       if(place === ""){
         setPlaceError("you must fill this field");
         return false;
@@ -20,13 +71,30 @@ function EditProfile(props){
     }
     const handleSubmitOrg = (e) => {
       e.preventDefault();
-      if(validate()){
+      if(validateOrg()){
         setPlace("");
         setShowEditCompany(false);
-        props.setOrgSubmitted(true);
+        setOrgSubmitted(true);
       }
       
     }
+
+    useEffect(() => {
+      if(posName !== ""){
+        setPosError(null);
+      }
+      if(startTime !== null){
+          setStartError(null);
+      }
+      if(endTime !== null){
+          setEndError(null);
+      }
+      if(orgSubmitted){
+          setOrgError(null)
+      }
+      
+    }, [posName, startTime, endTime, orgSubmitted])
+
 
     return (
     // <form onSubmit = {props.handleSubmit}>
@@ -39,44 +107,44 @@ function EditProfile(props){
                 <p>職務名稱</p>
                 <div className = "flex column">
                   <input className="marginLeftS"
-                         value={props.posName}
-                         onChange = {props.setPosName} 
+                         value={posName}
+                         onChange = {(e)=>setPosName(e.target.value)} 
                          required/>
                   {
-                    props.posError == null? null:(
-                      <div className="marginLeftS" style = {{color:'red'}}>{props.posError}</div>
+                    posError == null? null:(
+                      <div className="marginLeftS" style = {{color:'red'}}>{posError}</div>
                     )
                   }
                 </div>
             </div>
             <div className="flex marginTopS">
                 <p>公司名稱</p>
-                {props.org.name?(
-                    <div className = "tagButtonG">{props.org.name}</div>
+                {org.name?(
+                    <div className = "tagButtonG">{org.name}</div>
                     ):(
                     <input className="marginLeftS"
-                           value={props.orgName}
-                           onChange = {props.setOrgName}
+                           value={orgName}
+                           onChange = {handleSetOrg}
                            required/>
                     )
                 }
             </div>
             {
-              props.orgName === ""? null:(
-                  props.org.name? null :(
+              orgName === ""? null:(
+                  org.name? null :(
                     <div className = "scrollRow centerVertical">  
                       <div className = "tagButton"
                           onClick={()=>{
-                            props.setOrg({id:100, name: props.orgName})
-                            setShowEditCompany(true)}}>新增 {props.orgName}</div>  
+                            setOrg({id:100, name: orgName})
+                            setShowEditCompany(true)}}>新增 {orgName}</div>  
                       {
-                        props.filtered? (
-                          props.filtered.map((item)=>{
+                        filtered? (
+                          filtered.map((item)=>{
                             return(
                               <div className = "tagButtonG"
                                    onClick = {()=>{
-                                     props.setOrg(item)
-                                     props.setOrgSubmitted(true)}}>{item.name}</div>
+                                     setOrg(item)
+                                     setOrgSubmitted(true)}}>{item.name}</div>
                             );
                           })
                         ):null
@@ -114,8 +182,8 @@ function EditProfile(props){
               ):null
             }
             {
-              props.orgError == null? null:(
-                <div className="marginLeftS" style = {{color:'red'}}>{props.orgError}</div>
+              orgError == null? null:(
+                <div className="marginLeftS" style = {{color:'red'}}>{orgError}</div>
               )
             }
             
@@ -125,12 +193,12 @@ function EditProfile(props){
                 <div className = "flex column">
                   <input type="date" 
                          className="marginLeftS"
-                         value={props.startTime}
-                         onChange = {props.setStartTime}
+                         value={startTime}
+                         onChange = {(e)=>setStartTime(e.target.value)}
                          required/>
                   {
-                    props.startError == null? null:(
-                      <div className="marginLeftS" style = {{color:'red'}}>{props.startError}</div>
+                    startError == null? null:(
+                      <div className="marginLeftS" style = {{color:'red'}}>{startError}</div>
                     )
                   }
                 </div>
@@ -141,11 +209,11 @@ function EditProfile(props){
                   <input type="date" 
                          className="marginLeftS"
                          value={props.endTime}
-                         onChange = {props.setEndTime}
+                         onChange = {(e)=>setEndTime(e.target.value)}
                          required/>
                   {
-                    props.endError == null? null:(
-                      <div className="marginLeftS" style = {{color:'red'}}>{props.endError}</div>
+                    endError == null? null:(
+                      <div className="marginLeftS" style = {{color:'red'}}>{endError}</div>
                     )
                   }
                 </div>
@@ -156,7 +224,7 @@ function EditProfile(props){
           <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant= "primary" onClick = {props.handleSubmit}>
+          <Button variant= "primary" onClick = {handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
