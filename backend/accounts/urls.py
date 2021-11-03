@@ -24,4 +24,5 @@ urlpatterns = [
     path('user/login', views.login),
     path('user/logout', views.logout),
     # path('user/create_post', views.create_post),
+    path('post_getAll', views.post_getAll),
 ]
