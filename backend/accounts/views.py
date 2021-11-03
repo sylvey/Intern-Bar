@@ -16,7 +16,7 @@ def signup(request):
         if userSerializer.is_valid(): #validation of string length, datatype, etc.
             if userSerializer.create():
                 return Response(status=status.HTTP_201_CREATED)
-            else:
+            else: 
                 message = {"status": "Existing user id"}
             return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
         else:
@@ -51,14 +51,11 @@ def logout(request):
 
     if request.method == 'POST':
         user_id = request.data['user_id']
-        if check_login(user_id) == False:
-            message = {"status": "User is not logged in"}
-            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(user_id = user_id).first()
-        if user == None: #user not existing
-            message = {"status": "User does not exist"}
+        if check_login(user_id)['result'] == False:
+            message = check_login['status']
             return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
         else:
+            user = User.objects.get(user_id = user_id)
             user.status = False
             user.save(update_fields=['status'])
             return Response(data = {}, status=status.HTTP_200_OK)
