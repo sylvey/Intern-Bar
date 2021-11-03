@@ -8,7 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self):
         if(User.objects.filter(user_id = self.validated_data['user_id']).count() == 0):
-            print(self.validated_data['user_id'])
             new_user = User(user_id = self.validated_data['user_id'], 
                 user_name = self.validated_data['user_name'], 
                 password = self.validated_data['password'],
