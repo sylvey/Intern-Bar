@@ -80,6 +80,7 @@ function EditProfile(props){
     }
 
     useEffect(() => {
+      
       if(posName !== ""){
         setPosError(null);
       }

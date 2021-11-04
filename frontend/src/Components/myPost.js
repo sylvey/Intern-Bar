@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 // import "../csses/button.css"
 import "../csses/App.css";
-
+import { Link } from "react-router-dom";
 
 function MyPostComponent (props) {
 
@@ -9,10 +9,19 @@ function MyPostComponent (props) {
     return(
         <div className = "item profile">
             <div className = "textLeftBox">
-                <h1>{props.title}</h1>
-                <div>{props.posName}</div>
-                <div>{props.orgName}</div>
-                <div>{props.content}</div>
+                <h1 className = "cursor">
+                    <Link className="subTitleh" 
+                          to={{pathname: "/PostDetail/" + props.title, 
+                          state: {posName: props.posName, 
+                                  orgName: props.orgName, 
+                                  content: props.content,
+                                  time: props.time,
+                                  myPost: true}}}
+                          >{props.title}</Link>
+                </h1>
+                <div className = "subInformation">{props.posName}</div>
+                <div className = "subInformation">{props.orgName}</div>
+                <div className = "contentIgnoreBack">{props.content}</div>
             </div>
             
             <div className = "buttonRightBox column">

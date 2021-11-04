@@ -10,6 +10,7 @@ import LogIn from './pages/logIn';
 import Collection from './pages/collection';
 import MyPost from './pages/myPost';
 import Account from './pages/account';
+import PostDetail from './pages/postDetail';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/Collection" component={Collection}/>
             <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>
+            <Route path="/PostDetail/:title" component={PostDetail}/>
           </Switch>
       </div>
     </Router>

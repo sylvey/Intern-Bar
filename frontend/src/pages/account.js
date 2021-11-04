@@ -18,12 +18,6 @@ function Account(){
         setEditShow(false);
     }
 
-    
-
-    // useEffect(()=>{
-    //     console.log(org);
-    // }, [org])
-
 
     return (
          <div className = "page">

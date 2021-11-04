@@ -2,7 +2,7 @@ export default[
     {
         userName: "Sophia",
         title: "Title of Post", 
-        content: "Content of Post",
+        content: "Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post Content of Post ",
         time: "2011-01-12",
         position:
         {

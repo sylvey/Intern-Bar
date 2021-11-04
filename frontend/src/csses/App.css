@@ -145,6 +145,10 @@
     align-self: end;
 }
 
+.cursor{
+    cursor: pointer;
+}
+
 
  /* item */
 .item{
@@ -198,9 +202,13 @@
 .button{
     display: flex;
     cursor: pointer;
-    background-color: rgb(177, 175, 175);
+    /* background-color: rgb(177, 175, 175); */
     height: 40px;
     width: 60px;
+    border-style: solid;
+    border-color: #82B3E3;
+    color: #82B3E3;
+    font-weight: 900;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
@@ -332,5 +340,22 @@
 }
 
 
+/* text */
 
+.subTitleh{
+    color: black;
+}
+.subInformation{
+    color:rgb(158, 157, 157);
+}
+
+.contentIgnoreBack{
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
 
