@@ -8,6 +8,7 @@ function PostDetail(props){
         <div className = "page center fullPage">
             <div className= "item">
                 <div className = "textLeftBox">
+                    
                     <h1>{props.match.params.title}</h1>
                     <div className = "subInformation">{location.state.orgName}</div>
                     <div className = "subInformation">{location.state.posName}</div>
