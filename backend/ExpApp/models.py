@@ -14,18 +14,20 @@ class Experience(models.Model):
 class Organization(models.Model):
     org_id = models.AutoField(primary_key=True)
     org_name = models.CharField(max_length=100)
-    email = models.EmailField(null=True)
-    website = models.URLField(null=True)
+    email = models.EmailField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
 
     def __unicode__(self):
         return self.org_name
 
 class Place(models.Model):
-    place_id = models.AutoField(primary_key=True)
+    place_id = models.CharField(max_length=3, primary_key=True)
     city = models.CharField(max_length=50)
     district = models.CharField(max_length=50)
 
 class Located_In(models.Model):    # Relationship
-    # default primary key
-    org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='OrgLocatedIn')
+    org = models.ForeignKey('Organization',on_delete=models.CASCADE, related_name='OrgLocatedIn')
     location = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='LocatedInSite')
+
+    class Meta:
+        unique_together = (("org", "location"))
