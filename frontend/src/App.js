@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import NavigationBar from './Components/Nav';
 import './csses/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -14,14 +14,29 @@ import PostDetail from './pages/postDetail';
 import ThisFileCollection from './pages/thisFileCollection';
 
 function App() {
+  const [userId, setUserId] = useState("");
+  const [logInStatus, setLoginStatus] = useState(false);
+
+  useEffect(() => {
+    console.log(userId);
+  }, [userId])
+  
   return (
     <Router>
       <div className="App">
-          <NavigationBar />
+          <NavigationBar 
+              login = {logInStatus} 
+              userId = {userId}
+              setUserId = {setUserId}
+              setLogin = {setLoginStatus}/>
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/SignIn" component={SignIn}/>
-            <Route path="/LogIn" component={LogIn}/>
+            <Route path = "/LogIn">
+              <LogIn setUserId={setUserId} 
+                     userId = {userId}
+                     setLogin = {setLoginStatus}/>
+            </Route>
             <Route path="/Collection" component={Collection}/>
             <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>

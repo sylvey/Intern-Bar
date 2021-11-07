@@ -6,8 +6,8 @@ import "../csses/App.css";
 import _axios from "axios";
 import axios from "axios";
 
-const LogIn = () =>{
-    const [userId, setUserId] = useState("");
+const LogIn = (props) =>{
+    // const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -17,13 +17,13 @@ const LogIn = () =>{
         let res;
         try {
             res = await axios.post("http://127.0.0.1:8000/api/user/login",{
-                user_id: userId,
+                user_id: props.userId,
                 password: password,
             });
 
             if(res.status === 200){
                 console.log("success");
-                setUserId("");
+                props.setLogin(true);
                 setPassword("");
                 setError("");
                 handleNavigate();
@@ -46,8 +46,16 @@ const LogIn = () =>{
         <div className={["page", "fullPage", "center"].join(" ")} >
             <div className = "logInRegisterSmallPage">
                 <p className = {["title"].join(" ")}>Welcome to ProjectName</p>
-                <input className="searchBarInput" placeholder="帳號"></input>
-                <input className="searchBarInput" placeholder="密碼"></input>
+                <input 
+                    className="searchBarInput" 
+                    placeholder="帳號"
+                    value = {props.userId}
+                    onChange = {(e)=>props.setUserId(e.target.value)}></input>
+                <input 
+                    className="searchBarInput" 
+                    placeholder="密碼"
+                    value = {password}
+                    onChange = {(e)=>setPassword(e.target.value)}></input>
                 {/* <div className="searchBarDateContainer center">
                     <input type="radio" name="AccountType"/> GENERAL USER
                     <input type="radio" name="AccountType" className="marginLeft"/> ENTERPRISE

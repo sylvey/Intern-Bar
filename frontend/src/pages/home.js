@@ -6,9 +6,10 @@ import Post from "../Components/post";
 import posts from "../hardData/posts";
 
 
-const Home = () =>{
+const Home = ({userName}) =>{
     return (
         <div className = "page">
+            {userName}
             <div className = "row marginTop marginLeft">
                 <SearchBar></SearchBar>
             </div>
