@@ -1,11 +1,14 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import UserSerializer
-#PostSerializer
+from rest_framework.serializers import Serializer
 
 from .models import *
 from .functs import *
+from CategoryApp.models import Category
+
+from .serializer import UserSerializer
+from CategoryApp.serializer import CategorySerializer
 
 @api_view(['POST'])
 def signup(request):
@@ -61,3 +64,19 @@ def logout(request):
             user.save(update_fields=['status'])
             return Response(data = {}, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def get_user_cat(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+        
+    if request.method == 'POST':
+        user_id = request.data['user_id']
+        user = User.objects.get(user_id = user_id)
+        if user == None: # if the user does not exist
+            message = {"status": "User does not exist"}
+            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
+        #Get all categories of the user
+        cat_list = Category.objects.filter(user = user_id)
+        cat_response_list = CategorySerializer(cat_list, many = True).data
+        return Response(data = cat_response_list, status=status.HTTP_200_OK)
+            

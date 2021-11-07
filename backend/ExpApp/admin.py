@@ -3,6 +3,7 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Experience)
+admin.site.register(Position)
 admin.site.register(Organization)
 admin.site.register(Place)
-admin.site.register(Located_In)
+#admin.site.register(Located_In)

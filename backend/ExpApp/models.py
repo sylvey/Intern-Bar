@@ -5,6 +5,7 @@ class Experience(models.Model):
     exp_id = models.AutoField(primary_key=True)
     start_date = models.DateField()
     end_date = models.DateField()
+    pos = models.ForeignKey('Position', on_delete=models.CASCADE, related_name='ExpOfPos')
     user = models.ForeignKey('UserApp.User', on_delete=models.CASCADE, related_name='ExpOfUser')
 
     def __unicode__(self):
@@ -13,11 +14,11 @@ class Experience(models.Model):
 class Position(models.Model):
     pos_id = models.AutoField(primary_key=True)
     pos_name = models.CharField(max_length=100)
-    org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='ExpInOrg')
-    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='PlaceOfOrg')
+    org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='PosInOrg')
+    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='PosInPlace')
     salary = models.IntegerField(null=True, blank=True)
     class Meta:
-        unique_together = (("pos_name", "org", "place"))
+        unique_together = (("pos_name", "org", "place", "salary"))
 
 class Organization(models.Model):
     org_id = models.AutoField(primary_key=True)
