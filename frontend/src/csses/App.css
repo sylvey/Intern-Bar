@@ -361,3 +361,8 @@
     white-space: normal;
 }
 
+/* error */
+.errorMes{
+    color:red;
+}
+
