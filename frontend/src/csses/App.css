@@ -212,6 +212,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .functionalButton{
@@ -283,6 +284,7 @@
     box-sizing: border-box;
     border-radius: 6px;
     color: white;
+    cursor: pointer;
     
 }
 .submitButton{

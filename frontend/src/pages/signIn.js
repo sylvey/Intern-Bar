@@ -1,20 +1,52 @@
-import React from "react";
+import React,{useState} from "react";
 import "../csses/App.css";
 // import "../csses/button.css";
 import "../csses/signIn&logIn.css";
+import _axios from "axios";
+import axios from "axios";
 
 const SignIn = () =>{
+
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+    const [userName, setUserName] = useState("");
+
+    async function handleSignIn(){
+        try {
+            let res = await axios.post("http://127.0.0.1:8000/api/user/create",{
+                user_id: userId,
+                password: password,
+                user_name: userName
+            });
+            if(res.status === 201)
+                console.log("success");
+            return;
+        }catch(error){
+            console.log(error);
+        }
+    }
     return (
         <div className={["page", "fullPage", "center"].join(" ")} >
             <div className = "logInRegisterSmallPage">
                 <p className = {["title"].join(" ")}>Welcome to ProjectName</p>
-                <input className="searchBarInput" placeholder="帳號"></input>
-                <input className="searchBarInput" placeholder="密碼"></input>
+                <input className="searchBarInput" 
+                       placeholder="帳號"
+                       value = {userId}
+                       onChange = {(e)=>setUserId(e.target.value)}></input>
+                <input className="searchBarInput" 
+                       placeholder="名稱"
+                       value = {userName}
+                       onChange = {(e)=>setUserName(e.target.value)}></input>
+                <input className="searchBarInput" 
+                       placeholder="密碼"
+                       value = {password}
+                       onChange = {(e)=>setPassword(e.target.value)}></input>
                 <div className="searchBarDateContainer center">
                     <input type="radio" name="AccountType"/> GENERAL USER
                     <input type="radio" name="AccountType" className="marginLeft"/> ENTERPRISE
                 </div>
-                <div className="logIn_SignIn_button center">Register</div>
+                <div className="logIn_SignIn_button center"
+                     onClick = {handleSignIn}>Register</div>
             </div>
         </div>
     )
