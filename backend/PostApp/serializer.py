@@ -1,17 +1,18 @@
 from rest_framework import serializers
 from .models import *
 from UserApp.serializer import UserSerializer
+from ExpApp.models import Experience
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
-    model = Post
-    fields = ('publisher', 'title', 'content', 'experience')
+        model = Post
+        fields = ('publisher', 'title', 'content', 'experience')
 
      
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        exclude = ('user',)
+        exclude = ('user')
         depth = 1
 
         
