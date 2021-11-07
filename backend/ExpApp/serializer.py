@@ -8,11 +8,18 @@ class OrgSerializer(serializers.ModelSerializer):
         fields = ('org_name', 'email', 'website')
 
     def create(self):
-        new_org = Organization(
-            org_name = self.validated_data['org_name'],
-            email = self.validated_data['email'],
-            website = self.validated_data['website']
-        )
+        try:
+            new_org = Organization(
+                org_name = self.validated_data['org_name'],
+                email = self.validated_data['email'],
+                website = self.validated_data['website']
+            )
+        except:
+            new_org = Organization.objects.get(
+                org_name = self.validated_data['org_name'],
+                email = self.validated_data['email'],
+                website = self.validated_data['website']
+            )
         new_org.save()
         return new_org
     

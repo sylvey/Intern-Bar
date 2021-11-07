@@ -26,6 +26,9 @@ class Organization(models.Model):
     email = models.EmailField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
 
+    class Meta:
+        unique_together = ("org_name", "email", "website")
+        
     def __unicode__(self):
         return self.org_name
 

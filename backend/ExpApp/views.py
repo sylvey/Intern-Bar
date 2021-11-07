@@ -1,8 +1,6 @@
-from django.core.checks import messages
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.shortcuts import render
 
 from .serializer import ExpSerializer, OrgSerializer
 from .models import *
@@ -18,37 +16,24 @@ def exp_create(request):
         # Deal with organization
         if request.data["pos"]["pos_id"] == -1: #Create new instance of pos if needed
             if request.data["pos"]["org"]["org_id"] == -1: # Create new instance of org if needed
-                request.data["pos"]["org"].pop("org_id")
-                orgSerializer = OrgSerializer(data = request.data["pos"]["org"])
-                if orgSerializer.is_valid():
-                    new_org = orgSerializer.create()
-                    request.data["pos"]["org"] = new_org.org_id # Gets id of newly created org 
-                else:
-                    return Response(data = orgSerializer.errors, status = status.HTTP_400_BAD_REQUEST)     
+                request.data["pos"]["org"] = create_org(request.data["pos"]["org"])
+                print(request.data["pos"]["org"])
             else: #User existing instance of org
                 request.data["pos"]["org"] = request.data["pos"]["org"]["org_id"]
-            print(request.data["pos"])
 
             # Deal with position   
             request.data["pos"].pop("pos_id")
-            posSerializer = PosSerializer(data =request.data["pos"])
-            if posSerializer.is_valid():
-                new_pos = posSerializer.create()
-                request.data["pos"] = new_pos.pos_id # Gets id of newly created pos
-            else:
-                return Response(data = posSerializer.errors, status = status.HTTP_400_BAD_REQUEST)   
-        
+            request.data["pos"] = create_pos(request.data["pos"])
+                 
         else: #User existing instance of pos
             request.data["pos"] = request.data["pos"]["pos_id"]
 
         #Deal with experience
         expSerializer = ExpSerializer(data = request.data)
-        if expSerializer.is_valid():
+        if expSerializer.is_valid(raise_exception=True):
             new_exp = expSerializer.create()
             message = {"exp_id": new_exp.exp_id}
-            return Response(data = message, status = status.HTTP_201_CREATED)
-        else:
-            return Response(data = expSerializer.errors, status = status.HTTP_400_BAD_REQUEST)   
+            return Response(data = message, status = status.HTTP_201_CREATED) 
 
 @api_view(['POST'])
 def get_user_exp(request):
@@ -65,14 +50,24 @@ def get_user_exp(request):
 
 @api_view(['POST'])
 def search_org(request):
-        if 'application/json' not in request.content_type:
-            return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
-        if request.method == 'POST':
-            org = Organization.objects.filter(org_name__icontains = request.data['keyword']).first()
-            ##get_org_places(org)
-        return Response(status = status.HTTP_200_OK)
+    if request.method == 'POST':
+        org_list = Organization.objects.filter(org_name__icontains = request.data['keyword'])
+        orgSerializer = OrgSerializer(org_list, many = True)
+        return Response(data = orgSerializer.data, status = status.HTTP_200_OK)
 
+@api_view(['POST'])
+def search_pos(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'POST':
+        org = Organization.objects.get(org_id = request.data['org_id'])
+        pos_list = Position.objects.filter(pos_name__icontains = request.data['keyword'], org = org)
+        posSerializer = PosSerializer(pos_list, many = True)
+        return Response(data = posSerializer.data, status = status.HTTP_200_OK)
 
 
 
