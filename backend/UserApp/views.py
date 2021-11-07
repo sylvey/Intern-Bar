@@ -12,6 +12,8 @@ def signup(request):
     if 'application/json' not in request.content_type:
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
+    print("Here")
+
     if request.method == 'POST':
         userSerializer = UserSerializer(data = request.data)
         if userSerializer.is_valid(): #validation of string length, datatype, etc.
