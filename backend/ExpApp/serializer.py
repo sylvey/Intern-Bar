@@ -15,6 +15,14 @@ class OrgSerializer(serializers.ModelSerializer):
         )
         new_org.save()
         return new_org
+    
+    # def to_representation(self, instance):
+    #     return {
+    #         "org_name": instance.org_name,
+    #         "place": Located_In.objects.,
+    #         "email": instance.email,   
+    #         "website": instance.website,
+    #     }
 
 class ExpSerializer(serializers.ModelSerializer):  
     org_id = serializers.IntegerField()
