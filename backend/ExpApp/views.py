@@ -6,6 +6,7 @@ from django.shortcuts import render
 
 from .serializer import ExpSerializer, OrgSerializer
 from .models import *
+from UserApp.models import User
 
 @api_view(['POST'])
 def exp_create(request):
@@ -40,3 +41,19 @@ def exp_create(request):
             return Response(status = status.HTTP_201_CREATED)
         else:
             return Response(data = expSerializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_user_exp(request):
+        if 'application/json' not in request.content_type:
+            return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+        if request.type == "GET":
+            user = User.objects.filter(user_id = request['user_id'])
+            exp_list = Experience.objects.filter(user = user)
+            for exp in exp_list:
+                org = exp.org
+                orgSerializer = OrgSerializer(
+                    org_name = org.org_name,
+                    email = org.email,
+                    website = org.website)
+                orgSerializer.to_representation(org)
