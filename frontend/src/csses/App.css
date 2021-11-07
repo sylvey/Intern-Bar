@@ -78,11 +78,25 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 600px;
-    width: 82vw;
+    width: 80%;
+
     /* margin-left: 10vw; */
-    /* overflow-y: auto; */
+    overflow-y: auto;
     /* background-color: hotpink; */
 }
+
+.wrap::-webkit-scrollbar {
+    width: 7px;
+    height: inherit;
+    border-radius: 6px;
+    /* background-color: red; */
+  }
+  .wrap:-webkit-scrollbar-button{
+    width: 0;
+  }
+  
+
+
 
 .logInRegisterSmallPage{
     display: flex;
@@ -138,6 +152,10 @@
 .end{
     justify-content: end;
     align-items: end;
+}
+.centerSelf{
+    justify-self: center;
+    align-self: center;
 }
 
 .endSelf{

@@ -23,7 +23,10 @@ function Post (props) {
                 <div className = "contentIgnoreBack">{props.content}</div>
             </div>
             <div className = "buttonRightBox column centerVertical">
-                <div className = "button marginTopS">收藏</div>
+                {
+                    props.fromWhere == "home"?(<div className = "button marginTopS">收藏</div>):null
+                }
+                
                 <div className = "flex fullHeight end">{props.time}</div>
             </div>
             

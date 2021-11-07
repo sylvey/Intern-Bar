@@ -10,19 +10,19 @@ const Collection = () =>{
             <div className = "row marginTop">
                 <p className = "pageTitle">珍藏項目</p>
             </div>
-            <div class="row centerHorizontal">
-                <div className = "wrap">
-                    {
-                        myCollectionFile.map((item)=>{
-                            return(
-                                <MyFile name = {item}/>
-                            );
-                        })
-                    }
-                    <img scr = {addButton} width = "200px" height="200px"/>
-                    
-                </div>
+            
+            <div className = "wrap centerHorizontal centerSelf">
+                {
+                    myCollectionFile.map((item)=>{
+                        return(
+                            <MyFile name = {item}/>
+                        );
+                    })
+                }
+                <img scr = {addButton} width = "200px" height="200px"/>
+                
             </div>
+            
             
         </div>
     )

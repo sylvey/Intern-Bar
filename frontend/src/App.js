@@ -11,6 +11,7 @@ import Collection from './pages/collection';
 import MyPost from './pages/myPost';
 import Account from './pages/account';
 import PostDetail from './pages/postDetail';
+import ThisFileCollection from './pages/thisFileCollection';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>
             <Route path="/PostDetail/:title" component={PostDetail}/>
+            <Route path="/thisFile/:title" component={ThisFileCollection}/>
           </Switch>
       </div>
     </Router>
