@@ -3,10 +3,28 @@ import { Nav, Navbar, Container, NavDropdown, NavbarBrand } from 'react-bootstra
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logInButton from "../image/LogInButton.png";
 import RegisterButton from "../image/RegisterButton.png"
+import axios from "axios";
 
-const NavigationBar = () =>{
+const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
 
-    const login = true;// get login status
+
+    
+    async function handleLogOut(){
+      let res;
+      try{
+        res = await axios.post("http://127.0.0.1:8000/api/user/logout",{
+          user_id: userId,
+        });
+
+        if(res.status === 200){
+          setUserId("");
+          setLogin(false);
+        }
+
+      }catch(e){
+        console.log(e);
+      }
+    }
 
     return (
         // collapseOnSelect expand="lg"
@@ -23,14 +41,14 @@ const NavigationBar = () =>{
             <Nav>
               {
                 login?(
-                  <NavDropdown title="User Name" id="collasible-nav-dropdown">
+                  <NavDropdown title={userId} id="collasible-nav-dropdown">
                     <NavDropdown.Item href = "/Account">個人檔案</NavDropdown.Item>
                     <NavDropdown.Item href = "/MyPost">我的貼文</NavDropdown.Item>
                     <NavDropdown.Item href = "/Collection">珍藏項目</NavDropdown.Item>
-                    {/* <NavDropdown.Divider /> */}
+                    <NavDropdown.Divider />
                     {/* <NavDropdown.Item href = "/LogIn">登入</NavDropdown.Item> */}
                     {/* <NavDropdown.Item href="/SignIn">註冊</NavDropdown.Item> */}
-                    <NavDropdown.Item>登出</NavDropdown.Item>
+                    <NavDropdown.Item onClick = {handleLogOut}>登出</NavDropdown.Item>
                   </NavDropdown>
                 ):(
                   <Nav>

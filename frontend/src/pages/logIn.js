@@ -6,8 +6,8 @@ import "../csses/App.css";
 import _axios from "axios";
 import axios from "axios";
 
-const LogIn = () =>{
-    const [userId, setUserId] = useState("");
+const LogIn = ({userId, setLogin, setUserId}) =>{
+    // const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -23,7 +23,7 @@ const LogIn = () =>{
 
             if(res.status === 200){
                 console.log("success");
-                setUserId("");
+                setLogin(true);
                 setPassword("");
                 setError("");
                 handleNavigate();
@@ -46,8 +46,16 @@ const LogIn = () =>{
         <div className={["page", "fullPage", "center"].join(" ")} >
             <div className = "logInRegisterSmallPage">
                 <p className = {["title"].join(" ")}>Welcome to ProjectName</p>
-                <input className="searchBarInput" placeholder="帳號"></input>
-                <input className="searchBarInput" placeholder="密碼"></input>
+                <input 
+                    className="searchBarInput" 
+                    placeholder="帳號"
+                    value = {userId}
+                    onChange = {(e)=>setUserId(e.target.value)}></input>
+                <input 
+                    className="searchBarInput" 
+                    placeholder="密碼"
+                    value = {password}
+                    onChange = {(e)=>setPassword(e.target.value)}></input>
                 {/* <div className="searchBarDateContainer center">
                     <input type="radio" name="AccountType"/> GENERAL USER
                     <input type="radio" name="AccountType" className="marginLeft"/> ENTERPRISE
