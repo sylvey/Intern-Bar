@@ -19,14 +19,17 @@ function App() {
   const [userId, setUserId] = useState("");
   const [logInStatus, setLogInStatus] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(logInStatus);
-  // }, [logInStatus])
 
   useEffect(() => {
-    setUserId(JSON.parse(window.localStorage.getItem('userId')));
-    setLogInStatus(JSON.parse(window.localStorage.getItem('logInStatus')));
-    
+    const fetchData = async ()=>{
+      try {
+        setUserId(JSON.parse(window.localStorage.getItem('userId')));
+        setLogInStatus(JSON.parse(window.localStorage.getItem('logInStatus')));
+      }catch(e){
+        console.log(e);
+      }
+    }
+    fetchData();
   }, []);
 
   useEffect(() => {
