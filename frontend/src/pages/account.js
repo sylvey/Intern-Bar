@@ -46,12 +46,12 @@ function Account({userId}){
             </div>
             <div className="scroll centerVertical" >
                 {
-                    profile? profile.map((item, index)=>{
+                    profile? profile.map((item)=>{
                         return(
                             <MyProfile 
-                                posName = {item.posName}
-                                orgName = {item.org.orgName}
-                                place = {item.org.place}
+                                posName = {item.pos.pos_name}
+                                orgName = {item.pos.org.org_name}
+                                place = {item.pos.place}
                                 startDate ={item.startDate}
                                 endDate = {item.endDate}/>
                         );

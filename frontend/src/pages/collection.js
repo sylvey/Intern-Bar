@@ -38,7 +38,7 @@ const Collection = ({userId}) =>{
                     collection?
                             collection.map((item)=>{
                                 return(
-                                    <MyFile name = {item}/>
+                                    <MyFile name = {item.category_name}/>
                                 );
                             })
                     :null
