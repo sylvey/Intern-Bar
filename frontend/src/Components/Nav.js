@@ -5,21 +5,20 @@ import logInButton from "../image/LogInButton.png";
 import RegisterButton from "../image/RegisterButton.png"
 import axios from "axios";
 
-const NavigationBar = (props) =>{
+const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
 
-    // const handleLogOut = () =>{
 
-    // }
+    
     async function handleLogOut(){
       let res;
       try{
         res = await axios.post("http://127.0.0.1:8000/api/user/logout",{
-          user_id: props.userId,
+          user_id: userId,
         });
 
         if(res.status === 200){
-          props.setUserId("");
-          props.setLogin(false);
+          setUserId("");
+          setLogin(false);
         }
 
       }catch(e){
@@ -41,8 +40,8 @@ const NavigationBar = (props) =>{
             </Nav>
             <Nav>
               {
-                props.login?(
-                  <NavDropdown title={props.userId} id="collasible-nav-dropdown">
+                login?(
+                  <NavDropdown title={userId} id="collasible-nav-dropdown">
                     <NavDropdown.Item href = "/Account">個人檔案</NavDropdown.Item>
                     <NavDropdown.Item href = "/MyPost">我的貼文</NavDropdown.Item>
                     <NavDropdown.Item href = "/Collection">珍藏項目</NavDropdown.Item>

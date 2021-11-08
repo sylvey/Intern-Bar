@@ -13,30 +13,42 @@ import Account from './pages/account';
 import PostDetail from './pages/postDetail';
 import ThisFileCollection from './pages/thisFileCollection';
 
+
 function App() {
+  
   const [userId, setUserId] = useState("");
-  const [logInStatus, setLoginStatus] = useState(false);
+  const [logInStatus, setLogInStatus] = useState(false);
+
+  // useEffect(() => {
+  //   console.log(logInStatus);
+  // }, [logInStatus])
 
   useEffect(() => {
-    console.log(userId);
-  }, [userId])
-  
+    setUserId(JSON.parse(window.localStorage.getItem('userId')));
+    setLogInStatus(JSON.parse(window.localStorage.getItem('logInStatus')));
+    
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('userId', userId);
+    window.localStorage.setItem('logInStatus', logInStatus);
+  }, [userId, logInStatus])
+
   return (
     <Router>
       <div className="App">
-          <NavigationBar 
-              login = {logInStatus} 
-              userId = {userId}
-              setUserId = {setUserId}
-              setLogin = {setLoginStatus}/>
+          <NavigationBar login = {logInStatus}
+                         setLogin = {setLogInStatus}
+                         setUserId = {setUserId}
+                         userId = {userId}/>
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/SignIn" component={SignIn}/>
             <Route path = "/LogIn">
-              <LogIn setUserId={setUserId} 
+              <LogIn setUserId = {setUserId} 
                      userId = {userId}
-                     setLogin = {setLoginStatus}/>
-            </Route>
+                     setLogin = {setLogInStatus}/>
+            </Route> 
             <Route path="/Collection" component={Collection}/>
             <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>
