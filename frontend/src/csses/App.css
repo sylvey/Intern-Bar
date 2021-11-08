@@ -1,0 +1,336 @@
+/* page Title */
+.pageTitle{
+    display: flex;
+    background-color: transparent;
+    height: 40px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+    border-radius: 6px;
+    font-size: 35px;
+
+}
+/* page */
+.page{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    background: rgba(222, 222, 222, 0.25);
+}
+
+.redBackground{
+    background-color: red;
+}
+.transparentBackground{
+    background-color: transparent;
+}
+.fullPage{
+    height: 100vh;
+}
+.scroll{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 600px;
+    overflow-y: auto;
+    
+}
+.scrollRow{
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    height: 60px;
+    overflow-x: auto;
+    
+}
+
+.scrollRow::-webkit-scrollbar {
+  width: inherit;
+  height: 7px;
+  border-radius: 6px;
+  /* background-color: red; */
+}
+.scrollRow::-webkit-scrollbar-button{
+  width: 0;
+}
+.scrollRow::-webkit-scrollbar-track-piece{
+  background: transparent;
+  border-radius: 6px;
+}
+.scrollRow::-webkit-scrollbar-corner{
+  border:1px solid red;
+}
+.scrollRow::-webkit-scrollbar-track {
+    width: inherit;
+    /* background-color: palegoldenrod; */
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+ 
+.scrollRow::-webkit-scrollbar-thumb {
+  background-color: rgb(184, 184, 184);
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 8px;
+}
+
+.wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 600px;
+    width: 82vw;
+    /* margin-left: 10vw; */
+    /* overflow-y: auto; */
+    /* background-color: hotpink; */
+}
+
+.logInRegisterSmallPage{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* justify */
+.flex{
+    display: flex;
+}
+.center{
+    justify-content: center;
+    align-items: center;
+}
+.centerVertical{
+    align-items: center;
+}
+.centerHorizontal{
+    
+    justify-content: center;
+}
+.row{  
+    flex-direction: row;
+}
+.marginTop{
+    margin-top: 10%;
+}
+.marginTopS{
+    margin-Top: 12px;
+}
+.column{
+    flex-direction: column;
+}
+.marginLeft{
+    margin-left: 10%;
+}
+.marginRight{
+    margin-right: 10%;
+}
+.marginLeftS{
+    margin-left: 12px;
+}
+.fullWidth{
+    width: 100%;
+}
+.fullHeight{
+    height: 100%;
+}
+.end{
+    justify-content: end;
+    align-items: end;
+}
+
+.endSelf{
+    justify-self: end;
+    align-self: end;
+}
+
+
+ /* item */
+.item{
+    display: flex;
+    width: 80%;
+    background: #FFFFFF;
+    border: 1px solid rgba(204, 218, 233, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+}
+
+.profile{
+    height: 200px;
+    flex-direction: row;
+}
+
+.textLeftBox{
+    flex: 8;
+    /* margin-top: 12px; */
+    margin-left: 12px;
+}
+
+.buttonRightBox{
+    display: flex;
+    flex: 2;
+    /* flex-direction: row; */
+    height: 100%;
+    margin-right: 12px;
+}
+
+
+
+/* squareItem */
+
+.squareItem{
+    display: flex;
+    width: 200px;
+    height: 200px;
+    margin-block-start: 0px;
+    margin-right: 5vh;
+    background: #FFFFFF;
+    border: 1px solid rgba(204, 218, 233, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 5vh;
+}
+
+/* button */
+
+.button{
+    display: flex;
+    cursor: pointer;
+    background-color: rgb(177, 175, 175);
+    height: 40px;
+    width: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.functionalButton{
+    /* display: flex; */
+    cursor: pointer;
+    
+    margin-top: 3vw;
+}
+
+.tagButton{
+    display: flex;
+    cursor: pointer;
+    background-color: rgb(158, 157, 157);
+    height: 15px;
+    width:fit-content;
+    margin:12px;
+    font-size: 9px;
+    align-items: center;
+    padding:3px;
+    justify-content: center;
+    border-radius: 1px;
+    color:ivory;
+    white-space:nowrap;
+}
+
+.tagButtonG{
+    display: flex;
+    cursor: pointer;
+    background-color: rgb(213, 250, 210);
+    height: 15px;
+    width:fit-content;
+    margin:12px;
+    font-size: 9px;
+    align-items: center;
+    padding:3px;
+    justify-content: center;
+    border-radius: 1px;
+    color:rgb(3, 3, 3);
+    white-space:nowrap;
+}
+
+/* modal */
+
+.editProfile{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: 300px;
+    /* overflow-y: auto; */
+    
+}
+
+.editPost{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 500px;
+    /* overflow-y: auto; */
+    
+}
+
+.logIn_SignIn_button{
+    display: flex;
+    width: 90%;
+    height: 6vw;
+    margin-top: 3vw;
+    background: #82B3E3;
+    border: 1px solid #82B3E3;
+    box-sizing: border-box;
+    border-radius: 6px;
+    color: white;
+    
+}
+.submitButton{
+    background-color: transparent;
+    border-style: none;
+    color: white;
+}
+.searchButton{
+    /* display: flex; */
+    cursor: pointer;
+    margin-top: 3vh;
+}
+
+/* searchBar */
+.searchBarContainer{
+    display: flex;
+    width: 80vw;
+    height: 48vh;
+    background: #FFFFFF;
+    margin-bottom: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+
+}
+
+.searchBarInput{
+    display: flex;
+    width: 90%;
+    height: 12vh;
+    margin-top: 3vh;
+    background: #FAFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.searchBarDateContainer{
+    display: flex;
+    width: 90%;
+    height: 12vh;
+    margin-top: 3vh;
+    background: #FAFAFA;
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
+    box-sizing: border-box;
+}
+
+.searchBarDate{
+    display: flex;
+    width: 45%;
+    height: 12vh;
+    background: #FAFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+
+
+
