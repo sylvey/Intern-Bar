@@ -80,11 +80,8 @@ class ExpSerializer(serializers.ModelSerializer):
             "pos": PosSerializer(instance.pos).data
         }
 
-<<<<<<< HEAD
-=======
 
 class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
         fields = ('__all__')
->>>>>>> 97a929cb5e382583b10f06dbf5aa805709945d36

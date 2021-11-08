@@ -2,11 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-<<<<<<< HEAD
-from .serializer import ExpSerializer, OrgSerializer
-=======
 from .serializer import ExpSerializer, OrgSerializer, PlaceSerializer
->>>>>>> 97a929cb5e382583b10f06dbf5aa805709945d36
 from .models import *
 from UserApp.models import User
 from .functs import *
@@ -74,16 +70,12 @@ def search_pos(request):
         return Response(data = posSerializer.data, status = status.HTTP_200_OK)
 
 
-<<<<<<< HEAD
-
-=======
 @api_view(['GET'])
 def place(request):
     if request.method == 'GET':
         places = Place.objects.all()
         serializer = PlaceSerializer(places, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
->>>>>>> 97a929cb5e382583b10f06dbf5aa805709945d36
 
         
         
