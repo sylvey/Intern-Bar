@@ -1,15 +1,34 @@
 import React, {useState, useEffect} from "react";
 import "../csses/App.css";
-import profile from "../hardData/profile";
+// import profile from "../hardData/profile";
 import MyProfile from "../Components/myProfile";
 import EditProfile from "../Components/EditProfile";
 import orgs from "../hardData/orgs";
-
-function Account(){
+import axios from "axios";
+function Account({userId}){
 
     const [editShow, setEditShow] = useState(false);
-
+    const [profile, setProfile] = useState();
     
+    useEffect(() => {
+        const fetchData = async()=>{
+            let res;
+            try {
+                res = await axios.post("http://127.0.0.1:8000/api/user/exp/get",{
+                    user_id: userId,
+                });
+
+                if(res.status === 200){
+                    console.log("res.data:", res.data); 
+                    setProfile(res.data); 
+                } 
+                return;
+            }catch(e){
+                console.log(e);
+            }
+        }
+        fetchData();
+    }, [])
 
     const handleShow = () =>{
         setEditShow(true);
@@ -27,7 +46,7 @@ function Account(){
             </div>
             <div className="scroll centerVertical" >
                 {
-                    profile.map((item, index)=>{
+                    profile? profile.map((item, index)=>{
                         return(
                             <MyProfile 
                                 posName = {item.posName}
@@ -37,6 +56,7 @@ function Account(){
                                 endDate = {item.endDate}/>
                         );
                     })
+                    : null
                 }
                 <EditProfile 
                     show={editShow} 

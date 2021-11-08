@@ -46,20 +46,22 @@ function App() {
                          setUserId = {setUserId}
                          userId = {userId}/>
           <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/SignIn" component={SignIn}/>
-            <Route path = "/LogIn">
-              <LogIn setUserId = {setUserId} 
-                     userId = {userId}
-                     setLogin = {setLogInStatus}/>
-            </Route> 
-            <Route path="/Collection">
-              <Collection userId = {userId}/>
-            </Route>
-            <Route path="/MyPost" component={MyPost}/>
-            <Route path="/Account" component={Account}/>
-            <Route path="/PostDetail/:title" component={PostDetail}/>
-            <Route path="/thisFile/:title" component={ThisFileCollection}/>
+              <Route path="/" exact component={Home}/>
+              <Route path="/SignIn" component={SignIn}/>
+              <Route path = "/LogIn">
+                <LogIn setUserId = {setUserId} 
+                       userId = {userId}
+                       setLogin = {setLogInStatus}/>
+              </Route> 
+              <Route path="/Collection">
+                <Collection userId = {userId}/>
+              </Route>
+              <Route path="/MyPost" component={MyPost}/>
+              <Route path="/Account">
+                <Account userId = {userId}/>
+              </Route> 
+              <Route path="/PostDetail/:title" component={PostDetail}/>
+              <Route path="/thisFile/:title" component={ThisFileCollection}/>
           </Switch>
       </div>
     </Router>
