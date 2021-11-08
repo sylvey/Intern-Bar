@@ -34,9 +34,9 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto">
-              <Navbar.Brand>實習職務</Navbar.Brand>
+              {/* <Navbar.Brand>實習職務</Navbar.Brand>
               <Navbar.Brand>活動資訊</Navbar.Brand>
-              <Navbar.Brand>關於</Navbar.Brand>
+              <Navbar.Brand>關於</Navbar.Brand> */}
             </Nav>
             <Nav>
               {

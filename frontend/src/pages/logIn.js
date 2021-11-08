@@ -31,13 +31,13 @@ const LogIn = ({userId, setLogin, setUserId}) =>{
             } 
             return;
         }catch(e){
-            console.log(e.response.status);
-            if(e.response.status === 400){
-                setError("帳號不存在");
-            }
-            else if(e.response.status === 401){
-                setError("Incorrect Password");
-            }
+            console.log(e);
+            // if(e.response.status === 400){
+            //     setError("帳號不存在");
+            // }
+            // else if(e.response.status === 401){
+            //     setError("Incorrect Password");
+            // }
             
         }
     }
