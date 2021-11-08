@@ -10,6 +10,7 @@ from UserApp.models import User
 from ExpApp.models import Experience
 import datetime
 from datetime import date
+from PostApp.serializer import PostSerializer
 
 @api_view(['POST'])
 def post_create(request):
@@ -23,16 +24,18 @@ def post_create(request):
             post = Post(publisher = publisher)
             serializer = PostSerializer(post, data = request.data)
             if serializer.is_valid(): #validation of string length, datatype, etc.
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                post_obj = serializer.save()            
+                return Response(PostSerializer(post_obj).data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(data = check_login['status'], status = status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['GET'])
 def post_getAll(request):
     if request.method == 'GET':
         posts = Post.objects.all().order_by('-published_time')
-        serializer = PostGetSerializer(posts, many = True)
+        serializer = PostSerializer(posts, many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
 
@@ -87,13 +90,6 @@ def post_search(request):
             else:
                 post_list = post_list.intersection(final)
 
-        serializer = PostGetSerializer(post_list.order_by('-published_time'), many = True)
+        serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
-
-from UserApp.models import User
-from PostApp.models import Post
-from ExpApp.models import Experience
-from PostApp.serializer import PostSerializer
-from PostApp.serializer import ExperienceSerializer
-from PostApp.serializer import PostGetSerializer

@@ -57,7 +57,7 @@ def logout(request):
         user_id = request.data['user_id']
         if check_login(user_id)['result'] == False:
             message = check_login['status']
-            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
+            return Response(data = message, status = status.HTTP_401_UNAUTHORIZED)
         else:
             user = User.objects.get(user_id = user_id)
             user.status = False
