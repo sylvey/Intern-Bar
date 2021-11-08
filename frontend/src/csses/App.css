@@ -272,6 +272,18 @@
     white-space:nowrap;
 }
 
+.addButton{
+    display: flex;
+    font-size: 60px;
+    width: 200px;
+    height: 200px;
+    color:rgba(126, 122, 122, 0.25);
+    border-style: solid;
+    border-color: rgba(126, 122, 122, 0.25);
+    border-width: 2px;
+    cursor: pointer;
+}
+
 /* modal */
 
 .editProfile{

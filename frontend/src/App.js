@@ -20,6 +20,7 @@ function App() {
   const [logInStatus, setLogInStatus] = useState(false);
 
 
+  //store it to the local storage
   useEffect(() => {
     const fetchData = async ()=>{
       try {
@@ -52,7 +53,9 @@ function App() {
                      userId = {userId}
                      setLogin = {setLogInStatus}/>
             </Route> 
-            <Route path="/Collection" component={Collection}/>
+            <Route path="/Collection">
+              <Collection userId = {userId}/>
+            </Route>
             <Route path="/MyPost" component={MyPost}/>
             <Route path="/Account" component={Account}/>
             <Route path="/PostDetail/:title" component={PostDetail}/>
