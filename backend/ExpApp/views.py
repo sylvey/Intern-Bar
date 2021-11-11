@@ -34,6 +34,7 @@ def exp_create(request):
             new_exp = expSerializer.create()
             message = {"exp_id": new_exp.exp_id}
             return Response(data = message, status = status.HTTP_201_CREATED) 
+<<<<<<< HEAD
 
 @api_view(['POST'])
 def get_user_exp(request):
@@ -70,6 +71,31 @@ def search_pos(request):
         return Response(data = posSerializer.data, status = status.HTTP_200_OK)
 
 
+=======
+
+@api_view(['POST'])
+def search_org(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        org_list = Organization.objects.filter(org_name__icontains = request.data['keyword'])
+        orgSerializer = OrgSerializer(org_list, many = True)
+        return Response(data = orgSerializer.data, status = status.HTTP_200_OK)
+
+@api_view(['POST'])
+def search_pos(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'POST':
+        org = Organization.objects.get(org_id = request.data['org_id'])
+        pos_list = Position.objects.filter(pos_name__icontains = request.data['keyword'], org = org)
+        posSerializer = PosSerializer(pos_list, many = True)
+        return Response(data = posSerializer.data, status = status.HTTP_200_OK)
+
+
+>>>>>>> backend
 @api_view(['GET'])
 def place(request):
     if request.method == 'GET':

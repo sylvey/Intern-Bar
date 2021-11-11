@@ -84,4 +84,8 @@ class ExpSerializer(serializers.ModelSerializer):
 class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
+<<<<<<< HEAD
         fields = ('__all__')
+=======
+        fields = ('__all__')
+>>>>>>> backend

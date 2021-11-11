@@ -17,6 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
         else:
             return False
 
+    def to_representation(self, instance):
+        return {
+            "user_id": instance.user_id,
+            "user_name": instance.user_name
+        }
+
         
 
        
