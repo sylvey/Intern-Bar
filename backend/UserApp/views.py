@@ -3,11 +3,17 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 
+from backend.PostApp.serializer import PostSerializer
+
 from .models import *
 from .functs import *
 from CategoryApp.models import Category
+from ExpApp.models import Experience
+from PostApp.models import Post
 
 from .serializer import UserSerializer
+from ExpApp.serializer import ExpSerializer
+from PostApp.serializer import PostSerializer
 from CategoryApp.serializer import CategorySerializer
 
 @api_view(['POST'])
@@ -80,3 +86,29 @@ def get_user_cat(request):
         cat_response_list = CategorySerializer(cat_list, many = True).data
         return Response(data = cat_response_list, status=status.HTTP_200_OK)
             
+@api_view(['POST'])
+def get_user_exp(request):
+        if 'application/json' not in request.content_type:
+            return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+        if request.method == "POST":
+            user = User.objects.get(user_id = request.data['user_id'])
+            exp_list = Experience.objects.filter(user = user)
+            expSerializer = ExpSerializer(exp_list, many = True)
+
+        return Response(data = expSerializer.data, status = status.HTTP_200_OK)
+
+@api_view(['POST'])
+def get_user_post(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'POST':
+        user = User.objects.get(user_id = request.data['user_id'])
+        if user != None:
+            posts = Post.objects.filter(publisher = user)
+            postSerializer = PostSerializer(posts, many = True)
+            return Response(postSerializer.data, status = status.HTTP_200_OK)
+        else:
+            message = {"status": "User does not exist"}
+            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)

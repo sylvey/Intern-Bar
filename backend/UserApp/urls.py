@@ -23,5 +23,7 @@ urlpatterns = [
     path('user/create', views.signup),
     path('user/login', views.login),
     path('user/logout', views.logout),
-    path('user/myCat', views.get_user_cat)
+    path('user/myCat', views.get_user_cat),
+    path('user/exp/get', views.get_user_exp),
+    path('user/post/get', views.get_user_post),
 ]

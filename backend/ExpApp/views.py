@@ -36,19 +36,6 @@ def exp_create(request):
             return Response(data = message, status = status.HTTP_201_CREATED) 
 
 @api_view(['POST'])
-def get_user_exp(request):
-        if 'application/json' not in request.content_type:
-            return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
-
-        if request.method == "POST":
-            user = User.objects.get(user_id = request.data['user_id'])
-            exp_list = Experience.objects.filter(user = user)
-            expSerializer = ExpSerializer(exp_list, many = True)
-
-        return Response(data = expSerializer.data, status = status.HTTP_200_OK)
-
-
-@api_view(['POST'])
 def search_org(request):
     if 'application/json' not in request.content_type:
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)

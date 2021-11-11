@@ -38,7 +38,6 @@ def post_getAll(request):
         serializer = PostSerializer(posts, many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
-
 @api_view(['POST'])
 def post_search(request):
     if 'application/json' not in request.content_type:
