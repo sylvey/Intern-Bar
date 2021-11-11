@@ -3,8 +3,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 
-from backend.PostApp.serializer import PostSerializer
-
 from .models import *
 from .functs import *
 from CategoryApp.models import Category
