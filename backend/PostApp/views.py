@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-
 from .models import *
 from .serializer import *
 from UserApp.functs import *
@@ -11,10 +10,7 @@ from UserApp.models import User
 from ExpApp.models import Experience
 import datetime
 from datetime import date
-<<<<<<< HEAD
-=======
 from PostApp.serializer import PostSerializer
->>>>>>> backend
 
 @api_view(['POST'])
 def post_create(request):
@@ -28,33 +24,20 @@ def post_create(request):
             post = Post(publisher = publisher)
             serializer = PostSerializer(post, data = request.data)
             if serializer.is_valid(): #validation of string length, datatype, etc.
-<<<<<<< HEAD
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-=======
                 post_obj = serializer.save()            
                 return Response(PostSerializer(post_obj).data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(data = check_login['status'], status = status.HTTP_401_UNAUTHORIZED)
->>>>>>> backend
 
 
 @api_view(['GET'])
 def post_getAll(request):
     if request.method == 'GET':
         posts = Post.objects.all().order_by('-published_time')
-<<<<<<< HEAD
-        serializer = PostGetSerializer(posts, many = True)
-        return Response(serializer.data ,status=status.HTTP_200_OK)
-
-
-=======
         serializer = PostSerializer(posts, many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
->>>>>>> backend
 @api_view(['POST'])
 def post_search(request):
     if 'application/json' not in request.content_type:
@@ -106,19 +89,6 @@ def post_search(request):
             else:
                 post_list = post_list.intersection(final)
 
-<<<<<<< HEAD
-        serializer = PostGetSerializer(post_list.order_by('-published_time'), many = True)
-        return Response(serializer.data ,status=status.HTTP_200_OK)
-
-
-from UserApp.models import User
-from PostApp.models import Post
-from ExpApp.models import Experience
-from PostApp.serializer import PostSerializer
-from PostApp.serializer import ExperienceSerializer
-from PostApp.serializer import PostGetSerializer
-=======
         serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
->>>>>>> backend

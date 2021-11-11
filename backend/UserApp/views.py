@@ -2,26 +2,16 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
-<<<<<<< HEAD
-=======
-
-from backend.PostApp.serializer import PostSerializer
->>>>>>> backend
 
 from .models import *
 from .functs import *
 from CategoryApp.models import Category
-<<<<<<< HEAD
-
-from .serializer import UserSerializer
-=======
 from ExpApp.models import Experience
 from PostApp.models import Post
 
 from .serializer import UserSerializer
 from ExpApp.serializer import ExpSerializer
 from PostApp.serializer import PostSerializer
->>>>>>> backend
 from CategoryApp.serializer import CategorySerializer
 
 @api_view(['POST'])
@@ -94,8 +84,6 @@ def get_user_cat(request):
         cat_response_list = CategorySerializer(cat_list, many = True).data
         return Response(data = cat_response_list, status=status.HTTP_200_OK)
             
-<<<<<<< HEAD
-=======
 @api_view(['POST'])
 def get_user_exp(request):
         if 'application/json' not in request.content_type:
@@ -122,4 +110,3 @@ def get_user_post(request):
         else:
             message = {"status": "User does not exist"}
             return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
->>>>>>> backend

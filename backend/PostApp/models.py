@@ -4,19 +4,11 @@ from django.db import models
         
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
-<<<<<<< HEAD
-    publisher = models.ForeignKey('UserApp.User', on_delete=models.SET_NULL, related_name='PublishedByUser', null=True)
-    title = models.CharField(max_length=50)
-    content = models.TextField()
-    published_time = models.DateTimeField(auto_now=True)
-    experience = models.ForeignKey('ExpApp.Experience', on_delete=models.CASCADE, related_name='AboutExp', null=True)
-=======
     publisher = models.ForeignKey('UserApp.User', on_delete=models.SET_NULL, related_name='PublishedByUser', null = True)
     title = models.CharField(max_length=50)
     content = models.TextField()
     published_time = models.DateTimeField(auto_now=True)
     experience = models.ForeignKey('ExpApp.Experience', on_delete=models.CASCADE, related_name='AboutExp', null=True, blank = True)
->>>>>>> backend
 
     def __unicode__(self):
         return self.title

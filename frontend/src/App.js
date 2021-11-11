@@ -20,8 +20,9 @@ function App() {
   const [logInStatus, setLogInStatus] = useState(false);
 
 
-  //store it to the local storage
+  // store it to the local storage
   useEffect(() => {
+    
     const fetchData = async ()=>{
       try {
         setUserId(JSON.parse(window.localStorage.getItem('userId')));
@@ -31,11 +32,13 @@ function App() {
       }
     }
     fetchData();
+    console.log("userId", userId);
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem('userId', userId);
     window.localStorage.setItem('logInStatus', logInStatus);
+    console.log('userId', userId);
   }, [userId, logInStatus])
 
   return (
