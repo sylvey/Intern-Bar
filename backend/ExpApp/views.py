@@ -5,14 +5,22 @@ from rest_framework.response import Response
 from .serializer import ExpSerializer, OrgSerializer, PlaceSerializer
 from .models import *
 from UserApp.models import User
+from UserApp.functs import check_login
 from .functs import *
 
+#login required
 @api_view(['POST'])
 def exp_create(request):
     if 'application/json' not in request.content_type:
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "POST":
+        #Check login status
+        user_id = request.data["user_id"]
+        if check_login(user_id)['result'] == False:
+            message = {"status": check_login(user_id)['status']}
+            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
+        
         # Deal with organization
         if request.data["pos"]["pos_id"] == -1: #Create new instance of pos if needed
             if request.data["pos"]["org"]["org_id"] == -1: # Create new instance of org if needed

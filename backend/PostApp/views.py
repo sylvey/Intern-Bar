@@ -12,6 +12,7 @@ import datetime
 from datetime import date
 from PostApp.serializer import PostSerializer
 
+#login required
 @api_view(['POST'])
 def post_create(request):
     if 'application/json' not in request.content_type:
@@ -19,7 +20,7 @@ def post_create(request):
 
     if request.method == 'POST':
         user_id = request.data['publisher']
-        if check_login(user_id)['result'] == True:
+        if check_login(user_id):
             publisher = User.objects.get(user_id = user_id)
             post = Post(publisher = publisher)
             serializer = PostSerializer(post, data = request.data)
@@ -27,8 +28,6 @@ def post_create(request):
                 post_obj = serializer.save()            
                 return Response(PostSerializer(post_obj).data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(data = check_login['status'], status = status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['GET'])

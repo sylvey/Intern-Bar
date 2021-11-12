@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../csses/App.css'
 import orgs from "../hardData/orgs";
+import axios from "axios";
 
 
 
@@ -53,14 +54,36 @@ function EditProfile(props){
     const handleSetOrg = (e) =>{
         setOrgName(e.target.value);
         // console.log(orgName);
-        let tempt = orgs.filter((item)=>{
-            if(item.name.includes(e.target.value)){
-                return item;
-            }
-        });
-        setFiltered(tempt);
-        console.log(tempt);
+        // let tempt = orgs.filter((item)=>{
+        //     if(item.name.includes(e.target.value)){
+        //         return item;
+        //     }
+        // });
+        // setFiltered(tempt);
+        // console.log(tempt);
     }
+
+    useEffect(() => {
+      const fetchData = async()=>{
+          let res;
+          try {
+              res = await axios.post("http://127.0.0.1:8000/api/org/search",{
+                  keyword: orgName
+              });
+
+              if(res.status === 200){
+                  console.log("res.data:", res.data); 
+                  setFiltered(res.data); 
+              } 
+              return;
+          }catch(e){
+              console.log(e);
+          }
+      }
+      fetchData();
+      
+    }, [orgName])
+
 
     const validateOrg = () => {
       if(place === ""){
@@ -69,9 +92,36 @@ function EditProfile(props){
       }
       return true;
     }
+
     const handleSubmitOrg = (e) => {
       e.preventDefault();
       if(validateOrg()){
+        // const postData
+        // const postData = async()=>{
+        //     let res;
+        //     try {
+        //         res = await axios.get("http://127.0.0.1:8000/api/exp/create",{
+        //             user_id: props.userId,
+        //             start_date: startTime,
+        //             end_date: endTime,
+        //             pos: {
+        //               pos_id: org.org_id? org.orgid: -1,
+        //               pos_name: posName,
+        //               salary: null,
+        //               place: 
+        //             }
+        //         });
+
+        //         if(res.status === 200){
+        //             console.log("res.data:", res.data); 
+        //             setFiltered(res.data); 
+        //         } 
+        //         return;
+        //     }catch(e){
+        //         console.log(e);
+        //     }
+        // }
+        // postData();
         setPlace("");
         setShowEditCompany(false);
         setOrgSubmitted(true);
@@ -136,7 +186,7 @@ function EditProfile(props){
                     <div className = "scrollRow centerVertical">  
                       <div className = "tagButton"
                           onClick={()=>{
-                            setOrg({id:100, name: orgName})
+                            setOrg({name: orgName})
                             setShowEditCompany(true)}}>新增 {orgName}</div>  
                       {
                         filtered? (
@@ -145,7 +195,7 @@ function EditProfile(props){
                               <div className = "tagButtonG"
                                    onClick = {()=>{
                                      setOrg(item)
-                                     setOrgSubmitted(true)}}>{item.name}</div>
+                                     setOrgSubmitted(true)}}>{item.org_name}</div>
                             );
                           })
                         ):null

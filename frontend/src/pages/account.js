@@ -62,6 +62,7 @@ function Account({userId}){
                     show={editShow} 
                     setEditShow = {setEditShow}
                     handleClose = {handleClose}
+                    userId = {userId}
                 />
                 
             </div>
