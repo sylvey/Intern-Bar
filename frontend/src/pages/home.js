@@ -32,7 +32,7 @@ const Home = ({userName}) =>{
         <div className = "page">
             {userName}
             <div className = "row marginTop marginLeft">
-                <SearchBar></SearchBar>
+                <SearchBar setPosts = {setPosts}></SearchBar>
             </div>
             <div className="scroll centerVertical marginTopS" >
                 {
