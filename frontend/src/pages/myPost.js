@@ -1,17 +1,39 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "../csses/App.css";
-import myOwnPost from "../hardData/myOwnPost";
+// import myOwnPost from "../hardData/myOwnPost";
 import MyPostComponent from "../Components/myPost";
 import EditPost from "../Components/EditPost";
+import axios from "axios";
 
-const MyPost = () =>{
+const MyPost = ({userId}) =>{
 
     const [editShow, setEditShow] = useState(false);
+    const [myOwnPost, setMyOwnPost] = useState();
 
     const handleShow = () =>{
         setEditShow(true);
     }
     
+    useEffect(() => {
+        const fetchData = async()=>{
+            let res;
+            try {
+                res = await axios.get("http://127.0.0.1:8000/user/post/get",{
+                    user_id: userId,
+                });
+
+                if(res.status === 200){
+                    console.log(res.data); 
+                    setMyOwnPost(res.data); 
+                } 
+                return;
+            }catch(e){
+                console.log(e);
+            }
+        }
+        fetchData();
+        
+    }, [])
 
 
     return (
@@ -22,16 +44,16 @@ const MyPost = () =>{
             </div>
             <div className="scroll centerVertical" >
                 {
-                    myOwnPost.map((item)=>{
+                    myOwnPost? (myOwnPost.map((item)=>{
                         return(
                             <MyPostComponent 
                                 content = {item.content}
                                 title = {item.title}
-                                time = {item.time}
-                                posName = {item.position.posName}
-                                orgName = {item.position.organization.orgName}/>   
+                                time = {item.published_time}
+                                posName = {item.experience.pos.pos_name}
+                                orgName = {item.experience.pos.org.org_name}/>   
                         );
-                    })
+                    })):null
                 }
                 <EditPost 
                     show={editShow} 

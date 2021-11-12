@@ -53,6 +53,7 @@ const LogIn = ({userId, setLogin, setUserId}) =>{
                     onChange = {(e)=>setUserId(e.target.value)}></input>
                 <input 
                     className="searchBarInput" 
+                    type = "password"
                     placeholder="密碼"
                     value = {password}
                     onChange = {(e)=>setPassword(e.target.value)}></input>

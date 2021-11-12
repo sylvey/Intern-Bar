@@ -20,9 +20,8 @@ function App() {
   const [logInStatus, setLogInStatus] = useState(false);
 
 
-  // store it to the local storage
+  //fetch from local storage
   useEffect(() => {
-    
     const fetchData = async ()=>{
       try {
         setUserId(JSON.parse(window.localStorage.getItem('userId')));
@@ -35,6 +34,7 @@ function App() {
     console.log("userId", userId);
   }, []);
 
+  // store it to the local storage
   useEffect(() => {
     window.localStorage.setItem('userId', userId);
     window.localStorage.setItem('logInStatus', logInStatus);
@@ -59,7 +59,10 @@ function App() {
               <Route path="/Collection">
                 <Collection userId = {userId}/>
               </Route>
-              <Route path="/MyPost" component={MyPost}/>
+              {/* <Route path="/MyPost" component={MyPost}/> */}
+              <Route path="/MyPost">
+                <MyPost userId = {userId}/>
+              </Route>
               <Route path="/Account">
                 <Account userId = {userId}/>
               </Route> 
