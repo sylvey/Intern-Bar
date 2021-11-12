@@ -1,7 +1,6 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 
 from .models import *
 from .functs import *
@@ -59,15 +58,13 @@ def logout(request):
 
     if request.method == 'POST':
         user_id = request.data['user_id']
-        if check_login(user_id)['result'] == False:
-            message = check_login['status']
-            return Response(data = message, status = status.HTTP_401_UNAUTHORIZED)
-        else:
+        if check_login(user_id):
             user = User.objects.get(user_id = user_id)
             user.status = False
             user.save(update_fields=['status'])
             return Response(data = {}, status=status.HTTP_200_OK)
 
+#login_required
 @api_view(['POST'])
 def get_user_cat(request):
     if 'application/json' not in request.content_type:
@@ -75,14 +72,11 @@ def get_user_cat(request):
         
     if request.method == 'POST':
         user_id = request.data['user_id']
-        user = User.objects.get(user_id = user_id)
-        if user == None: # if the user does not exist
-            message = {"status": "User does not exist"}
-            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
-        #Get all categories of the user
-        cat_list = Category.objects.filter(user = user_id)
-        cat_response_list = CategorySerializer(cat_list, many = True).data
-        return Response(data = cat_response_list, status=status.HTTP_200_OK)
+        if check_login(user_id):
+            #Get all categories of the user
+            cat_list = Category.objects.filter(user = user_id)
+            cat_response_list = CategorySerializer(cat_list, many = True).data
+            return Response(data = cat_response_list, status=status.HTTP_200_OK)
             
 @api_view(['POST'])
 def get_user_exp(request):
@@ -90,7 +84,8 @@ def get_user_exp(request):
             return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
         if request.method == "POST":
-            user = User.objects.get(user_id = request.data['user_id'])
+            user_id = request.data['user_id']
+            user = User.objects.get(user_id = user_id)
             exp_list = Experience.objects.filter(user = user)
             expSerializer = ExpSerializer(exp_list, many = True)
 
@@ -102,7 +97,8 @@ def get_user_post(request):
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
     
     if request.method == 'POST':
-        user = User.objects.get(user_id = request.data['user_id'])
+        user_id = request.data['user_id']
+        user = User.objects.get(user_id = user_id)
         if user != None:
             posts = Post.objects.filter(publisher = user)
             postSerializer = PostSerializer(posts, many = True)
