@@ -85,6 +85,7 @@ function EditProfile(props){
     }, [orgName])
 
 
+
     const validateOrg = () => {
       if(place === ""){
         setPlaceError("you must fill this field");
