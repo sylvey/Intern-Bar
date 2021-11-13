@@ -22,7 +22,6 @@ class PostSerializer(serializers.ModelSerializer):
 
 # -- Comment --
 class CommentSerializer(serializers.ModelSerializer):
-    user_id = serializers.CharField()
 
     class Meta:
         model = Comment
