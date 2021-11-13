@@ -81,7 +81,14 @@ class ExpSerializer(serializers.ModelSerializer):
         }
 
 
-class PlaceSerializer(serializers.ModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Place
+        model = City
         fields = ('__all__')
+        depth = 1
+
+
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = District
+        fields = ('district_id', 'district')
