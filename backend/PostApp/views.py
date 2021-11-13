@@ -100,7 +100,7 @@ def comment_create(request):
 
     if request.method == 'POST':
         user_id = request.data['author']
-        if check_login(user_id)['result'] == True:
+        if check_login(user_id):
             serializer = CommentSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
