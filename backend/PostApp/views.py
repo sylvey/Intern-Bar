@@ -91,3 +91,26 @@ def post_search(request):
         serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
+from django.views.decorators.csrf import csrf_exempt
+# -- Comment --
+@csrf_exempt
+@api_view(['POST'])
+def comment_create(request):
+
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        user_id = request.data['author']
+        if check_login(user_id)['result'] == True:
+            serializer = CommentSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+            else:
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return render(request, )
+
+
+
+
