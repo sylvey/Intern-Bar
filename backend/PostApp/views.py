@@ -91,9 +91,7 @@ def post_search(request):
         serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
-from django.views.decorators.csrf import csrf_exempt
 # -- Comment --
-@csrf_exempt
 @api_view(['POST'])
 def comment_create(request):
 
@@ -109,7 +107,6 @@ def comment_create(request):
                 return Response(status=status.HTTP_201_CREATED)
             else:
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return render(request, )
 
 
 
