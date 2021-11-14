@@ -110,6 +110,16 @@ def comment_create(request):
             else:
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+def comment_get(request):
+
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        comments = Comment.objects.filter(post_attached_id=request.data['post_id'])
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

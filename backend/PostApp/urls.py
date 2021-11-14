@@ -8,5 +8,5 @@ urlpatterns = [
     path('post/getAll', views.post_getAll),
     path('post/search', views.post_search),
     path('comment/create', views.comment_create),
-    # path('comment/get', views.comment_getFromPost)
+    path('comment/get', views.comment_get)
 ]

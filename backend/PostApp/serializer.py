@@ -31,11 +31,10 @@ class CommentSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         return {
             "comment_id": instance.comment_id,
-            "author": UserSerializer(instance.author).data,
-            "post_attached_id": PostSerializer(instance.post_attached_id).data,
-            "content": instance.content,
+            "author": UserSerializer(instance.author).data['user_name'],
+            # "post_attached_id": PostSerializer(instance.post_attached_id).data,
             "published_time": instance.published_time,
-            
+            "content": instance.content,
         }
 
     
