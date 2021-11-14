@@ -15,7 +15,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    author = models.OneToOneField('UserApp.User', on_delete=models.SET_NULL, related_name='CommentedByUser', null = True)
-    post_attached = models.OneToOneField('Post', on_delete=models.CASCADE, related_name='UnderPost')
+    author = models.ForeignKey('UserApp.User', on_delete=models.SET_NULL, related_name='CommentedByUser', null = True)
+    post_attached_id = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='UnderPost')
     content = models.TextField()
     published_time = models.DateTimeField(auto_now=True)

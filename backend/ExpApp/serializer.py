@@ -51,7 +51,7 @@ class PosSerializer(serializers.ModelSerializer):
             "pos_id": instance.pos_id,
             "pos_name": instance.pos_name,
             "salary": instance.salary,
-            "place": instance.place.place_id,
+            "place": instance.place.district_id,
             "org": OrgSerializer(instance.org).data
         }
 

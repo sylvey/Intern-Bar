@@ -101,7 +101,9 @@ def comment_create(request):
     if request.method == 'POST':
         user_id = request.data['author']
         if check_login(user_id):
-            serializer = CommentSerializer(data=request.data)
+            author = User.objects.get(user_id = user_id)
+            comment = Comment(author = author)
+            serializer = CommentSerializer(comment, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_201_CREATED)
@@ -111,3 +113,10 @@ def comment_create(request):
 
 
 
+from PostApp.models import *
+from PostApp.serializer import *
+from UserApp.functs import *
+from UserApp.models import User
+from ExpApp.models import Experience
+import datetime
+from datetime import date
