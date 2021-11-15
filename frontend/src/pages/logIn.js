@@ -22,11 +22,16 @@ const LogIn = ({userId, setLogin, setUserId}) =>{
             });
 
             if(res.status === 200){
-                console.log("success");
+                // console.log("success");
                 setLogin(true);
                 setPassword("");
                 setError("");
                 handleNavigate();
+                
+                sessionStorage.clear();
+                window.sessionStorage.setItem('userId', userId);
+                window.sessionStorage.setItem('logInStatus', true);
+                // console.log(JSON.parse(window.sessionStorage.getItem('userId')));
                 console.log("success");
             } 
             return;

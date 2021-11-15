@@ -22,24 +22,18 @@ function App() {
 
   // fetch from local storage
   useEffect(() => {
+    console.log("i am here");
     const fetchData = async ()=>{
       try {
-        setUserId(JSON.parse(window.sessionStorage.getItem('userId')));
-        setLogInStatus(JSON.parse(window.sessionStorage.getItem('logInStatus')));
+        setUserId(window.sessionStorage.getItem('userId'));
+        setLogInStatus(window.sessionStorage.getItem('logInStatus'));
       }catch(e){
         console.log(e);
       }
     }
     fetchData();
-    console.log("userId", userId);
+    // console.log("userId", userId);
   }, []);
-
-  // store it to the local storage
-  useEffect(() => {
-    window.sessionStorage.setItem('userId', userId);
-    window.sessionStorage.setItem('logInStatus', logInStatus);
-    console.log('userId', userId);
-  }, [userId, logInStatus])
 
   return (
     <Router>
