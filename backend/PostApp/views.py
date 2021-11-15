@@ -105,8 +105,8 @@ def comment_create(request):
             comment = Comment(author = author)
             serializer = CommentSerializer(comment, data=request.data)
             if serializer.is_valid():
-                serializer.save()
-                return Response(status=status.HTTP_201_CREATED)
+                comment_obj = serializer.save()
+                return Response(CommentSerializer(comment_obj).data, status=status.HTTP_201_CREATED)
             else:
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
