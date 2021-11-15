@@ -31,7 +31,7 @@ const LogIn = ({userId, setLogin, setUserId}) =>{
             } 
             return;
         }catch(e){
-            console.log(e.response.status);
+            console.log(e);
             if(e.response.status === 400){
                 setError("帳號不存在");
             }
