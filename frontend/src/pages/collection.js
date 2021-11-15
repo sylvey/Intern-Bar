@@ -8,11 +8,12 @@ const Collection = ({userId}) =>{
     const [collection, setCollection] = useState();
 
     useEffect(() => {
+        console.log("userIdOn collection:",userId);
         const fetchData = async()=>{
             let res;
             try {
                 res = await axios.post("http://127.0.0.1:8000/api/user/myCat",{
-                    user_id: userId,
+                    user_id: window.sessionStorage.getItem('userId'),
                 });
 
                 if(res.status === 200){

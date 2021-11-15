@@ -38,7 +38,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-          <NavigationBar login = {logInStatus}
+          <NavigationBar login = {window.sessionStorage.getItem('logInStatus')}
                          setLogin = {setLogInStatus}
                          setUserId = {setUserId}
                          userId = {userId}/>

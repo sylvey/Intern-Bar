@@ -19,6 +19,9 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
         if(res.status === 200){
           setUserId("");
           setLogin(false);
+          window.sessionStorage.clear();
+          window.sessionStorage.setItem('userId', "");
+          window.sessionStorage.setItem('logInStatus', false);
         }
 
       }catch(e){
@@ -40,7 +43,7 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
             </Nav>
             <Nav>
               {
-                login?(
+                userId !== ""?(
                   <NavDropdown title={userId} id="collasible-nav-dropdown">
                     <NavDropdown.Item href = "/Account">個人檔案</NavDropdown.Item>
                     <NavDropdown.Item href = "/MyPost">我的貼文</NavDropdown.Item>
