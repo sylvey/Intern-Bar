@@ -15,7 +15,7 @@ class Position(models.Model):
     pos_id = models.AutoField(primary_key=True)
     pos_name = models.CharField(max_length=100)
     org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='PosInOrg')
-    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='PosInPlace')
+    place = models.ForeignKey('District', on_delete=models.CASCADE, related_name='PosInPlace')
     salary = models.IntegerField(null=True, blank=True)
     class Meta:
         unique_together = (("pos_name", "org", "place", "salary"))
@@ -32,10 +32,23 @@ class Organization(models.Model):
     def __unicode__(self):
         return self.org_name
 
-class Place(models.Model):
-    place_id = models.CharField(max_length=3, primary_key=True)
+# class Place(models.Model):
+#     place_id = models.CharField(max_length=3, primary_key=True)
+#     city = models.CharField(max_length=50)
+#     district = models.CharField(max_length=50)
+
+class City(models.Model):
+    city_id = models.IntegerField(primary_key=True)
     city = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
+
+class District(models.Model):
+    city_id = models.ForeignKey('City', on_delete=models.CASCADE, default = "")
+    district_id = models.IntegerField(primary_key= True, default="")
+    district = models.CharField(max_length=50, blank = True, default="")
+
+    class Meta:
+        unique_together = (('city_id', 'district_id'), )
+    
 
 # class Located_In(models.Model):    # Relationship
 #     org = models.ForeignKey('Organization',on_delete=models.CASCADE, related_name='OrgLocatedIn')

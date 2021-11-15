@@ -6,7 +6,7 @@ import "../csses/App.css";
 import _axios from "axios";
 import axios from "axios";
 
-const LogIn = ({userId, setLogin, setUserId}) =>{
+const LogIn = ({userId, setUserId, login, setLogin}) =>{
     // const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -30,8 +30,6 @@ const LogIn = ({userId, setLogin, setUserId}) =>{
                 
                 sessionStorage.clear();
                 window.sessionStorage.setItem('userId', userId);
-                window.sessionStorage.setItem('logInStatus', true);
-                // console.log(JSON.parse(window.sessionStorage.getItem('userId')));
                 console.log("success");
             } 
             return;

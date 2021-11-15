@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializer import ExpSerializer, OrgSerializer, PlaceSerializer
+from .serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
 from .models import *
 from UserApp.models import User
 from UserApp.functs import check_login
@@ -66,11 +66,27 @@ def search_pos(request):
 
 
 @api_view(['GET'])
-def place(request):
+def city(request):
     if request.method == 'GET':
-        places = Place.objects.all()
-        serializer = PlaceSerializer(places, many = True)
+        cities = City.objects.all()
+        serializer = CitySerializer(cities, many = True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+@api_view(['POST'])
+def district(request):
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+        
+    if request.method == 'POST':
+        city_id = request.data['city_id']
+        districts = District.objects.filter(city_id = city_id)
+        serializer = DistrictSerializer(districts, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
         
-        
+from ExpApp.serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
+from ExpApp.models import *
+from UserApp.models import User
+from UserApp.functs import check_login
+from ExpApp.functs import *

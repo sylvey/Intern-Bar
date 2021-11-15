@@ -5,5 +5,6 @@ from .models import *
 admin.site.register(Experience)
 admin.site.register(Position)
 admin.site.register(Organization)
-admin.site.register(Place)
+admin.site.register(City)
+admin.site.register(District)
 #admin.site.register(Located_In)

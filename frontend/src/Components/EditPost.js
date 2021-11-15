@@ -124,9 +124,6 @@ function EditPost(props){
 
 
     const [howToAddPos, setHowToAddPos] = useState(" add from current position");
-    const handleSetHowToAdd = (value) =>{
-      setHowToAddPos(value);
-    }
 
     useEffect(() => {
       if(title !== ""){
@@ -183,7 +180,12 @@ function EditPost(props){
                   )
                 }
                 </>
-              ):(
+              ):null
+              }
+
+              {
+                howToAddPos === " add new" ? 
+                (
                 <>
                   <div className="flex marginTopS">
                       <p>職務名稱</p>
@@ -299,16 +301,16 @@ function EditPost(props){
                       </div>
                   </div>
                 </>
-
-              )
-            }
+                ):null
+              }
+              
+            
 
         
             <MyPicker 
                 value = {howToAddPos}
                 setValue = {setHowToAddPos}
-                firstValue = " add from current position"
-                secondValue = " add new"  />
+                choices = {[" add from current position", " add new"]}/>
 
             <div className="flex marginTopS">
                 <p>標題</p>

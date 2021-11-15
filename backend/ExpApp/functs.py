@@ -23,7 +23,7 @@ def create_pos(pos_data):
     existing_positions = Position.objects.filter(
         pos_name = pos_data["pos_name"],
         org = Organization.objects.get(org_id = pos_data["org"]),
-        place = Place.objects.get(place_id = pos_data["place"]),
+        place = District.objects.get(district_id = pos_data["place"]),
         salary = pos_data["salary"]
     )
     if len(existing_positions) != 0:

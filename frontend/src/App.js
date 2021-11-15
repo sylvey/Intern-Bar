@@ -17,7 +17,7 @@ import ThisFileCollection from './pages/thisFileCollection';
 function App() {
   
   const [userId, setUserId] = useState("");
-  const [logInStatus, setLogInStatus] = useState(false);
+  const [login, setLogin] = useState(false);
 
 
   // fetch from local storage
@@ -25,8 +25,17 @@ function App() {
     console.log("i am here");
     const fetchData = async ()=>{
       try {
-        setUserId(window.sessionStorage.getItem('userId'));
-        setLogInStatus(window.sessionStorage.getItem('logInStatus'));
+        if(window.sessionStorage.getItem('userId'))
+        {
+          setUserId(window.sessionStorage.getItem('userId'));
+          setLogin(window.sessionStorage.getItem('userId') !== "")
+        }
+        else
+        {
+          setUserId("");
+          setLogin(false);
+        }
+        
       }catch(e){
         console.log(e);
       }
@@ -35,30 +44,33 @@ function App() {
     // console.log("userId", userId);
   }, []);
 
+  
+
   return (
     <Router>
       <div className="App">
-          <NavigationBar login = {window.sessionStorage.getItem('logInStatus')}
-                         setLogin = {setLogInStatus}
+          <NavigationBar userId = {userId}
                          setUserId = {setUserId}
-                         userId = {userId}/>
+                         login = {login}
+                         setLogin = {setLogin}/>
           <Switch>
               <Route path="/" exact component={Home}/>
               <Route path="/SignIn" component={SignIn}/>
               <Route path = "/LogIn">
                 <LogIn setUserId = {setUserId} 
                        userId = {userId}
-                       setLogin = {setLogInStatus}/>
+                       login = {login}
+                       setLogin = {setLogin}/>
               </Route> 
               <Route path="/Collection">
-                <Collection userId = {userId}/>
+                <Collection/>
               </Route>
               {/* <Route path="/MyPost" component={MyPost}/> */}
               <Route path="/MyPost">
-                <MyPost userId = {userId}/>
+                <MyPost/>
               </Route>
               <Route path="/Account">
-                <Account userId = {userId}/>
+                <Account/>
               </Route> 
               <Route path="/PostDetail/:title" component={PostDetail}/>
               <Route path="/thisFile/:title" component={ThisFileCollection}/>

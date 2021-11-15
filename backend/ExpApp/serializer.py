@@ -51,7 +51,7 @@ class PosSerializer(serializers.ModelSerializer):
             "pos_id": instance.pos_id,
             "pos_name": instance.pos_name,
             "salary": instance.salary,
-            "place": instance.place.place_id,
+            "place": instance.place.district_id,
             "org": OrgSerializer(instance.org).data
         }
 
@@ -81,7 +81,14 @@ class ExpSerializer(serializers.ModelSerializer):
         }
 
 
-class PlaceSerializer(serializers.ModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Place
+        model = City
         fields = ('__all__')
+        depth = 1
+
+
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = District
+        fields = ('district_id', 'district')

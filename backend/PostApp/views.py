@@ -91,3 +91,42 @@ def post_search(request):
         serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
+# -- Comment --
+@api_view(['POST'])
+def comment_create(request):
+
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        user_id = request.data['author']
+        if check_login(user_id):
+            author = User.objects.get(user_id = user_id)
+            comment = Comment(author = author)
+            serializer = CommentSerializer(comment, data=request.data)
+            if serializer.is_valid():
+                comment_obj = serializer.save()
+                return Response(CommentSerializer(comment_obj).data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def comment_get(request):
+
+    if 'application/json' not in request.content_type:
+        return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        comments = Comment.objects.filter(post_attached_id=request.data['post_id'])
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+from PostApp.models import *
+from PostApp.serializer import *
+from UserApp.functs import *
+from UserApp.models import User
+from ExpApp.models import Experience
+import datetime
+from datetime import date

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import '../csses/App.css';
 import MyFile from "../Components/file";
-import myCollectionFile from "../hardData/myCollectionFile";
-import addButton from "../image/addButton.png";
 import axios from "axios";
-const Collection = ({userId}) =>{
+const Collection = () =>{
     const [collection, setCollection] = useState();
+    const [showAddCat, setShowAddCat] = useState(false);
+    const [newCat, setNewCat] = useState("");
 
     useEffect(() => {
-        console.log("userIdOn collection:",userId);
+        // console.log("userIdOn collection:",userId);
         const fetchData = async()=>{
             let res;
             try {
@@ -27,6 +27,10 @@ const Collection = ({userId}) =>{
         }
         fetchData();
     }, [])
+
+    const handleAddCat = () =>{
+        setShowAddCat(false);
+    }
     
     return (
         <div className = "page">
@@ -45,7 +49,21 @@ const Collection = ({userId}) =>{
                     :null
                 }
                 {/* <img scr = {addButton} width = "200px" height="200px"/> */}
-                <div className="addButton center">+</div>
+                <div className="addButton center"
+                     onClick = {()=>{setShowAddCat(true)}}>
+                         {
+                             showAddCat? (
+                             <form className = "flex centerHorizontal"
+                                    onSubmit = {handleAddCat}>
+                                <input className="normalInput"
+                                       value = {newCat}
+                                       onChange = {(e)=>setNewCat(e.target.value)}/>
+                             </form>
+                             ):(
+                                <>+</>
+                             )
+                         } 
+                     </div>
             </div>
             
             

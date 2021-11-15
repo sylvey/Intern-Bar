@@ -5,7 +5,7 @@ import MyProfile from "../Components/myProfile";
 import EditProfile from "../Components/EditProfile";
 import orgs from "../hardData/orgs";
 import axios from "axios";
-function Account({userId}){
+function Account(){
 
     const [editShow, setEditShow] = useState(false);
     const [profile, setProfile] = useState();
@@ -15,7 +15,7 @@ function Account({userId}){
             let res;
             try {
                 res = await axios.post("http://127.0.0.1:8000/api/user/exp/get",{
-                    user_id: userId,
+                    user_id: window.sessionStorage.getItem('userId'),
                 });
 
                 if(res.status === 200){
@@ -61,8 +61,7 @@ function Account({userId}){
                 <EditProfile 
                     show={editShow} 
                     setEditShow = {setEditShow}
-                    handleClose = {handleClose}
-                    userId = {userId}
+                    handleClose = {handleClose} 
                 />
                 
             </div>

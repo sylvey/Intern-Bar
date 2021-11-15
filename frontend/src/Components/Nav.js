@@ -7,21 +7,22 @@ import axios from "axios";
 
 const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
 
-
+    // const [userId, setUserId] = useState(window.sessionStorage.getItem('userId'))
     
     async function handleLogOut(){
       let res;
       try{
         res = await axios.post("http://127.0.0.1:8000/api/user/logout",{
-          user_id: userId,
+          user_id: window.sessionStorage.getItem('userId'),
         });
 
         if(res.status === 200){
           setUserId("");
           setLogin(false);
+          console.log(userId)
           window.sessionStorage.clear();
           window.sessionStorage.setItem('userId', "");
-          window.sessionStorage.setItem('logInStatus', false);
+          // window.sessionStorage.setItem('logInStatus', false);
         }
 
       }catch(e){
@@ -43,7 +44,7 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
             </Nav>
             <Nav>
               {
-                userId !== ""?(
+                login?(
                   <NavDropdown title={userId} id="collasible-nav-dropdown">
                     <NavDropdown.Item href = "/Account">個人檔案</NavDropdown.Item>
                     <NavDropdown.Item href = "/MyPost">我的貼文</NavDropdown.Item>

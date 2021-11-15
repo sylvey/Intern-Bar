@@ -5,7 +5,7 @@ import MyPostComponent from "../Components/myPost";
 import EditPost from "../Components/EditPost";
 import axios from "axios";
 
-const MyPost = ({userId}) =>{
+const MyPost = () =>{
 
     const [editShow, setEditShow] = useState(false);
     const [myOwnPost, setMyOwnPost] = useState();
@@ -15,15 +15,16 @@ const MyPost = ({userId}) =>{
     }
     
     useEffect(() => {
+        console.log("rendering my post")
         const fetchData = async()=>{
             let res;
             try {
-                res = await axios.get("http://127.0.0.1:8000/user/post/get",{
-                    user_id: userId,
+                res = await axios.post("http://127.0.0.1:8000/api/user/post/get",{
+                    user_id: window.sessionStorage.getItem('userId')
                 });
 
                 if(res.status === 200){
-                    console.log(res.data); 
+                    console.log("res.data:", res.data); 
                     setMyOwnPost(res.data); 
                 } 
                 return;
