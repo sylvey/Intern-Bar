@@ -85,8 +85,8 @@ def district(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
         
-# from ExpApp.serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
-# from ExpApp.models import *
-# from UserApp.models import User
-# from UserApp.functs import check_login
-# from ExpApp.functs import *
+from ExpApp.serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
+from ExpApp.models import *
+from UserApp.models import User
+from UserApp.functs import check_login
+from ExpApp.functs import *
