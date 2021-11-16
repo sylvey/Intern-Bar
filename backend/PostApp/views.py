@@ -97,7 +97,7 @@ def post_search(request):
 
 
         if len(district) != 0:
-            temp_dis = Post.objects.filter(experience__pos__place__district__icontains = district)
+            temp_dis = Post.objects.filter(experience__pos__place__district_name__icontains = district)
             if len(post_list) == 0:
                 post_list = temp_dis
             else:
@@ -105,7 +105,7 @@ def post_search(request):
 
         
         if len(city) != 0: 
-            temp_city = Post.objects.filter(experience__pos__place__city_id__city__icontains = city)
+            temp_city = Post.objects.filter(experience__pos__place__city_id__city_name__icontains = city)
             if len(post_list) == 0:
                 post_list = temp_city
             else:
