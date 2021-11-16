@@ -50,7 +50,7 @@ def collection_add(request):
 					serializer.save()
 					return Response(status=status.HTTP_201_CREATED)
 				else:
-					return Response("The post has been colleted in this category.", status=status.HTTP_400_BAD_REQUEST)
+					return Response("The post has been collected in this category.", status=status.HTTP_400_BAD_REQUEST)
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
