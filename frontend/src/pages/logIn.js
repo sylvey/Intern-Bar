@@ -3,7 +3,6 @@ import "../csses/input.css";
 // import "../csses/button.css";
 import { useHistory } from "react-router";
 import "../csses/App.css";
-import _axios from "axios";
 import axios from "axios";
 
 const LogIn = ({userId, setUserId, login, setLogin}) =>{

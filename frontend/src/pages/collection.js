@@ -7,29 +7,50 @@ const Collection = () =>{
     const [showAddCat, setShowAddCat] = useState(false);
     const [newCat, setNewCat] = useState("");
 
+    const fetchData = async()=>{
+        let res;
+        try {
+            res = await axios.post("http://127.0.0.1:8000/api/user/myCat",{
+                user_id: window.sessionStorage.getItem('userId'),
+            });
+
+            if(res.status === 200){
+                console.log(res.data); 
+                setCollection(res.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         // console.log("userIdOn collection:",userId);
-        const fetchData = async()=>{
-            let res;
-            try {
-                res = await axios.post("http://127.0.0.1:8000/api/user/myCat",{
-                    user_id: window.sessionStorage.getItem('userId'),
-                });
+        fetchData();
+    }, [])
+
+    const handleAddCat = async () =>{
+        const create = async ()=>{
+            try{
+                console.log("i am creating");
+                let res = await axios.post("http://127.0.0.1:8000/api/user/collection/create", {
+                    user: window.sessionStorage.getItem('userId'),
+                    category_name: newCat,
+                })
 
                 if(res.status === 200){
-                    console.log(res.data); 
-                    setCollection(res.data); 
-                } 
-                return;
+                    console.log("create success:", res.data);
+                    fetchData();
+                }
+
             }catch(e){
                 console.log(e);
             }
         }
-        fetchData();
-    }, [])
 
-    const handleAddCat = () =>{
+        await create();
         setShowAddCat(false);
+        
     }
     
     return (
@@ -43,14 +64,15 @@ const Collection = () =>{
                     collection?
                             collection.map((item)=>{
                                 return(
-                                    <MyFile name = {item.category_name}/>
+                                    <MyFile item = {item}/>
                                 );
                             })
                     :null
                 }
                 {/* <img scr = {addButton} width = "200px" height="200px"/> */}
                 <div className="addButton center"
-                     onClick = {()=>{setShowAddCat(true)}}>
+                     onClick = {()=>{setShowAddCat(true)
+                                     setNewCat("")}}>
                          {
                              showAddCat? (
                              <form className = "flex centerHorizontal"

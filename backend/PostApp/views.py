@@ -48,13 +48,19 @@ def post_search(request):
         pos = request.data['keyword_pos']
         sDate = request.data['keyword_sDate']
         eDate = request.data['keyword_eDate']
+        city = request.data['keyword_city']
+        district = request.data['keyword_district']
 
-        if len(org) == 0 and len(pos) == 0 and len(sDate) == 0 and len(eDate) == 0:
+        if len(org) == 0 and len(pos) == 0 and len(sDate) == 0 and len(eDate) == 0 and len(city) == 0 and len(district) == 0:
             return Response("Fill in at least one field", status=status.HTTP_400_BAD_REQUEST)
         
         if len(sDate) != 0 and len(eDate) != 0:
             if sDate > eDate:
                 return Response("Check your start date and end date.", status=status.HTTP_400_BAD_REQUEST)
+        
+        if len(city) == 0 and len(district) != 0:
+            return Response("City is missing", status=status.HTTP_400_BAD_REQUEST)
+
         
         post_list = []
 
@@ -87,6 +93,28 @@ def post_search(request):
                 post_list = final
             else:
                 post_list = post_list.intersection(final)
+
+
+
+        if len(district) != 0:
+            temp_dis = Post.objects.filter(experience__pos__place__district_name__icontains = district)
+            if len(post_list) == 0:
+                post_list = temp_dis
+            else:
+                post_list = post_list.intersection(temp_dis)
+
+        
+        if len(city) != 0: 
+            temp_city = Post.objects.filter(experience__pos__place__city_id__city_name__icontains = city)
+            if len(post_list) == 0:
+                post_list = temp_city
+            else:
+                post_list = post_list.intersection(temp_city)
+
+
+
+
+
 
         serializer = PostSerializer(post_list.order_by('-published_time'), many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)

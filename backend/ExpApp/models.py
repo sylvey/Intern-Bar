@@ -39,12 +39,12 @@ class Organization(models.Model):
 
 class City(models.Model):
     city_id = models.IntegerField(primary_key=True)
-    city = models.CharField(max_length=50)
+    city_name = models.CharField(max_length=50)
 
 class District(models.Model):
     city_id = models.ForeignKey('City', on_delete=models.CASCADE, default = "")
     district_id = models.IntegerField(primary_key= True, default="")
-    district = models.CharField(max_length=50, blank = True, default="")
+    district_name = models.CharField(max_length=50, blank = True, default="")
 
     class Meta:
         unique_together = (('city_id', 'district_id'), )

@@ -332,7 +332,7 @@
 .searchBarContainer{
     display: flex;
     width: 80vw;
-    height: 48vh;
+    /* height: 48vh; */
     background: #FFFFFF;
     margin-bottom: 50px;
     border: 1px solid rgba(0, 0, 0, 0.05);

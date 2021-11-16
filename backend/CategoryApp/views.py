@@ -39,15 +39,18 @@ def collection_add(request):
 		return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
 	if request.method == 'POST':
-		user_id = request.data['user']
+		user_id = request.data['user_id']
 		if check_login(user_id):
 			post = Post.objects.get(post_id=request.data['post'])
 			category = Category.objects.get(category_id=request.data['category'])
 			collected_in = Collected_In(post=post, category=category)
 			serializer = CollectedInSerializer(collected_in, data=request.data)
 			if serializer.is_valid():
-				serializer.save()
-				return Response(status=status.HTTP_201_CREATED)
+				if (Collected_In.objects.filter(post=post, category=category).count() == 0):
+					serializer.save()
+					return Response(status=status.HTTP_201_CREATED)
+				else:
+					return Response("The post has been colleted in this category.", status=status.HTTP_400_BAD_REQUEST)
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
@@ -57,9 +60,9 @@ def collection_get(request):
 		return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
 
 	if request.method == 'POST':
-		user_id = request.data['user']
+		user_id = request.data['user_id']
 		if check_login(user_id):
-			category = Category.objects.get(category_id=request.data['category_id'])
+			category = Category.objects.get(category_id=request.data['category'])
 			posts_to_display = Collected_In.objects.filter(category=category)
 			serializer = CollectedInSerializer(posts_to_display, many=True)
 			return Response(serializer.data, status=status.HTTP_200_OK)
