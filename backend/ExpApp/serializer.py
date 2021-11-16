@@ -91,4 +91,4 @@ class CitySerializer(serializers.ModelSerializer):
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = District
-        fields = ('district_id', 'district')
+        fields = ('district_id', 'district_name')

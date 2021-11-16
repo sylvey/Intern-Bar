@@ -11,10 +11,11 @@ const SearchBar = ({setPosts}) =>{
     const [pos, setPos] = useState("");
     const [sDate, setSDate] = useState("");
     const [eDate, setEDate] = useState("");
-    const [city, setCity] = useState({city: "請選擇城市"});
-    const [dist, setDist] = useState({district: "請選擇鄉鎮市區"})
+    const [city, setCity] = useState({city_name: "請選擇城市"});
+    const [dist, setDist] = useState({district_name: "請選擇鄉鎮市區"})
 
     const [allCities, setAllCities] = useState();
+    const [allDists, setAllDists] = useState();
 
     const handleSearch = async()=>{
       const fetchData = async()=>{
@@ -25,6 +26,8 @@ const SearchBar = ({setPosts}) =>{
                 keyword_pos: pos,
                 keyword_sDate: sDate,
                 keyword_eDate: eDate,
+                keyword_city: city.city_name === "請選擇城市"? "" : city.city_name,
+                keyword_district: dist.district_name === "請選擇鄉鎮市區"? "": dist.district_name,
             });
 
             if(res.status === 200){
@@ -57,6 +60,32 @@ const SearchBar = ({setPosts}) =>{
       fetchData();
     }, [])
 
+    //fetch Dist data
+    useEffect(() => {
+      console.log("city_id:", city.city_id);
+      setDist({district_name: "請選擇鄉鎮市區"});
+      const fetchData = async()=>{
+        try {
+            let data = await axios.post("http://127.0.0.1:8000/api/district",{
+              city_id: city.city_id,
+            });
+
+            if(data.status === 200){
+                console.log("dist:", data.data); 
+                setAllDists(data.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
+        }
+      }
+
+      if(city.city_id){
+         fetchData();
+      }
+      
+    }, [city])
+
 
 
     return (
@@ -84,12 +113,12 @@ const SearchBar = ({setPosts}) =>{
               <Dropdown>
                 <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D" }} 
                                  variant="transparentBackground" id="dropdown-basic" >
-                  {city.city}
+                  {city.city_name}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {
                     allCities? allCities.map((item)=>(
-                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city}</Dropdown.Item>
+                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>
                     )):null
                   }
                 </Dropdown.Menu>
@@ -97,12 +126,12 @@ const SearchBar = ({setPosts}) =>{
               <Dropdown>
                 <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D", marginLeft:"20px"}} 
                                  variant="transparentBackground" id="dropdown-basic" >
-                  {dist.district}
+                  {dist.district_name}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {
-                    allCities? allCities.map((item)=>(
-                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city}</Dropdown.Item>
+                    allDists? allDists.map((item)=>(
+                      <Dropdown.Item onClick = {()=>setDist(item)}>{item.district_name}</Dropdown.Item>
                     )):null
                   }
                 </Dropdown.Menu>
