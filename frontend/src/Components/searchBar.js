@@ -101,16 +101,16 @@ const SearchBar = ({setPosts}) =>{
                    onChange = {(e)=>setPos(e.target.value)}/>
             
             <div className = "searchBarDateContainer centerVertical">
-              開始時間/結束時間
+              開始時間
               
               <input type = "date" 
-                     className = "searchBarDate marginLeftS"
+                     className = "searchBarDate marginLeftS marginRight"
                      value = {sDate}
                      
                      onChange = {(e)=>setSDate(e.target.value)}/>
-              /
+              結束時間
               <input type = "date"
-                     className = "searchBarDate"
+                     className = "searchBarDate marginLeftS"
                      value = {eDate}
                      onChange = {(e)=>setEDate(e.target.value)}/>
             </div>
