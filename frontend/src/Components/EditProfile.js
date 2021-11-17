@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Dropdown } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../csses/App.css'
 // import orgs from "../hardData/orgs";
@@ -8,9 +8,7 @@ import axios from "axios";
 
 
 function EditProfile(props){
-
-    
-    
+    //org related
     const [orgName, setOrgName] = useState("");
     const [filteredOrg, setFilteredOrg] = useState();
     const [showEditCompany, setShowEditCompany] = useState(false);
@@ -20,29 +18,33 @@ function EditProfile(props){
     const [orgSubmitted, setOrgSubmitted] = useState(false);
     const [orgError, setOrgError] = useState(null);
 
-
+    //pos related
     const [posName, setPosName] = useState("");
     const [filteredPos, setFilteredPos] = useState();
     const [showEditPos, setShowEditPos] = useState(false);
-    const [place, setPlace] = useState("");
+    const [salary, setSalary] = useState();
+    const [city, setCity] = useState({city_name: "請選擇城市"});
+    const [dist, setDist] = useState({district_name: "請選擇鄉鎮市區"})
+    const [allCities, setAllCities] = useState();
+    const [allDists, setAllDists] = useState();
     const [placeError, setPlaceError] = useState(null);
     const [pos, setPos] = useState({});
     const [posSubmitted, setPosSubmitted] = useState(false);
     const [posError, setPosError] = useState();
 
+    //startime related
     const [startTime, setStartTime] = useState(null);
     const [startError, setStartError] = useState(null);
 
+    //endtime related
     const [endTime, setEndTime] = useState(null);
     const [endError, setEndError] = useState(null);
-
-    
     
 
     const validate = () =>{
-        if(posName === "" || startTime == null || endTime == null || !orgSubmitted){
-            if(posName === ""){
-                setPosError("you must fill this field");
+        if( !posSubmitted || startTime == null || endTime == null || !orgSubmitted){
+            if(!posSubmitted){
+                setPosError("you haven't finished adding a position");
             }
             if(startTime == null){
                 setStartError("you haven't choose a time");
@@ -51,22 +53,44 @@ function EditProfile(props){
                 setEndError("you haven't choose a time");
             }
             if(!orgSubmitted){
-                setOrgError("you haven't finish adding an organization")
+                setOrgError("you haven't finished adding an organization")
             }
             return false;
         }
         
         return true;
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
         if(validate()){
             props.setEditShow(false);
+            const create = async()=>{
+                let res;
+                try {
+                    res = await axios.post("http://127.0.0.1:8000/api/exp/create",{
+                        user_id: window.sessionStorage.getItem('userId'),
+                        start_date: startTime,
+                        end_date: endTime,
+                        pos:pos,
+                    });
+                  
+                    if(res.status === 201){
+                        console.log("success create exp");
+                        console.log("create resdata:", res.data); 
+                    } 
+                    return;
+                }catch(e){
+                    console.log(e);
+                }
+            }
+            await create();
+            setPos({});
+            setOrg({});
+            setOrgSubmitted(false);
+            setPosSubmitted(false);
+            setStartTime(null);
+            setEndTime(null);
         }
-    }
-
-    const handleSetOrg = (e) =>{
-        setOrgName(e.target.value);
     }
 
     //filter orgs
@@ -91,10 +115,10 @@ function EditProfile(props){
       
     }, [orgName])
 
-    //filter poses
+    //filter postes
     useEffect(() => {
       if(posName !== "" && orgSubmitted == false){
-        setOrgError("請先填入公司名稱，否則無法正確新增職務名稱");
+        setOrgError("請先將公司名稱新增完成，否則無法正確新增職務名稱");
       }
       const fetchData = async()=>{
           let res;
@@ -116,16 +140,90 @@ function EditProfile(props){
       fetchData();
     }, [posName])
 
+    //fetch City Data
+    useEffect(() => {
+      const fetchData = async()=>{
+        try {
+            let data = await axios.get("http://127.0.0.1:8000/api/city");
 
+            if(data.status === 200){
+                console.log("cities:", data.data); 
+                setAllCities(data.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
+        }
+      }
+      fetchData();
+    }, [])
+
+    //fetch Dist data
+    useEffect(() => {
+      console.log("city_id:", city.city_id);
+      setDist({district_name: "請選擇鄉鎮市區"});
+      const fetchData = async()=>{
+        try {
+            let data = await axios.post("http://127.0.0.1:8000/api/district",{
+              city_id: city.city_id,
+            });
+
+            if(data.status === 200){
+                console.log("dist:", data.data); 
+                setAllDists(data.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
+        }
+      }
+
+      if(city.city_id){
+         fetchData();
+      }
+      
+    }, [city])
+
+    //submit org
     const handleSubmitOrg = (e) => {
       e.preventDefault();
+      let newOrg = org;
+      newOrg.email = orgEmail;
+      newOrg.website = orgWebsite;
+      setOrg(newOrg);
       setShowEditCompany(false);
       setOrgSubmitted(true);
+      console.log("Submit org:", org);
+    }
+
+    //submit pos
+    const handleSubmitPos = (e) =>{
+      e.preventDefault();
+      console.log("orginal pos:", pos);
+      if(city.city_name !== "請選擇城市"){
+        let newPos = pos;
+        newPos.salary = parseInt(salary);
+        if(dist.district_name === "請選擇鄉鎮市區"){
+          newPos.place = allDists[0].district_id;
+        }
+        else{
+          newPos.place = dist.district_id;
+        }
+        
+        setPos(newPos);
+        setShowEditPos(false);
+        setPosSubmitted(true);
+        console.log("submit pos:", pos);
+      }
+      else{
+        setPlaceError("工作地點為必填欄位");
+        console.log("avoid success");
+      }
     }
 
     useEffect(() => {
       
-      if(posName !== ""){
+      if(posSubmitted){
         setPosError(null);
       }
       if(startTime !== null){
@@ -138,7 +236,7 @@ function EditProfile(props){
           setOrgError(null)
       }
       
-    }, [posName, startTime, endTime, orgSubmitted])
+    }, [posSubmitted, startTime, endTime, orgSubmitted])
 
 
     return (
@@ -156,7 +254,7 @@ function EditProfile(props){
                     ):(
                     <input className="marginLeftS"
                            value={orgName}
-                           onChange = {handleSetOrg}
+                           onChange = {(e)=>setOrgName(e.target.value)}
                            required/>
                     )
                 }
@@ -244,7 +342,7 @@ function EditProfile(props){
                     <div className = "scrollRow centerVertical">  
                       <div className = "tagButton"
                           onClick={()=>{
-                            setPos({pos_id: -1, pos_name: posName})
+                            setPos({pos_id: -1, pos_name: posName, salary: 0, place: null, org: org})
                             setShowEditPos(true)
                             }}>新增 {posName}</div>  
                       {
@@ -270,25 +368,57 @@ function EditProfile(props){
                   <div className="flex marginTopS marginLeftS">
                     <p>薪資</p>
                     <div className = "flex column">
-                      <input className="marginLeftS" 
-                             value={orgEmail}
-                             onChange = {(e)=>setOrgEmail(e.target.value)}/>
-                    </div>
-                  </div>
-
-                  <div className="flex marginTopS marginLeftS">
-                    <p>公司網站</p>
-                    <div className = "flex column">
                       <input className="marginLeftS"
-                             value = {orgWebsite}
-                             onChange = {(e)=>setOrgWebsite(e.target.value)}/>
+                             type="number" 
+                             step="1"
+                             min = "0"
+                             value={salary}
+                             onChange = {(e)=>setSalary(e.target.value)}/>
                     </div>
+                    <p>元/月</p>
                   </div>
+                  <div className="flex marginTopS marginLeftS">
+                    <p>工作地點</p>
+                    <Dropdown>
+                      <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D", marginLeft:"20px" }} 
+                                       variant="transparentBackground" id="dropdown-basic" >
+                        {city.city_name}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        {
+                          allCities? allCities.map((item)=>(
+                            <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>
+                          )):null
+                        }
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                      <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D", marginLeft:"20px"}} 
+                                       variant="transparentBackground" id="dropdown-basic" >
+                        {dist.district_name}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        {
+                          allDists? allDists.map((item)=>(
+                            item.district_name !== "" ?
+                            (<Dropdown.Item onClick = {()=>setDist(item)}>{item.district_name}</Dropdown.Item>
+                            ): null
+                          )):null
+                        }
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    
+                  </div>
+                  {
+                    placeError == null? null:(
+                      <div className="marginLeftS" style = {{color:'red'}}>{placeError}</div>
+                    )
+                  }
                   
                   <button
                        type = "submit"
                        className = "button marginTopS marginRight endSelf"
-                       onClick = {handleSubmitOrg}
+                       onClick = {handleSubmitPos}
                        >新增</button>
                   
                 </form>

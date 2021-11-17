@@ -356,16 +356,17 @@
     display: flex;
     width: 90%;
     height: 12vh;
-    margin-top: 3vh;
-    background: #FAFAFA;
+    /* margin-top: 3vh; */
+    /* background-color: red; */
+    /* background: #FAFAFA; */
     /* border: 1px solid rgba(0, 0, 0, 0.3); */
     box-sizing: border-box;
 }
 
 .searchBarDate{
     display: flex;
-    width: 45%;
-    height: 12vh;
+    width: 30%;
+    height: 10vh;
     background: #FAFAFA;
     border: 1px solid rgba(0, 0, 0, 0.3);
     box-sizing: border-box;

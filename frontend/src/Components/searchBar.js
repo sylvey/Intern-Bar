@@ -99,13 +99,18 @@ const SearchBar = ({setPosts}) =>{
                    placeholder="職務名稱"
                    value = {pos}
                    onChange = {(e)=>setPos(e.target.value)}/>
-            <div className = "searchBarDateContainer">
+            
+            <div className = "searchBarDateContainer centerVertical">
+              開始時間/結束時間
+              
               <input type = "date" 
-                     className = "searchBarDate"
+                     className = "searchBarDate marginLeftS"
                      value = {sDate}
+                     
                      onChange = {(e)=>setSDate(e.target.value)}/>
+              /
               <input type = "date"
-                     className = "searchBarDate marginLeft"
+                     className = "searchBarDate"
                      value = {eDate}
                      onChange = {(e)=>setEDate(e.target.value)}/>
             </div>
@@ -129,21 +134,23 @@ const SearchBar = ({setPosts}) =>{
                   {dist.district_name}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {
-                    allDists? allDists.map((item)=>(
-                      <Dropdown.Item onClick = {()=>setDist(item)}>{item.district_name}</Dropdown.Item>
-                    )):null
-                  }
+                {
+                  allDists? allDists.map((item)=>(
+                    item.district_name !== "" ?
+                    (<Dropdown.Item onClick = {()=>setDist(item)}>{item.district_name}</Dropdown.Item>
+                    ): null
+                  )):null
+                }
                 </Dropdown.Menu>
               </Dropdown>
             </div>
           </div>
-          <div className = "buttonRightBox centerHorizontal"
+          <div className = "buttonRightBox"
                onClick = {handleSearch}>
             <img src={searchButton}
-                 class = "searchButton transparentBackground"
-                 width = "80px"
-                 height= "60px"/>
+                 class = "searchButton"
+                 width = "60px"
+                 height= "30px"/>
           </div>
         </div>
         
