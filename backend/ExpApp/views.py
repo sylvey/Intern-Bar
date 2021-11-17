@@ -4,7 +4,6 @@ from rest_framework.response import Response
 
 from .serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
 from .models import *
-from UserApp.models import User
 from UserApp.functs import check_login
 from .functs import *
 
