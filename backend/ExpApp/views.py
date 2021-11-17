@@ -17,7 +17,7 @@ def exp_create(request):
     if request.method == "POST":
         #Check login status
         user_id = request.data["user_id"]
-        if check_login(user_id)['result'] == False:
+        if check_login(user_id) == False:
             message = {"status": check_login(user_id)['status']}
             return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
         
@@ -90,3 +90,4 @@ from ExpApp.models import *
 from UserApp.models import User
 from UserApp.functs import check_login
 from ExpApp.functs import *
+

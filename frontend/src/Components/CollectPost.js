@@ -66,7 +66,7 @@ function CollectPost({show, setShow, post}){
         </Modal.Header>
         <Modal.Body >
             {
-                collections === []? "請先至珍藏項目新增珍藏資料夾" : (
+                collections.length === 0? "請先至珍藏項目新增珍藏資料夾" : (
                     <Dropdown>
                       <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D" }} 
                                        variant="transparentBackground" id="dropdown-basic" >
@@ -86,14 +86,19 @@ function CollectPost({show, setShow, post}){
             
         </Modal.Body>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={(e)=>setShow(false)}>
-            取消
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            確認收藏
-          </Button>
-        </Modal.Footer>
+        {
+            collections.length === 0? null:
+            <Modal.Footer>
+              <Button variant="secondary" onClick={(e)=>setShow(false)}>
+                取消
+              </Button>
+              <Button variant="primary" onClick={handleSubmit}>
+                確認收藏
+              </Button>
+            </Modal.Footer>
+
+        }
+        
       </Modal>
     </>
     );
