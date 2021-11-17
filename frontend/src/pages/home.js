@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import SearchBar from "../Components/searchBar";
 import '../csses/App.css'
 import myOwnPost from "../hardData/myOwnPost";
+import CollectPost from "../Components/CollectPost";
 import Post from "../Components/post";
 import axios from "axios";
 // import posts from "../hardData/posts";
@@ -9,6 +10,8 @@ import axios from "axios";
 
 const Home = ({userName}) =>{
     const [posts, setPosts] = useState();
+    const [postToBeCollected, setPostToBeCollected] = useState({title: "nothing"});
+    const [showCollect, setShowCollect] = useState(false);
 
     useEffect(() => {
         const fetchData = async ()=>{
@@ -39,16 +42,22 @@ const Home = ({userName}) =>{
                     posts? posts.map((item)=>{
                         return(
                             <Post 
-                                content = {item.content}
-                                title = {item.title}
-                                posName = {item.experience.pos.pos_name}
-                                time = {item.published_time}
-                                fromWhere = "home"
-                                orgName = {item.experience.pos.org.org_name}/>   
+                                post = {item}
+                                postToBeCollected = {postToBeCollected}
+                                setPostToBeCollected = {setPostToBeCollected}
+                                setShowCollect = {setShowCollect}
+                                fromWhere = "home"/>   
                         );
                     }):null
                 }
             </div>
+            
+            <CollectPost 
+                post = {postToBeCollected}
+                show = {showCollect}
+                setShow = {setShowCollect}
+            />
+                
         </div>
     )
 }

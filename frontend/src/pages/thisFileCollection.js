@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import myOwnPost from "../hardData/myOwnPost";
 import Post from "../Components/post";
 import axios from "axios";
 function ThisFileCollection(props){
@@ -41,12 +40,8 @@ function ThisFileCollection(props){
                     myColPost? myColPost.map((item)=>{
                         return(
                             <Post 
-                                content = {item.content}
-                                title = {item.title}
-                                posName = {item.experience.pos.pos_name}
-                                time = {item.published_time}
-                                fromWhere = "myfileCollection"
-                                orgName = {item.experience.pos.org.org_name}/>   
+                                post = {item.post}
+                                fromWhere = "myfileCollection"/> 
                         );
                     }) : null
                 }
