@@ -17,31 +17,28 @@ def exp_create(request):
     if request.method == "POST":
         #Check login status
         user_id = request.data["user_id"]
-        if check_login(user_id) == False:
-            message = {"status": check_login(user_id)['status']}
-            return Response(data = message, status = status.HTTP_400_BAD_REQUEST)
-        
-        # Deal with organization
-        if request.data["pos"]["pos_id"] == -1: #Create new instance of pos if needed
-            if request.data["pos"]["org"]["org_id"] == -1: # Create new instance of org if needed
-                request.data["pos"]["org"] = create_org(request.data["pos"]["org"])
-                print(request.data["pos"]["org"])
-            else: #User existing instance of org
-                request.data["pos"]["org"] = request.data["pos"]["org"]["org_id"]
+        if check_login(user_id):       
+            # Deal with organization
+            if request.data["pos"]["pos_id"] == -1: #Create new instance of pos if needed
+                if request.data["pos"]["org"]["org_id"] == -1: # Create new instance of org if needed
+                    request.data["pos"]["org"] = create_org(request.data["pos"]["org"])
+                    print(request.data["pos"]["org"])
+                else: #User existing instance of org
+                    request.data["pos"]["org"] = request.data["pos"]["org"]["org_id"]
 
-            # Deal with position   
-            request.data["pos"].pop("pos_id")
-            request.data["pos"] = create_pos(request.data["pos"])
-                 
-        else: #User existing instance of pos
-            request.data["pos"] = request.data["pos"]["pos_id"]
+                # Deal with position   
+                request.data["pos"].pop("pos_id")
+                request.data["pos"] = create_pos(request.data["pos"])
+                    
+            else: #User existing instance of pos
+                request.data["pos"] = request.data["pos"]["pos_id"]
 
-        #Deal with experience
-        expSerializer = ExpSerializer(data = request.data)
-        if expSerializer.is_valid(raise_exception=True):
-            new_exp = expSerializer.create()
-            message = {"exp_id": new_exp.exp_id}
-            return Response(data = message, status = status.HTTP_201_CREATED) 
+            #Deal with experience
+            expSerializer = ExpSerializer(data = request.data)
+            if expSerializer.is_valid(raise_exception=True):
+                new_exp = expSerializer.create()
+                message = {"exp_id": new_exp.exp_id}
+                return Response(data = message, status = status.HTTP_201_CREATED) 
 
 @api_view(['POST'])
 def search_org(request):
