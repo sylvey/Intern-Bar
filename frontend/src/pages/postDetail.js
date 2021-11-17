@@ -1,13 +1,72 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useLocation } from "react-router";
 import CollectPost from "../Components/CollectPost";
+import Comment from "../Components/comment";
+import axios from "axios";
 // import { BrowserRouter as useLocation } from "react-router-dom";
 function PostDetail(props){
     let location = useLocation();
     const [showCollect, setShowCollect] = useState(false);
-    console.log(location.state.post.experience.pos.org.org_name);
+    const [newComment, setNewComment] = useState("");
+    const [comments, setComments] = useState([]);
+    
+    const handleSubmitComment = async(e)=>{
+        e.preventDefault();
+        let today = new Date();
+        let time = today.getFullYear() + "-"+today.getMonth() + "-" + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        console.log("time:", time);
+        const create = async()=>{
+            let res;
+            try {
+                res = await axios.post("http://127.0.0.1:8000/api/comment/create",{
+                    author: window.sessionStorage.getItem('userId'),
+                    content: newComment,
+                    post_attached_id: location.state.post.post_id,
+                    published_time: time,
+                });
+              
+                if(res.status === 201){
+                    console.log("success create exp");
+                    console.log("create resdata:", res.data); 
+                } 
+                return;
+            }catch(e){
+                console.log(e);
+            }
+        }
+        await create();
+        setNewComment("");
+        //console.log("submit commemt")
+    }
+
+    const fetchData = async()=>{
+        let res;
+        try {
+            
+            res = await axios.post("http://127.0.0.1:8000/api/comment/get",{
+                post_id: location.state.post.post_id,
+            });
+            
+            if(res.status === 200){
+                console.log("success fetch");
+                console.log("comments in this post:", res.data);
+                setComments(res.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+    useEffect(() => {
+        fetchData()
+    }, [handleSubmitComment])
+    // console.log(location.state.post.experience.pos.org.org_name);
     return(
-        <div className = "page center fullPage">
+        <div className = "page centerVertical">
             <div className= "item">
                 <div className = "textLeftBox">
                     
@@ -35,6 +94,33 @@ function PostDetail(props){
                 }
                 
             </div>
+            
+            <div className="item">
+                <form className="fullWidth" onSubmit = {handleSubmitComment}>
+                    <input className="fullWidth" 
+                           value = {newComment}
+                           onChange = {(e)=>setNewComment(e.target.value)}
+                           type= "text" 
+                           placeholder = "留言"/>
+                </form>
+                
+            </div>
+            {
+                comments[0]?
+                <div className = "item column">
+                {
+                    comments !==[]? comments.map((item)=>{
+                        return(
+                            <Comment comment = {item}/>
+                        )
+                    }):null
+                }
+                </div>:null
+            }
+            
+            
+            
+
             <CollectPost 
                 post = {location.state.post}
                 show = {showCollect}

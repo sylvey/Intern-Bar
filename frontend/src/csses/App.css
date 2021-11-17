@@ -1,4 +1,7 @@
 /* page Title */
+.App{
+    background-color: #FAFAFA;
+}
 .pageTitle{
     display: flex;
     background-color: transparent;
@@ -16,7 +19,7 @@
     display: flex;
     width: 100vw;
     flex-direction: column;
-    background: rgba(222, 222, 222, 0.25);
+    /* background: rgba(222, 222, 222, 0.25); */
 }
 
 .redBackground{
@@ -130,6 +133,9 @@
 }
 .marginTopS{
     margin-Top: 12px;
+}
+.marginTopL{
+    margin-top: 50vh;
 }
 .column{
     flex-direction: column;
@@ -376,6 +382,7 @@
 /* text */
 
 .subTitleh{
+    font-size: large;
     color: black;
 }
 .subInformation{

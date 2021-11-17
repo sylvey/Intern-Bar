@@ -1,0 +1,6 @@
+.commentContainer{
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-width: 1.5px;
+    border-bottom-color: rgb(158, 157, 157);;
+}
