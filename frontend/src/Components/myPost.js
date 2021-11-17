@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import "../csses/App.css";
 import { Link } from "react-router-dom";
 
-function MyPostComponent (props) {
+function MyPostComponent ({post}) {
 
 
     return(
@@ -11,17 +11,14 @@ function MyPostComponent (props) {
             <div className = "textLeftBox">
                 <h1 className = "cursor">
                     <Link className="subTitleh" 
-                          to={{pathname: "/PostDetail/" + props.title, 
-                          state: {posName: props.posName, 
-                                  orgName: props.orgName, 
-                                  content: props.content,
-                                  time: props.time,
+                          to={{pathname: "/PostDetail/" + post.title, 
+                          state: {post: post,
                                   myPost: true}}}
-                          >{props.title}</Link>
+                          >{post.title}</Link>
                 </h1>
-                <div className = "subInformation">{props.posName}</div>
-                <div className = "subInformation">{props.orgName}</div>
-                <div className = "contentIgnoreBack">{props.content}</div>
+                <div className = "subInformation">{post.experience.pos.pos_name}</div>
+                <div className = "subInformation">{post.experience.pos.org.org_name}</div>
+                <div className = "contentIgnoreBack">{post.content}</div>
             </div>
             
             <div className = "buttonRightBox column">
@@ -29,7 +26,7 @@ function MyPostComponent (props) {
                     <div className = "button marginLeft marginTop">編輯</div>
                     <div className = "button marginLeft marginTop">刪除</div>
                 </div>
-                <div className = "flex fullHeight end">{props.time}</div>
+                <div className = "flex fullHeight end">{post.published_time}</div>
             </div>
             
         </div>

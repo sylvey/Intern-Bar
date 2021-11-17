@@ -72,7 +72,6 @@ def get_user_cat(request):
         
     if request.method == 'POST':
         user_id = request.data['user_id']
-        print(user_id)
         if check_login(user_id):
             #Get all categories of the user
             cat_list = Category.objects.filter(user = user_id)

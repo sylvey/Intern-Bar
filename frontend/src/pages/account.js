@@ -10,25 +10,26 @@ function Account(){
     const [editShow, setEditShow] = useState(false);
     const [profile, setProfile] = useState();
     
-    useEffect(() => {
-        const fetchData = async()=>{
-            let res;
-            try {
-                res = await axios.post("http://127.0.0.1:8000/api/user/exp/get",{
-                    user_id: window.sessionStorage.getItem('userId'),
-                });
+    const fetchData = async()=>{
+        let res;
+        try {
+            res = await axios.post("http://127.0.0.1:8000/api/user/exp/get",{
+                user_id: window.sessionStorage.getItem('userId'),
+            });
 
-                if(res.status === 200){
-                    console.log("res.data:", res.data); 
-                    setProfile(res.data); 
-                } 
-                return;
-            }catch(e){
-                console.log(e);
-            }
+            if(res.status === 200){
+                console.log("all my profile", res.data); 
+                setProfile(res.data); 
+            } 
+            return;
+        }catch(e){
+            console.log(e);
         }
+    }
+
+    useEffect(() => {
         fetchData();
-    }, [])
+    }, [editShow])
 
     const handleShow = () =>{
         setEditShow(true);
@@ -52,8 +53,8 @@ function Account(){
                                 posName = {item.pos.pos_name}
                                 orgName = {item.pos.org.org_name}
                                 place = {item.pos.place}
-                                startDate ={item.startDate}
-                                endDate = {item.endDate}/>
+                                startDate ={item.start_date}
+                                endDate = {item.end_date}/>
                         );
                     })
                     : null

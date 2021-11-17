@@ -4,7 +4,6 @@ from rest_framework.response import Response
 
 from .serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
 from .models import *
-from UserApp.models import User
 from UserApp.functs import check_login
 from .functs import *
 
@@ -17,7 +16,7 @@ def exp_create(request):
     if request.method == "POST":
         #Check login status
         user_id = request.data["user_id"]
-        if check_login(user_id):           
+        if check_login(user_id):       
             # Deal with organization
             if request.data["pos"]["pos_id"] == -1: #Create new instance of pos if needed
                 if request.data["pos"]["org"]["org_id"] == -1: # Create new instance of org if needed
@@ -81,10 +80,5 @@ def district(request):
         serializer = DistrictSerializer(districts, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-        
-from ExpApp.serializer import ExpSerializer, OrgSerializer, CitySerializer, DistrictSerializer
-from ExpApp.models import *
-from UserApp.models import User
-from UserApp.functs import check_login
-from ExpApp.functs import *
+
 

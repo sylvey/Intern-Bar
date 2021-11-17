@@ -24,7 +24,7 @@ const MyPost = () =>{
                 });
 
                 if(res.status === 200){
-                    console.log("res.data:", res.data); 
+                    console.log("my posts", res.data); 
                     setMyOwnPost(res.data); 
                 } 
                 return;
@@ -32,9 +32,8 @@ const MyPost = () =>{
                 console.log(e);
             }
         }
-        fetchData();
-        
-    }, [])
+        fetchData();  
+    }, [editShow])
 
 
     return (
@@ -48,11 +47,7 @@ const MyPost = () =>{
                     myOwnPost? (myOwnPost.map((item)=>{
                         return(
                             <MyPostComponent 
-                                content = {item.content}
-                                title = {item.title}
-                                time = {item.published_time}
-                                posName = {item.experience.pos.pos_name}
-                                orgName = {item.experience.pos.org.org_name}/>   
+                                post={item}/>   
                         );
                     })):null
                 }

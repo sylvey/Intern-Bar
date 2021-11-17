@@ -18,11 +18,8 @@ function Post ({post, fromWhere, postToBeCollected, setPostToBeCollected, setSho
                 <h1 className = "cursor">
                     <Link className="subTitleh" 
                           to={{pathname: "/PostDetail/" + post.title, 
-                          state: {posName: post.experience.pos.pos_Name, 
-                                  orgName: post.experience.pos.org.org_name, 
-                                  content: post.content,
-                                  time: post.published_time,
-                                  myPost: false}}}
+                          state: {post: post,
+                                  myPost: window.sessionStorage.getItem('userId') === post.publisher.user_id}}}
                           >{post.title}</Link>
                 </h1>
                 <div className = "subInformation">{post.experience.pos.pos_Name}</div>

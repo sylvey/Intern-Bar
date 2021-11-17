@@ -7,8 +7,6 @@ from .models import *
 from .serializer import *
 from UserApp.functs import *
 from UserApp.models import User
-from ExpApp.models import Experience
-import datetime
 from datetime import date
 from PostApp.serializer import PostSerializer
 
@@ -21,13 +19,10 @@ def post_create(request):
     if request.method == 'POST':
         user_id = request.data['publisher']
         if check_login(user_id):
-            publisher = User.objects.get(user_id = user_id)
-            post = Post(publisher = publisher)
-            serializer = PostSerializer(post, data = request.data)
-            if serializer.is_valid(): #validation of string length, datatype, etc.
-                post_obj = serializer.save()            
-                return Response(PostSerializer(post_obj).data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            postSerializer = PostSerializer(data = request.data)
+            if postSerializer.is_valid(raise_exception=True):
+                newPost = postSerializer.create()       
+                return Response(PostSerializer(newPost).data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
@@ -148,13 +143,3 @@ def comment_get(request):
         comments = Comment.objects.filter(post_attached_id=request.data['post_id'])
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
-from PostApp.models import *
-from PostApp.serializer import *
-from UserApp.functs import *
-from UserApp.models import User
-from ExpApp.models import Experience
-import datetime
-from datetime import date

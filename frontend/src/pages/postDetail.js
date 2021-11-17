@@ -1,19 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLocation } from "react-router";
+import CollectPost from "../Components/CollectPost";
 // import { BrowserRouter as useLocation } from "react-router-dom";
 function PostDetail(props){
     let location = useLocation();
-    console.log(location);
+    const [showCollect, setShowCollect] = useState(false);
+    console.log(location.state.post.experience.pos.org.org_name);
     return(
         <div className = "page center fullPage">
             <div className= "item">
                 <div className = "textLeftBox">
                     
                     <h1>{props.match.params.title}</h1>
-                    <div className = "subInformation">{location.state.orgName}</div>
-                    <div className = "subInformation">{location.state.posName}</div>
-                    <div className = "marginTopS">{location.state.content}</div>
-                    <div className = "subInformation marginTopS">{location.state.time}</div>
+                    <div className = "subInformation">{location.state.post.experience.pos.org.org_name}</div>
+                    <div className = "subInformation">{location.state.post.experience.pos.pos_name}</div>
+                    <div className = "marginTopS">{location.state.post.content}</div>
+                    <div className = "subInformation marginTopS">{location.state.post.published_time}</div>
                 </div>
                 {
                     location.state.myPost?(
@@ -26,12 +28,18 @@ function PostDetail(props){
                     ):(
                         
                         <div className = "buttonRightBox column centerVertical">
-                            <div className = "button marginTopS">收藏</div>
+                            <div className = "button marginTopS"
+                                 onClick = {(e)=>setShowCollect(true)}>收藏</div>
                             
                         </div>)
                 }
                 
             </div>
+            <CollectPost 
+                post = {location.state.post}
+                show = {showCollect}
+                setShow = {setShowCollect}
+            />
         </div>
     )
 }

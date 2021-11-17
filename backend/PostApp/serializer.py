@@ -1,15 +1,25 @@
 from rest_framework import serializers
+
+from ExpApp.models import Experience
 from .models import *
 from UserApp.models import User
 from UserApp.serializer import UserSerializer
 from ExpApp.serializer import ExpSerializer
 
 class PostSerializer(serializers.ModelSerializer):
-    experience = ExpSerializer(read_only = True)
-
     class Meta:
         model = Post
         fields = ('publisher', 'title', 'content', 'experience')
+
+    def create(self):
+        new_post = Post(
+            publisher = self.validated_data['publisher'],
+            title = self.validated_data['title'],
+            content = self.validated_data['content'],
+            experience = self.validated_data['experience']
+        )
+        new_post.save()
+        return new_post
 
     def to_representation(self, instance):
         return {

@@ -47,11 +47,15 @@ class PosSerializer(serializers.ModelSerializer):
         return new_pos
 
     def to_representation(self, instance):
+        ## get string for district
+        district = District.objects.get(district_id = instance.place.district_id)
+        city = City.objects.get(city_id = district.city_id.city_id)
+        place_str = city.city_name + district.district_name
         return {
             "pos_id": instance.pos_id,
             "pos_name": instance.pos_name,
             "salary": instance.salary,
-            "place": instance.place.district_id,
+            "place": place_str,
             "org": OrgSerializer(instance.org).data
         }
 
