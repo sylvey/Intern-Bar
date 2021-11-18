@@ -2,7 +2,7 @@
 
 ## Contributors & Tasks
 
-組員全部 - Database schema design, ER Design
++ 組員全部 - Database schema design, ER Design
 + 郭姿筠 - API Design, Back-end using Django(User-related, Experience-related)
 + 金民亞 - API Design, Back-end using Django(Post-related, Place-related)
 + 管晟宇 - Back-end using Django(User-caterogy-related, Comment-related)
@@ -42,6 +42,8 @@
 > POST collection/get </br>
 > POST collection/add </br>
 > POST district </br>
+
+----------------------
 
 ## Backend
 
