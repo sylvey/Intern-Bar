@@ -27,7 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
             "publisher": UserSerializer(instance.publisher).data,
             "title": instance.title,
             "content": instance.content,
-            "published_time": instance.published_time,
+            "published_time": instance.published_time.strftime("%Y/%m/%d %H:%M:%S"),
             "experience": ExpSerializer(instance.experience).data
         }
 
