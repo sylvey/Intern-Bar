@@ -1,6 +1,7 @@
 /* page Title */
 .App{
     background-color: #FAFAFA;
+    /* background-color: red; */
 }
 .pageTitle{
     display: flex;
@@ -36,7 +37,7 @@
     flex-direction: column;
     width: 100vw;
     height: 600px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     
 }
 .scrollRow{
@@ -172,6 +173,9 @@
 .cursor{
     cursor: pointer;
 }
+.borderRadius{
+    border-radius: 6px;
+}
 
 
  /* item */
@@ -183,6 +187,22 @@
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-bottom: 20px;
+}
+
+.commentInput{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    /* border: 1px solid rgba(204, 218, 233, 0.5); */
+    justify-self: center;
+    align-self: center;
+    border-width: 0ch;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+.commentInput:focus{
+    outline:none;
 }
 
 .profile{
@@ -228,7 +248,7 @@
     cursor: pointer;
     /* background-color: rgb(177, 175, 175); */
     height: 40px;
-    width: 60px;
+    width: 100px;
     border-style: solid;
     border-color: #82B3E3;
     color: #82B3E3;

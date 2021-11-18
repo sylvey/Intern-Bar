@@ -18,117 +18,86 @@ function EditPost(props){
     const [contentError, setContentError] = useState(null);
 
     const [exps, setExps] = useState([]);
-    const [exp, setExp] = useState({pos:{pos_name: "選擇一個現有的工作經驗"}});
+    const [exp, setExp] = useState({pos:{pos_name: "選擇一個現有的工作經驗", org:{org_name:""}}});
     const [expError, setExpError] = useState(null);
 
-    const validate = () =>{
-        if(howToAddPos === " add from current position"){
-            if(exp.pos.pos_name === "選擇一個現有的工作經驗"
-              || title === "" || content === ""){
-                if(exp.pos.pos_name === "選擇一個現有的工作經驗"){
-                    setExpError("請選擇貼文相關的工作經驗");
-                }
-                if(title === ""){
-                    setTitleError("請輸入標題");
-                }
-                if(content === ""){
-                    setContentError("請輸入內文");
-                }
-                return false;
-            }   
-        }
-        else{
-          if( !posSubmitted || startTime == null || endTime == null || !orgSubmitted
-              || title === "" || content === ""){
-              if(!posSubmitted){
-                  setPosError("you haven't finished adding a position");
-              }
-              if(startTime == null){
-                  setStartError("you haven't choose a time");
-              }
-              if(endTime == null){
-                  setEndError("you haven't choose a time");
-              }
-              if(!orgSubmitted){
-                  setOrgError("you haven't finished adding an organization")
-              }
-              if(title === ""){
-                  setTitleError("請輸入標題");
-              }
-              if(content === ""){
-                  setContentError("請輸入內文");
-              }
-              return false;
-          }
+    const setAllStateDefault = ()=>{
+        setHowToAddPos(" add from current position");
+        setTitle("");
+        setTitleError(null);
+        setContent("");
+        setContentError(null);
+        setExp({pos:{pos_name: "選擇一個現有的工作經驗", org:{org_name:""}}});
+        setExpError(null);
 
-        }
+        setExpSubmitted(false);
+        setOrgName("");
+        setShowEditCompany(false);
+        setOrgEmail("");
+        setOrgWebsite("");
+        setOrg({});
+        setOrgSubmitted(false);
+        setOrgError(null);
+        setPosName("");
+        setShowEditPos(false);
+        setSalary();
+        setCity({city_name: "請選擇城市"});
+        setDist({district_name: "請選擇鄉鎮市區"})
+        setPlaceError(null);
+        setPos({});
+        setPosSubmitted(false);
+        setPosError();
+        setStartTime(null);
+        setStartError(null);
+        setEndTime(null);
+        setEndError (null);
+    }
+    const validate = () =>{
+        
+      if(!expSubmitted || title === "" || content === ""){
+          if(title === ""){
+              setTitleError("請輸入標題");
+          }
+          if(content === ""){
+              setContentError("請輸入內文");
+          }
+          if(!expSubmitted){
+              setExpError("請選擇貼文相關的實習經驗");
+          }
+          return false;
+      }   
+        
         return true;
     }
 
-    const handleSubmit = async (e)=>{
-        
+    const handleSubmit = (e)=>{
         if(validate()){
-
           console.log("exp:", exp);
           const createPost = async()=>{
-            let res;
-            try {
-                res = await axios.post("http://127.0.0.1:8000/api/post/create",{
-                    publisher: window.sessionStorage.getItem('userId'),
-                    title: title,
-                    content: content,
-                    experience: exp.exp_id,
-                });
-              
-                if(res.status === 201){
-                    console.log("success create post");
-                    console.log("create post data:", res.data);
-                    setTitle("");
-                    setContent("");
-                    props.setEditShow(false); 
-                } 
-                return;
-            }catch(e){
-                console.log(e);
-            }
+                let res;
+                try {
+                    res = await axios.post("http://127.0.0.1:8000/api/post/create",{
+                        publisher: window.sessionStorage.getItem('userId'),
+                        title: title,
+                        content: content,
+                        experience: exp.exp_id,
+                    });
+                  
+                    if(res.status === 201){
+                        console.log("success create post");
+                        console.log("create post data:", res.data);
+                        setAllStateDefault();
+                        props.setEditShow(false);
+                    } 
+                    let x;
+                    return x;
+                }catch(e){
+                    console.log(e);
+                }    
           }
-
-          if(howToAddPos === " add from current position"){
-            await createPost();
-            
-          }else{
-            const createExp = async()=>{
-              let res;
-              try {
-                  res = await axios.post("http://127.0.0.1:8000/api/exp/create",{
-                      user_id: window.sessionStorage.getItem('userId'),
-                      start_date: startTime,
-                      end_date: endTime,
-                      pos:pos,
-                  });
-                
-                  if(res.status === 201){
-                      console.log("success create exp");
-                      console.log("create resdata:", res.data); 
-                      setExp(res.data);
-                      setPos({});
-                      setOrg({});
-                      setOrgSubmitted(false);
-                      setPosSubmitted(false);
-                      setStartTime(null);
-                      setEndTime(null);
-                  } 
-                  return;
-              }catch(e){
-                  console.log(e);
-              }
-            }
-            await createExp();
-            createPost();
-          }
+          createPost();
           
-        }
-        // console.log(howToAddPos, posError);
+        }   // console.log(howToAddPos, posError);
     }
 
     useEffect(() => {
@@ -165,6 +134,7 @@ function EditPost(props){
     }, [])
 
     //add new exp related-------------------------------
+    const [expSubmitted, setExpSubmitted] = useState(false);
     //org related
     const [orgName, setOrgName] = useState("");
     const [filteredOrg, setFilteredOrg] = useState();
@@ -197,6 +167,55 @@ function EditPost(props){
     const [endTime, setEndTime] = useState(null);
     const [endError, setEndError] = useState(null);
 
+    const validateExp = () =>{
+      if( !posSubmitted || startTime == null || endTime == null || !orgSubmitted){
+          if(!posSubmitted){
+              setPosError("you haven't finished adding a position");
+          }
+          if(startTime == null){
+              setStartError("you haven't choose a time");
+          }
+          if(endTime == null){
+              setEndError("you haven't choose a time");
+          }
+          if(!orgSubmitted){
+              setOrgError("you haven't finished adding an organization")
+          }
+          return false;
+      }
+      
+      return true;
+    }
+    const handleSubmitExp = async (e) =>{
+      e.preventDefault();
+      if(validateExp()){
+          const create = async()=>{
+              let res;
+              try {
+                  res = await axios.post("http://127.0.0.1:8000/api/exp/create",{
+                      user_id: window.sessionStorage.getItem('userId'),
+                      start_date: startTime,
+                      end_date: endTime,
+                      pos:pos,
+                  });
+                
+                  if(res.status === 201){
+                      console.log("success create exp");
+                      console.log("create resdata:", res.data); 
+                      let newExp = exp;
+                      newExp.exp_id = res.data.exp_id;
+                      setExp(newExp);
+                  } 
+                  return;
+              }catch(e){
+                  console.log(e);
+              }
+          }
+          await create();
+          setExpSubmitted(true);
+          
+      }
+    }
     //filter orgs
     useEffect(() => {
       const fetchData = async()=>{
@@ -260,7 +279,7 @@ function EditPost(props){
         }
       }
       fetchData();
-    }, [])
+    }, [city])
 
     //fetch Dist data
     useEffect(() => {
@@ -339,15 +358,19 @@ function EditPost(props){
       if(orgSubmitted){
           setOrgError(null)
       }
+      if(expSubmitted){
+        setExpError(null)
+      }
       
-    }, [posSubmitted, startTime, endTime, orgSubmitted])
+    }, [posSubmitted, startTime, endTime, orgSubmitted, expSubmitted])
 
     //add new exp related-----------------------
 
 
     return (
     <>
-      <Modal show={props.show} onHide={(e)=>props.setEditShow(false)}>
+      <Modal show={props.show} onHide={(e)=>{props.setEditShow(false)
+                                             setAllStateDefault()}}>
         <Modal.Header closeButton>
           <Modal.Title>新增貼文</Modal.Title>
         </Modal.Header>
@@ -358,22 +381,18 @@ function EditPost(props){
                 <>
                 <Dropdown>
                   <Dropdown.Toggle variant="transparentBackground" id="dropdown-basic" >
-                    {exp.pos.pos_name} {exp.pos.org? " in " + exp.pos.org.org_name:null}
+                    {exp.pos? exp.pos.pos_name: null}{exp.pos.org.org_name !== ""? " in "+ exp.pos.org.org_name : null}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     {
                       exps.map((item)=>(
-                        <Dropdown.Item onClick = {()=>setExp(item)}>{item.pos.pos_name} in {item.pos.org.org_name}</Dropdown.Item>
+                        <Dropdown.Item onClick = {()=>{setExp(item); setExpSubmitted(true)}}>{item.pos.pos_name} in {item.pos.org.org_name}</Dropdown.Item>
                       ))
                     }
                   </Dropdown.Menu>
                 </Dropdown>
-                {
-                  expError == null? null:(
-                    <div className="marginLeftS" style = {{color:'red'}}>{expError}</div>
-                  )
-                }
+                
                 </>
               ):null
               }
@@ -569,11 +588,18 @@ function EditPost(props){
                       <div className="flex marginTopS">
                           <p>開始日期</p>
                           <div className = "flex column">
-                            <input type="date" 
-                                   className="marginLeftS"
-                                   value={startTime}
-                                   onChange = {(e)=>setStartTime(e.target.value)}
-                                   required/>
+                            {
+                              expSubmitted?(
+                                <div className = "marginLeftS">{startTime? startTime: null}</div>
+                              ):(
+                                <input type="date" 
+                                    className="marginLeftS"
+                                    value={startTime}
+                                    onChange = {(e)=>setStartTime(e.target.value)}
+                                    required/>
+                              )
+                            }
+                            
                           </div>
                       </div>
                       {
@@ -584,11 +610,17 @@ function EditPost(props){
                       <div className="flex marginTopS">
                           <p>結束日期</p>
                           <div className = "flex column">
-                            <input type="date" 
-                                   className="marginLeftS"
-                                   value={props.endTime}
-                                   onChange = {(e)=>setEndTime(e.target.value)}
-                                   required/>
+                            {
+                              expSubmitted?(
+                                <div className = "marginLeftS">{endTime? endTime:null}</div>
+                                ):(
+                                <input type="date" 
+                                  className="marginLeftS"
+                                  value={props.endTime}
+                                  onChange = {(e)=>setEndTime(e.target.value)}
+                                  required/>)
+                            }
+                            
                           </div>
                       </div>
                       {
@@ -596,10 +628,24 @@ function EditPost(props){
                           <div className="marginLeftS" style = {{color:'red'}}>{endError}</div>
                         )
                       }
+                      {
+                        expSubmitted? null: (
+                          <div
+                            onClick = {handleSubmitExp}
+                            className = "button marginTopS marginRight endSelf"
+                            >確認職務無誤</div>
+                        )
+                      }
+                      
                       </>
 
                   </>
                 ):null
+              }
+              {
+                expError == null? null:(
+                  <div className="marginLeftS" style = {{color:'red'}}>{expError}</div>
+                )
               }
                
             <MyPicker 
@@ -639,7 +685,8 @@ function EditPost(props){
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={(e)=>props.setEditShow(false)}>
+          <Button variant="secondary" onClick={(e)=>{props.setEditShow(false)
+                                                     setAllStateDefault()}}>
             取消
           </Button>
           <Button variant="primary" onClick={handleSubmit}>

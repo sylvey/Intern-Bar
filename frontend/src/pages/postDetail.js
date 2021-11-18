@@ -72,7 +72,7 @@ function PostDetail(props){
                     
                     <h1>{props.match.params.title}</h1>
                     <div className = "subInformation">{location.state.post.experience.pos.org.org_name}</div>
-                    <div className = "subInformation">{location.state.post.experience.pos.pos_name}</div>
+                    <div className = "subInformation">{location.state.post.experience.pos.pos_name} in {location.state.post.experience.pos.place}</div>
                     <div className = "marginTopS">{location.state.post.content}</div>
                     <div className = "subInformation marginTopS">{location.state.post.published_time}</div>
                 </div>
@@ -80,8 +80,8 @@ function PostDetail(props){
                     location.state.myPost?(
                         <div className = "buttonRightBox column">
                             <div className = "flex row">
-                                <div className = "button marginLeft marginTop">編輯</div>
-                                <div className = "button marginLeft marginTop">刪除</div>
+                                {/* <div className = "button marginLeft marginTop">編輯</div>
+                                <div className = "button marginLeft marginTop">刪除</div> */}
                             </div>
                         </div>
                     ):(
@@ -95,9 +95,9 @@ function PostDetail(props){
                 
             </div>
             
-            <div className="item">
-                <form className="fullWidth" onSubmit = {handleSubmitComment}>
-                    <input className="fullWidth" 
+            <div className="item borderRadius">
+                <form onSubmit = {handleSubmitComment}>
+                    <input className="commentInput" 
                            value = {newComment}
                            onChange = {(e)=>setNewComment(e.target.value)}
                            type= "text" 

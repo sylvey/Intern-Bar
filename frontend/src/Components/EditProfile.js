@@ -41,6 +41,29 @@ function EditProfile(props){
     const [endError, setEndError] = useState(null);
     
 
+    const setAllStateDefault = () =>{
+        setOrgName("");
+        setShowEditCompany(false);
+        setOrgEmail("");
+        setOrgWebsite("");
+        setOrg({});
+        setOrgSubmitted(false);
+        setOrgError(null);
+        setPosName("");
+        setShowEditPos(false);
+        setSalary();
+        setCity({city_name: "請選擇城市"});
+        setDist({district_name: "請選擇鄉鎮市區"})
+        setPlaceError(null);
+        setPos({});
+        setPosSubmitted(false);
+        setPosError();
+        setStartTime(null);
+        setStartError(null);
+        setEndTime(null);
+        setEndError (null);
+    }
+
     const validate = () =>{
         if( !posSubmitted || startTime == null || endTime == null || !orgSubmitted){
             if(!posSubmitted){
@@ -63,7 +86,7 @@ function EditProfile(props){
     const handleSubmit = async (e) =>{
         e.preventDefault();
         if(validate()){
-            props.setEditShow(false);
+            
             const create = async()=>{
                 let res;
                 try {
@@ -84,12 +107,8 @@ function EditProfile(props){
                 }
             }
             await create();
-            setPos({});
-            setOrg({});
-            setOrgSubmitted(false);
-            setPosSubmitted(false);
-            setStartTime(null);
-            setEndTime(null);
+            setAllStateDefault();            
+            props.setEditShow(false);
         }
     }
 
@@ -241,7 +260,8 @@ function EditProfile(props){
 
     return (
     // <form onSubmit = {props.handleSubmit}>
-      <Modal show={props.show} onHide={props.handleClose}>
+      <Modal show={props.show} onHide={()=>{props.handleClose()
+                                            setAllStateDefault()}}>
         <Modal.Header closeButton>
           <Modal.Title>新增職務</Modal.Title>
         </Modal.Header>
@@ -469,7 +489,8 @@ function EditProfile(props){
             
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
+          <Button variant="secondary" onClick={()=>{props.handleClose()
+                                                    setAllStateDefault()}}>
             Close
           </Button>
           <Button variant= "primary" onClick = {handleSubmit}>

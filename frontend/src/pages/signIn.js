@@ -30,6 +30,7 @@ const SignIn = () =>{
                 setPassword("");
                 setError("");
                 handleNavigate();
+                alert("successfully registered")
             } 
             return;
         }catch(e){

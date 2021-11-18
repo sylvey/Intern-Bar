@@ -22,7 +22,9 @@ function Post ({post, fromWhere, postToBeCollected, setPostToBeCollected, setSho
                                   myPost: window.sessionStorage.getItem('userId') === post.publisher.user_id}}}
                           >{post.title}</Link>
                 </h1>
-                <div className = "subInformation">{post.experience.pos.pos_Name}</div>
+                
+                <div className = "subInformation">from {post.experience.start_date} to {post.experience.end_date}</div>
+                <div className = "subInformation">{post.experience.pos.pos_name} in {post.experience.pos.place}</div>
                 <div className = "subInformation">{post.experience.pos.org.org_name}</div>
                 <div className = "contentIgnoreBack">{post.content}</div>
             </div>
@@ -34,7 +36,10 @@ function Post ({post, fromWhere, postToBeCollected, setPostToBeCollected, setSho
                     ):null
                 }
                 
-                <div className = "flex fullHeight end">{post.published_time}</div>
+                <div className = "flex fullHeight end column">
+                    <p>{post.publisher.user_name + ` published at\n`} </p>
+                    <p>{post.published_time}</p>
+                </div>
             </div>
             
             

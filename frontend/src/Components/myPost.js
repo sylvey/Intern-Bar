@@ -22,10 +22,10 @@ function MyPostComponent ({post}) {
             </div>
             
             <div className = "buttonRightBox column">
-                <div className = "flex row">
+                {/* <div className = "flex row">
                     <div className = "button marginLeft marginTop">編輯</div>
                     <div className = "button marginLeft marginTop">刪除</div>
-                </div>
+                </div> */}
                 <div className = "flex fullHeight end">{post.published_time}</div>
             </div>
             

@@ -3,9 +3,9 @@ import "../csses/App.css";
 // import profile from "../hardData/profile";
 import MyProfile from "../Components/myProfile";
 import EditProfile from "../Components/EditProfile";
-import orgs from "../hardData/orgs";
+// import orgs from "../hardData/orgs";
 import axios from "axios";
-function Account(){
+const Account =()=>{
 
     const [editShow, setEditShow] = useState(false);
     const [profile, setProfile] = useState();

@@ -65,7 +65,6 @@ function App() {
               <Route path="/Collection">
                 <Collection/>
               </Route>
-              {/* <Route path="/MyPost" component={MyPost}/> */}
               <Route path="/MyPost">
                 <MyPost/>
               </Route>
