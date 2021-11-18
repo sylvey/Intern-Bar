@@ -43,7 +43,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "comment_id": instance.comment_id,
             "author": UserSerializer(instance.author).data['user_name'],
             # "post_attached_id": PostSerializer(instance.post_attached_id).data,
-            "published_time": instance.published_time,
+            "published_time": instance.published_time.strftime("%Y/%m/%d %H:%M:%S"),
             "content": instance.content,
         }
 
