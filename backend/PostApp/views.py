@@ -22,7 +22,9 @@ def post_create(request):
         user_id = request.data['publisher']
         if check_login(user_id):
             publisher = User.objects.get(user_id = user_id)
-            post = Post(publisher = publisher)
+            experience = request.data['experience']
+            publisher = Experience.objects.get(exp_id = experience)
+            post = Post()
             serializer = PostSerializer(post, data = request.data)
             if serializer.is_valid(): #validation of string length, datatype, etc.
                 post_obj = serializer.save()            
