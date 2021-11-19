@@ -124,7 +124,7 @@ python manage.py runserver
 ```
 
 用瀏覽器打開  http://127.0.0.1:8000/api/city ，如果有順利拿到資源表示後端起成功。
-### <span style="color:red">Image needed</span>
+# Image needed!!!!!!!!!
 ![](img/api.png)
 
 ## Frontend
@@ -151,7 +151,7 @@ yarn start
 #### 首頁（查詢貼文）
 <img width="1160" alt="image" src="https://user-images.githubusercontent.com/44054303/142606198-be19b492-24f5-4418-a768-bfff55daf7b1.png">
 
-### <span style="color:red"> NEED TO WRITE THIS PART, WHEN EVERYTHING IS COMPLETED </span>
+# NEED TO WRITE THIS PART, WHEN EVERYTHING IS COMPLETED 
 #### 車次時刻與適用優惠列表
 ![截圖 2021-10-17 下午10 55 38](https://user-images.githubusercontent.com/56534481/137632908-d0b43156-b165-4858-8930-9734e7f4d5ca.png)
 #### 票價試算
