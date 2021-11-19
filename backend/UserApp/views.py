@@ -87,7 +87,7 @@ def get_user_exp(request):
         if request.method == "POST":
             user_id = request.data['user_id']
             user = User.objects.get(user_id = user_id)
-            exp_list = Experience.objects.filter(user = user)
+            exp_list = Experience.objects.filter(user = user).order_by('-start_date')
             expSerializer = ExpSerializer(exp_list, many = True)
 
         return Response(data = expSerializer.data, status = status.HTTP_200_OK)

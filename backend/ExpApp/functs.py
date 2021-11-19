@@ -26,10 +26,12 @@ def create_pos(pos_data):
         place = District.objects.get(district_id = pos_data["place"]),
         salary = pos_data["salary"]
     )
+    print(existing_positions)
     if len(existing_positions) != 0:
         return existing_positions.first().pos_id
 
     posSerializer = PosSerializer(data = pos_data)
     if posSerializer.is_valid(raise_exception=True):
+        print(posSerializer.validated_data)
         new_pos = posSerializer.create()
         return new_pos.pos_id # Gets id of newly created pos
