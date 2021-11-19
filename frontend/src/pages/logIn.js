@@ -22,14 +22,14 @@ const LogIn = ({userId, setUserId, login, setLogin}) =>{
 
             if(res.status === 200){
                 // console.log("success");
-                setLogin(true);
-                setPassword("");
-                setError("");
-                handleNavigate();
-                
                 sessionStorage.clear();
                 window.sessionStorage.setItem('userId', userId);
                 console.log("success");
+                setLogin(true);
+                setPassword("");
+                setError("");
+
+                handleNavigate();
             } 
             return;
         }catch(e){

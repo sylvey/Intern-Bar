@@ -30,7 +30,7 @@ function Post ({post, fromWhere, postToBeCollected, setPostToBeCollected, setSho
             </div>
             <div className = "buttonRightBox column centerVertical">
                 {
-                    fromWhere == "home"?(
+                    fromWhere == "home" && window.sessionStorage.getItem('userId') && window.sessionStorage.getItem('userId') !== ""?(
                         <div className = "button marginTopS"
                              onClick = {handleToCollect}>收藏</div>
                     ):null

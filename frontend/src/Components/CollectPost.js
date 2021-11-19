@@ -27,8 +27,13 @@ function CollectPost({show, setShow, post}){
                 console.log(e);
             }
         }
-        fetchData();
-    }, [])
+        
+        if(window.sessionStorage.getItem('userId') && window.sessionStorage.getItem('userId') !== "")
+        {
+          fetchData();
+        }
+        
+    }, [window.sessionStorage.getItem('userId')])
 
     const handleSubmit = ()=>{
         const collect = async ()=>{
