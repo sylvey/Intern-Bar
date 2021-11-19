@@ -114,8 +114,8 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 
 最後，同步資料庫並啟動 backend server。
 如果是在本地端使用 `pgAdmin 4`(PostgreSQL) 作為資料庫，
-會需要先自行手動操作建資料庫(CREATE DATABASE)，且命名為 `project`
-是為一個空的 DATABASE。
+會需要先自行手動操作建資料庫(CREATE DATABASE)，且命名為 `project`。   
+
 而後執行 `python manage.py migrate`，
 會發現原先空的 DATABASE 突然多了許多張 TABLE，具有欄位名稱以及鍵值等限制與條件。
 
@@ -127,7 +127,14 @@ python manage.py migrate
 接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔匯入資料庫。
 
 ```shell
-
+UserApp_user.csv
+ExpApp_city.csv'
+ExpApp_organization.csv
+ExpApp_district.csv
+ExpApp_position.csv
+ExpApp_experience.csv
+PostApp_post.csv
+PostApp_comment.csv
 ```
 
 ```shell
