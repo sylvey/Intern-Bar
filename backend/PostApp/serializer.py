@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from ExpApp.models import Experience
 from .models import *
-from UserApp.models import User
 from UserApp.serializer import UserSerializer
 from ExpApp.serializer import ExpSerializer
 
@@ -27,11 +26,10 @@ class PostSerializer(serializers.ModelSerializer):
             "publisher": UserSerializer(instance.publisher).data,
             "title": instance.title,
             "content": instance.content,
-            "published_time": instance.published_time.strftime("%Y/%m/%d %H:%M:%S"),
+            "published_time": instance.published_time.strftime("%Y-%m-%d %H:%M:%S"),
             "experience": ExpSerializer(instance.experience).data
         }
 
-# -- Comment --
 class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -43,7 +41,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "comment_id": instance.comment_id,
             "author": UserSerializer(instance.author).data['user_name'],
             # "post_attached_id": PostSerializer(instance.post_attached_id).data,
-            "published_time": instance.published_time.strftime("%Y/%m/%d %H:%M:%S"),
+            "published_time": instance.published_time.strftime("%Y-%m-%d %H:%M:%S"),
             "content": instance.content,
         }
 

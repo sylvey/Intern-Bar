@@ -15,7 +15,9 @@ class ErrorMessage(APIException):
 #Checks whether the user exists and is logged-in.
 #Returns {'result': boolean, 'status': string}
 def check_login(user_id):
+    print(user_id)
     user = User.objects.filter(user_id = user_id).first()
+    print(User.objects.all())
     if user == None: #user not existing
         raise ErrorMessage(detail = {"status": "User does not exist"}, 
                 status_code = status.HTTP_400_BAD_REQUEST)
