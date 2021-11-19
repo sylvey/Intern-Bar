@@ -28,7 +28,7 @@ def post_create(request):
 @api_view(['GET'])
 def post_getAll(request):
     if request.method == 'GET':
-        posts = Post.objects.all().order_by('-published_time')
+        posts = Post.objects.all().order_by('-published_time')[:10]
         serializer = PostSerializer(posts, many = True)
         return Response(serializer.data ,status=status.HTTP_200_OK)
 
