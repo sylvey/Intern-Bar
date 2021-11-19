@@ -100,15 +100,19 @@ function EditProfile(props){
                     if(res.status === 201){
                         console.log("success create exp");
                         console.log("create resdata:", res.data); 
+                        setAllStateDefault(); 
+                        props.setEditShow(false);
+                        alert("新增個人檔案成功")
                     } 
                     return;
                 }catch(e){
                     console.log(e);
+                    alert("新增個人檔案失敗")
                 }
             }
             await create();
-            setAllStateDefault();            
-            props.setEditShow(false);
+            console.log("finish set create")
+            
         }
     }
 
@@ -133,6 +137,7 @@ function EditProfile(props){
       fetchData();
       
     }, [orgName])
+
 
     //filter postes
     useEffect(() => {

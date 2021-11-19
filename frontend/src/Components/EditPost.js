@@ -88,11 +88,13 @@ function EditPost(props){
                         console.log("create post data:", res.data);
                         setAllStateDefault();
                         props.setEditShow(false);
+                        alert("新增貼文成功")
                     } 
                     let x;
                     return x;
                 }catch(e){
                     console.log(e);
+                    alert("新增貼文失敗")
                 }    
           }
           createPost();
