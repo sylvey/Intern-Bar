@@ -9,6 +9,8 @@ function PostDetail(props){
     const [showCollect, setShowCollect] = useState(false);
     const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState([]);
+
+    const [trigger,setTrigger] = useState(false);
     
     const handleSubmitComment = async(e)=>{
         e.preventDefault();
@@ -28,6 +30,7 @@ function PostDetail(props){
                 if(res.status === 201){
                     console.log("success create exp");
                     console.log("create resdata:", res.data); 
+                    setTrigger(!trigger);
                 } 
                 return;
             }catch(e){
@@ -42,7 +45,6 @@ function PostDetail(props){
     const fetchData = async()=>{
         let res;
         try {
-            
             res = await axios.post("http://127.0.0.1:8000/api/comment/get",{
                 post_id: location.state.post.post_id,
             });
@@ -60,11 +62,8 @@ function PostDetail(props){
 
     useEffect(() => {
         fetchData()
-    }, [])
-    useEffect(() => {
-        fetchData()
-    }, [handleSubmitComment])
-    // console.log(location.state.post.experience.pos.org.org_name);
+    }, [trigger])
+
     return(
         <div className = "page centerVertical">
             <div className= "item">
