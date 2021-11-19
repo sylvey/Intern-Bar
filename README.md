@@ -52,22 +52,22 @@
 ```shell
 # for mac
 cd backend
-python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
-source tutorial-env/bin/activate #啟動虛擬環境 for mac
+python3 -m venv venv #建立虛擬環境 #-m: module-name
+source venv/bin/activate #啟動虛擬環境 for mac
 ```
 
 ```shell
 # for windows
 cd backend
-python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
-tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
+python3 -m venv venv #建立虛擬環境 #-m: module-name
+venv\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
 這邊要補充怎麼開資料庫和匯資料庫---*妍伶、民亞*
 ```shell
 ```
 
-成功的話，command prompt 前面應該會多出 `(tutorial-env)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
+成功的話，command prompt 前面應該會多出 `(venv)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
 接著下載所需套件，需要的套件與版本已定義在 `requirements.txt`，下載完輸入`pip list`檢查所有用 `pip` 下載的套件。
 
 ```shell
@@ -124,6 +124,7 @@ python manage.py runserver
 ```
 
 用瀏覽器打開  http://127.0.0.1:8000/api/city ，如果有順利拿到資源表示後端起成功。
+### Image needed
 ![](img/api.png)
 
 ## Frontend
@@ -150,6 +151,7 @@ yarn start
 #### 首頁（查詢貼文）
 <img width="1160" alt="image" src="https://user-images.githubusercontent.com/44054303/142606198-be19b492-24f5-4418-a768-bfff55daf7b1.png">
 
+### NEED TO WRITE THIS PART, WHEN EVERYTHING IS COMPLETED
 #### 車次時刻與適用優惠列表
 ![截圖 2021-10-17 下午10 55 38](https://user-images.githubusercontent.com/56534481/137632908-d0b43156-b165-4858-8930-9734e7f4d5ca.png)
 #### 票價試算
