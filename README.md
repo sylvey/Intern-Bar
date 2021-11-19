@@ -124,21 +124,21 @@ python manage.py migrate
 ```
 
 有了此專案所需的 TABLE 的架構於 DATABASE 中後，
-接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔匯入資料庫。
+接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔（如下）匯入資料庫。
+
+> UserApp_user.csv
+> ExpApp_city.csv
+> ExpApp_organization.csv
+> ExpApp_district.csv
+> ExpApp_position.csv
+> ExpApp_experience.csv
+> PostApp_post.csv
+> PostApp_comment.csv
+
+匯入的順序都有詳列在`db_data.ipynb`。　　
+隨後完成同步資料庫並啟動 backend server。
 
 ```shell
-UserApp_user.csv
-ExpApp_city.csv'
-ExpApp_organization.csv
-ExpApp_district.csv
-ExpApp_position.csv
-ExpApp_experience.csv
-PostApp_post.csv
-PostApp_comment.csv
-```
-
-```shell
-
 python manage.py runserver
 ```
 
