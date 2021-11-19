@@ -124,7 +124,7 @@ python3 manage.py createsuperuser #他們要求什麼你就打什麼（superuser
 python manage.py runserver
 ```
 
-用瀏覽器打開  http://127.0.0.1:8000/api/stations ，如果有順利拿到資源表示後端起成功。
+用瀏覽器打開  http://127.0.0.1:8000/api/city ，如果有順利拿到資源表示後端起成功。
 ![](img/api.png)
 
 ## Frontend
