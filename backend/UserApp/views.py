@@ -37,6 +37,7 @@ def login(request):
     if request.method == 'POST':
         user_id = request.data['user_id']
         password = request.data['password']
+        print(user_id, password)
         user = User.objects.filter(user_id = user_id).first()
         if user == None: #user not existing
             message = {"status": "User does not exist"}
