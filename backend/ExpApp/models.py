@@ -16,7 +16,7 @@ class Position(models.Model):
     pos_name = models.CharField(max_length=100)
     org = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='PosInOrg')
     place = models.ForeignKey('District', on_delete=models.CASCADE, related_name='PosInPlace')
-    salary = models.IntegerField(null=True, blank=True)
+    salary = models.CharField(max_length=50, null=True, blank=True)
     class Meta:
         unique_together = (("pos_name", "org", "place", "salary"))
 
