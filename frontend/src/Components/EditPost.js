@@ -236,7 +236,10 @@ function EditPost(props){
               console.log(e);
           }
       }
-      fetchData();
+      if(orgName !== ""){
+        fetchData();
+      }
+      
       
     }, [orgName])
 
@@ -262,7 +265,10 @@ function EditPost(props){
               console.log(e);
           }
       }
-      fetchData();
+      if(posName !== ""){
+        fetchData();
+      }
+      
     }, [posName])
 
     //fetch City Data
@@ -280,8 +286,11 @@ function EditPost(props){
             console.log(e);
         }
       }
-      fetchData();
-    }, [city])
+      if(howToAddPos !== " add from current position"){
+        fetchData();
+      }
+      
+    }, [howToAddPos])
 
     //fetch Dist data
     useEffect(() => {

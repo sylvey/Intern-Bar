@@ -134,7 +134,11 @@ function EditProfile(props){
               console.log(e);
           }
       }
-      fetchData();
+      if(orgName!== "")
+      {
+        fetchData();
+      }
+      
       
     }, [orgName])
 
@@ -161,7 +165,10 @@ function EditProfile(props){
               console.log(e);
           }
       }
-      fetchData();
+      if(posName !== ""){
+          fetchData();
+      }
+     
     }, [posName])
 
     //fetch City Data
