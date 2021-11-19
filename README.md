@@ -120,7 +120,6 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 
 ```shell
 python manage.py migrate
-python3 manage.py createsuperuser #他們要求什麼你就打什麼（superuserid, password, email 之類的）
 python manage.py runserver
 ```
 
@@ -136,6 +135,7 @@ python manage.py runserver
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
 ```shell
 cd frontend
+npm install @babel/helper-compilation-targets --save-dev #如果yarn start出error的話 加這一行重新試看看
 yarn
 ```
 
