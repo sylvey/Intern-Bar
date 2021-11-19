@@ -31,7 +31,7 @@
 > POST user/myCat </br>
 > POST user/exp/get </br>
 > POST user/post/get </br>
-> POST user/collection/create 
+> POST user/collection/create </br>
 > POST exp/create </br>
 > POST org/search </br>
 > POST pos/search </br>
@@ -126,16 +126,16 @@ python manage.py migrate
 有了此專案所需的 TABLE 的架構於 DATABASE 中後，
 接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔（如下）匯入資料庫。
 
-> UserApp_user.csv
-> ExpApp_city.csv
-> ExpApp_organization.csv
-> ExpApp_district.csv
-> ExpApp_position.csv
-> ExpApp_experience.csv
-> PostApp_post.csv
-> PostApp_comment.csv
+> UserApp_user.csv </br>
+> ExpApp_city.csv </br>
+> ExpApp_organization.csv </br>
+> ExpApp_district.csv </br>
+> ExpApp_position.csv </br>
+> ExpApp_experience.csv </br>
+> PostApp_post.csv </br>
+> PostApp_comment.csv </br>
 
-匯入的順序都有詳列在`db_data.ipynb`。　　
+匯入的順序都有詳列在`db_data.ipynb`。  
 隨後完成同步資料庫並啟動 backend server。
 
 ```shell
