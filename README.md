@@ -120,11 +120,10 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 
 ```shell
 python manage.py migrate
-python3 manage.py createsuperuser #他們要求什麼你就打什麼（superuserid, password, email 之類的）
 python manage.py runserver
 ```
 
-用瀏覽器打開  http://127.0.0.1:8000/api/stations ，如果有順利拿到資源表示後端起成功。
+用瀏覽器打開  http://127.0.0.1:8000/api/city ，如果有順利拿到資源表示後端起成功。
 ![](img/api.png)
 
 ## Frontend
@@ -136,6 +135,7 @@ python manage.py runserver
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
 ```shell
 cd frontend
+npm install @babel/helper-compilation-targets --save-dev #如果yarn start出error的話 加這一行重新試看看
 yarn
 ```
 
@@ -147,8 +147,9 @@ yarn start
 #### Step 3. 開啟瀏覽器 
 一般情況會自動開啟瀏覽器，若沒有請手動開啟 http://127.0.0.1:3000/ ，看到以下畫面即代表成功開啟前端且前後端連接成功。
 
-#### 查詢選單
-![截圖 2021-10-17 下午10 53 03](https://user-images.githubusercontent.com/56534481/137632819-dfc1e96b-7a0b-4086-92fe-33ec2bd48c66.png)
+#### 首頁（查詢貼文）
+<img width="1160" alt="image" src="https://user-images.githubusercontent.com/44054303/142606198-be19b492-24f5-4418-a768-bfff55daf7b1.png">
+
 #### 車次時刻與適用優惠列表
 ![截圖 2021-10-17 下午10 55 38](https://user-images.githubusercontent.com/56534481/137632908-d0b43156-b165-4858-8930-9734e7f4d5ca.png)
 #### 票價試算

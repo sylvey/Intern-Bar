@@ -65,6 +65,7 @@ class ExpSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = ('start_date', 'end_date', 'pos', 'user_id')
+        depth = 1
     
     def create(self):
         new_exp = Experience(
