@@ -92,6 +92,30 @@ sqlparse            0.4.1
 ```
 
 
+安裝完套件後複製 `.env.example` 的內容到 `.env`。
+
+>`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解上傳，同學們實作專案時記得避免。
+
+```shell
+# for mac
+cp .env.example .env
+```
+
+```shell
+# for windows
+copy .env.example .env
+```
+
+接著可以將 `.env` 當中的變數改成符合你電腦資料庫的值。
+
+```shell
+SECRET_KEY={aaaaaaaaa}
+DEBUG=True
+ALLOWED_HOSTS=.localhost,127.0.0.1
+DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
+```
+
+
 最後，同步資料庫並啟動 backend server。
 
 ```shell
