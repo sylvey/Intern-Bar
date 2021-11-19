@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav, Navbar, Container, NavDropdown, NavbarBrand } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useHistory } from "react-router";
 import logInButton from "../image/LogInButton.png";
 import RegisterButton from "../image/RegisterButton.png"
 import axios from "axios";
@@ -8,7 +9,9 @@ import axios from "axios";
 const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
 
     // const [userId, setUserId] = useState(window.sessionStorage.getItem('userId'))
-    
+    const history = useHistory();
+    const handleNavigate = ()=>history.push("/");
+
     async function handleLogOut(){
       let res;
       try{
@@ -22,6 +25,7 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
           console.log(userId)
           window.sessionStorage.clear();
           window.sessionStorage.setItem('userId', "");
+          handleNavigate();
           // window.sessionStorage.setItem('logInStatus', false);
         }
 
