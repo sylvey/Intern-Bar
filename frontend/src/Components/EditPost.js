@@ -518,7 +518,7 @@ function EditPost(props){
                                         <div className = "tagButtonG"
                                              onClick = {()=>{
                                                setPos(item)
-                                               setPosSubmitted(true)}}>{item.pos_name}</div>
+                                               setPosSubmitted(true)}}>{item.pos_name}{item.salary? `(薪資: ${item.salary} 元/月)`: null}</div>
                                       );
                                     })
                                   ):null
