@@ -63,6 +63,10 @@ python3 -m venv tutorial-env #建立虛擬環境 #-m: module-name
 tutorial-env\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
+這邊要補充怎麼開資料庫和匯資料庫---*妍伶、民亞*
+```shell
+```
+
 成功的話，command prompt 前面應該會多出 `(tutorial-env)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
 接著下載所需套件，需要的套件與版本已定義在 `requirements.txt`，下載完輸入`pip list`檢查所有用 `pip` 下載的套件。
 
