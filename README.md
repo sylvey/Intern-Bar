@@ -120,6 +120,7 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 
 ```shell
 python manage.py migrate
+python3 manage.py createsuperuser #他們要求什麼你就打什麼（superuserid, password, email 之類的）
 python manage.py runserver
 ```
 
