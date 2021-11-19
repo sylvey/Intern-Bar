@@ -63,10 +63,6 @@ python3 -m venv venv #建立虛擬環境 #-m: module-name
 venv\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
 
-這邊要補充怎麼開資料庫和匯資料庫---*妍伶、民亞*
-```shell
-```
-
 成功的話，command prompt 前面應該會多出 `(venv)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
 接著下載所需套件，需要的套件與版本已定義在 `requirements.txt`，下載完輸入`pip list`檢查所有用 `pip` 下載的套件。
 
@@ -107,6 +103,7 @@ copy .env.example .env
 ```
 
 接著可以將 `.env` 當中的變數改成符合你電腦資料庫的值。
+我們該專案創建的資料庫名 NAME 為 `project`，而 PORT 為 `5432`。
 
 ```shell
 SECRET_KEY={aaaaaaaaa}
@@ -115,11 +112,26 @@ ALLOWED_HOSTS=.localhost,127.0.0.1
 DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```
 
-
 最後，同步資料庫並啟動 backend server。
+如果是在本地端使用 `pgAdmin 4`(PostgreSQL) 作為資料庫，
+會需要先自行手動操作建資料庫(CREATE DATABASE)，且命名為 `project`
+是為一個空的 DATABASE。
+而後執行 `python manage.py migrate`，
+會發現原先空的 DATABASE 突然多了許多張 TABLE，具有欄位名稱以及鍵值等限制與條件。
 
 ```shell
 python manage.py migrate
+```
+
+有了此專案所需的 TABLE 的架構於 DATABASE 中後，
+接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔匯入資料庫。
+
+```shell
+
+```
+
+```shell
+
 python manage.py runserver
 ```
 
