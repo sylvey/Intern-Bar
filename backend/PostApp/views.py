@@ -19,6 +19,7 @@ def post_create(request):
 
     if request.method == 'POST':
         user_id = request.data['publisher']
+        #heyyyyyy
         if check_login(user_id):
             postSerializer = PostSerializer(data = request.data)
             if postSerializer.is_valid(raise_exception=True):
