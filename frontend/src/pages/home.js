@@ -40,6 +40,7 @@ const Home = ({userName}) =>{
             <div className="scroll centerVertical marginTopS" >
                 {
                     posts? posts.map((item)=>{
+                        console.log(item.publisher.user_name)
                         return(
                             <Post 
                                 post = {item}

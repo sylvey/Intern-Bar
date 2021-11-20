@@ -280,6 +280,7 @@ function EditPost(props){
             if(data.status === 200){
                 console.log("cities:", data.data); 
                 setAllCities(data.data); 
+                
             } 
             return;
         }catch(e){
@@ -289,7 +290,7 @@ function EditPost(props){
       if(howToAddPos !== " add from current position"){
         fetchData();
       }
-      
+      setExpSubmitted(false);
     }, [howToAddPos])
 
     //fetch Dist data
