@@ -136,8 +136,23 @@ python manage.py migrate
 > PostApp_comment.csv </br>
 
 匯入的順序都有詳列在`db_data.ipynb`。  
-隨後完成同步資料庫並啟動 backend server。
 
+因為目前資料庫內，ExpApp 和 PostApp 已經有匯入資料，因此必須設定 django 自動生成 primary key 之序列開頭，才能避免之後新增資料時，使用已經存在的流水號 primary key。
+打開 psql console 後，移到本專案所連結之資料庫，並輸入執行上個區塊指令後所產生的 sql 指令 ()。
+```psql shell
+\c NAME
+BEGIN;
+SELECT setval(pg_get_serial_sequence('"ExpApp_experience"','exp_id'), coalesce(max("exp_id"), 1), max("exp_id") IS NOT null) FROM "ExpApp_experience";
+SELECT setval(pg_get_serial_sequence('"ExpApp_position"','pos_id'), coalesce(max("pos_id"), 1), max("pos_id") IS NOT null) FROM "ExpApp_position";
+SELECT setval(pg_get_serial_sequence('"ExpApp_organization"','org_id'), coalesce(max("org_id"), 1), max("org_id") IS NOT null) FROM "ExpApp_organization";
+COMMIT;
+BEGIN;
+SELECT setval(pg_get_serial_sequence('"PostApp_post"','post_id'), coalesce(max("post_id"), 1), max("post_id") IS NOT null) FROM "PostApp_post";
+SELECT setval(pg_get_serial_sequence('"PostApp_comment"','comment_id'), coalesce(max("comment_id"), 1), max("comment_id") IS NOT null) FROM "PostApp_comment";
+COMMIT;
+```
+
+隨後完成同步資料庫並啟動 backend server。
 ```shell
 python manage.py runserver
 ```
