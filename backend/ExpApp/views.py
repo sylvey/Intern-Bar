@@ -33,10 +33,8 @@ def exp_create(request):
                 request.data["pos"] = request.data["pos"]["pos_id"]
 
             #Deal with experience
-            print(request.data)
             expSerializer = ExpSerializer(data = request.data)
             if expSerializer.is_valid(raise_exception=True):
-                print(expSerializer.validated_data)
                 new_exp = expSerializer.create()
                 message = {"exp_id": new_exp.exp_id}
                 return Response(data = message, status = status.HTTP_201_CREATED) 
@@ -57,7 +55,10 @@ def search_pos(request):
         return Response("Content type should be 'application/json'.", status=status.HTTP_400_BAD_REQUEST)
     
     if request.method == 'POST':
-        org = Organization.objects.get(org_id = request.data['org_id'])
+        try:
+            org = Organization.objects.get(org_id = request.data['org_id'])
+        except:
+            return Response(status = status.HTTP_200_OK)
         pos_list = Position.objects.filter(pos_name__icontains = request.data['keyword'], org = org)
         posSerializer = PosSerializer(pos_list, many = True)
         return Response(data = posSerializer.data, status = status.HTTP_200_OK)
