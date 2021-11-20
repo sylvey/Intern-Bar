@@ -47,6 +47,8 @@
 
 ## Backend
 
+#### Step 0.
+
 確定電腦有安裝 `python3` 以及完成上述資料匯入資料庫的指令後打開終端機執行以下指令：
 
 ```shell
@@ -62,6 +64,8 @@ cd backend
 python3 -m venv venv #建立虛擬環境 #-m: module-name
 venv\Scripts\activate.bat #啟動虛擬環境 for windows
 ```
+
+#### Step 1.
 
 成功的話，command prompt 前面應該會多出 `(venv)` 的字樣，代表已經進入這個虛擬環境。如果未來你想退出這個虛擬環境，可以輸入 `deactivate`。
 接著下載所需套件，需要的套件與版本已定義在 `requirements.txt`，下載完輸入`pip list`檢查所有用 `pip` 下載的套件。
@@ -87,6 +91,7 @@ setuptools          47.1.0
 sqlparse            0.4.1
 ```
 
+#### Step 3.
 
 安裝完套件後複製 `.env.example` 的內容到 `.env`。
 
@@ -112,6 +117,8 @@ ALLOWED_HOSTS=.localhost,127.0.0.1
 DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```
 
+#### Step 4.
+
 最後，同步資料庫並啟動 backend server。
 如果是在本地端使用 `pgAdmin 4`(PostgreSQL) 作為資料庫，
 會需要先自行手動操作建資料庫(CREATE DATABASE)，且命名為 `project`。   
@@ -122,6 +129,8 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```shell
 python manage.py migrate
 ```
+
+#### Step 5.
 
 有了此專案所需的 TABLE 的架構於 DATABASE 中後，
 接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔（如下）匯入資料庫。
@@ -137,6 +146,8 @@ python manage.py migrate
 
 匯入的順序都有詳列在`db_data.ipynb`。  
 
+#### Step 6.
+
 因為目前資料庫內，ExpApp 和 PostApp 已經有匯入資料，因此必須設定 django 自動生成 primary key 之序列開頭，才能避免之後新增資料時，使用已經存在的流水號 primary key。
 打開 psql console 後，移到本專案所連結之資料庫，並輸入執行上個區塊指令後所產生的 sql 指令 ()。
 ```psql shell
@@ -151,6 +162,7 @@ SELECT setval(pg_get_serial_sequence('"PostApp_post"','post_id'), coalesce(max("
 SELECT setval(pg_get_serial_sequence('"PostApp_comment"','comment_id'), coalesce(max("comment_id"), 1), max("comment_id") IS NOT null) FROM "PostApp_comment";
 COMMIT;
 ```
+#### Step 7.
 
 隨後完成同步資料庫並啟動 backend server。
 ```shell
