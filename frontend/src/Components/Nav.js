@@ -38,7 +38,7 @@ const NavigationBar = ({userId, setUserId, login, setLogin}) =>{
         // collapseOnSelect expand="lg"
         <Navbar expand="lg" bg="light" variant="light">
           <Container>
-          <Navbar.Brand href="/">Intern Bar</Navbar.Brand>
+          <Navbar.Brand href="/">Intern Bar 實習心得資訊分享平台</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto">
