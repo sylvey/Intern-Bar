@@ -20,7 +20,7 @@
 
 + 討論文件：https://hackmd.io/@SofiaK0426/SJUwaEgIt
 
-+ API endpoint: http://127.0.0.1:8000/api
++ API endpoint: http://127.0.0.1:8000/api/
 
 +接口
 > GET post/getAll </br>
