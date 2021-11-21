@@ -179,9 +179,18 @@ python manage.py runserver
 
 #### Step 1. 安裝 packages
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
+
 ```shell
 cd frontend
+```
+
+```shell
 yarn install
+yarn
+```
+上面出error的話，重新試看看這一個。
+```shell
+npm install @babel/helper-compilation-targets --save-dev
 npm update #如果yarn start出error的話 加這一行重新試看看
 yarn
 ```
