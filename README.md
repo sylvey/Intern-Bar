@@ -8,7 +8,7 @@
 + 管晟宇 - Back-end using Django(User-caterogy-related, Comment-related)
 + 杜沛慈 - Front-end Design, Logo Design
 + 林又昕 - Front-end using ReactJS, Front-end Back-end connection
-+ 李妍伶 - Data colleciton and process using postgreSQL
++ 李妍伶 - Data collecn and process using postgreSQL
 
 ## Database
 
@@ -77,25 +77,37 @@ pip list
 ```
 ```
 Package             Version
-------------------- -------
+------------------- ---------
 asgiref             3.4.1
+certifi             2021.10.8
+charset-normalizer  2.0.7
 dj-database-url     0.5.0
 Django              3.2.6
 django-cors-headers 3.8.0
 djangorestframework 3.12.4
-pip                 21.3
-psycopg2            2.9.1
+greenlet            1.1.2
+idna                3.3
+importlib-metadata  4.8.2
+numpy               1.19.5
+pandas              1.1.5
+pip                 21.3.1
+psycopg2-binary     2.9.1
+python-dateutil     2.8.2
 python-decouple     3.4
-pytz                2021.1
-setuptools          47.1.0
-sqlparse            0.4.1
+pytz                2021.3
+requests            2.26.0
+setuptools          40.6.2
+six                 1.16.0
+SQLAlchemy          1.4.27
+sqlparse            0.4.2
+typing_extensions   4.0.0
+urllib3             1.26.7
+zipp                3.6.0
 ```
 
 #### Step 3.
 
 安裝完套件後複製 `.env.example` 的內容到 `.env`。
-
->`.env`裡存的是環境變數，裡面通常會放一些機密資訊（如 `SECRET_KEY`、資料庫資訊等），這種檔案通常不會傳上版本控制系統（如 Github），但此為教學專案為了方便講解上傳，同學們實作專案時記得避免。
 
 ```shell
 # for mac
@@ -181,9 +193,7 @@ python manage.py runserver
 第一次開啟專案請先用以下指令安裝所有需要的 packages，之後再次開啟專案跳過這個指令即可。
 ```shell
 cd frontend
-npm install @babel/helper-compilation-targets --save-dev #如果yarn start出error的話 加這一行重新試看看
-npm update #如果yarn start出error的話 加這一行重新試看看
-yarn
+yarn install
 ```
 
 #### Step 2. 開啟前端
