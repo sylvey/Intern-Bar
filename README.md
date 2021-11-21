@@ -170,8 +170,7 @@ python manage.py runserver
 ```
 
 用瀏覽器打開  http://127.0.0.1:8000/api/city ，如果有順利拿到資源表示後端起成功。
-# Image needed!!!!!!!!!
-![](img/api.png)
+![image](https://user-images.githubusercontent.com/44054303/142756163-1b8b5468-bbd3-45ad-8573-5ab3a141bfa2.png)
 
 ## Frontend
 
@@ -196,12 +195,7 @@ yarn start
 一般情況會自動開啟瀏覽器，若沒有請手動開啟 http://127.0.0.1:3000/ ，看到以下畫面即代表成功開啟前端且前後端連接成功。
 
 #### 首頁（查詢貼文）
-<img width="1160" alt="image" src="https://user-images.githubusercontent.com/44054303/142606198-be19b492-24f5-4418-a768-bfff55daf7b1.png">
+![image](https://user-images.githubusercontent.com/44054303/142756370-ed471f68-daf7-45fc-b343-67e995783570.png)
 
-# NEED TO WRITE THIS PART, WHEN EVERYTHING IS COMPLETED 
-#### 車次時刻與適用優惠列表
-![截圖 2021-10-17 下午10 55 38](https://user-images.githubusercontent.com/56534481/137632908-d0b43156-b165-4858-8930-9734e7f4d5ca.png)
-#### 票價試算
-![截圖 2021-10-17 下午10 56 13](https://user-images.githubusercontent.com/56534481/137632935-88a6ca29-d65c-46be-9853-eb09fb4e91f2.png)
 
 
