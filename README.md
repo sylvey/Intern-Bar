@@ -105,7 +105,7 @@ urllib3             1.26.7
 zipp                3.6.0
 ```
 
-#### Step 3.
+#### Step 2.
 
 接著可以新增名稱為 .env 的檔案於 backend資料夾，複製以下內容並將 `.env` 當中的變數改成符合電腦資料庫的值。
 我們該專案創建的資料庫名 NAME 為 `project`，而 PORT 為 `5432`。
@@ -117,7 +117,7 @@ ALLOWED_HOSTS=.localhost,127.0.0.1
 DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 ```
 
-#### Step 4.
+#### Step 3.
 
 最後，同步資料庫並啟動 backend server。
 如果是在本地端使用 `pgAdmin 4`(PostgreSQL) 作為資料庫，
@@ -130,7 +130,7 @@ DATABASE_URL={postgres://USER:PASSWORD@HOST:PORT/NAME}
 python manage.py migrate
 ```
 
-#### Step 5.
+#### Step 4.
 
 有了此專案所需的 TABLE 的架構於 DATABASE 中後，
 接著可以透過 `db` （資料夾）中的 `db_data.ipynb` 來將其中的 csv 檔（如下）匯入資料庫。
@@ -146,7 +146,7 @@ python manage.py migrate
 
 匯入的順序都有詳列在`db_data.ipynb`。  
 
-#### Step 6.
+#### Step 5.
 
 因為目前資料庫內，ExpApp 和 PostApp 已經有匯入資料，因此必須設定 django 自動生成 primary key 之序列開頭，才能避免之後新增資料時，使用已經存在的流水號 primary key。
 打開 psql console 後，移到本專案所連結之資料庫，並輸入執行上個區塊指令後所產生的 sql 指令 ()。
@@ -162,7 +162,7 @@ SELECT setval(pg_get_serial_sequence('"PostApp_post"','post_id'), coalesce(max("
 SELECT setval(pg_get_serial_sequence('"PostApp_comment"','comment_id'), coalesce(max("comment_id"), 1), max("comment_id") IS NOT null) FROM "PostApp_comment";
 COMMIT;
 ```
-#### Step 7.
+#### Step 6.
 
 隨後完成同步資料庫並啟動 backend server。
 ```shell
