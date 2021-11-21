@@ -182,7 +182,8 @@ python manage.py runserver
 ```shell
 cd frontend
 yarn install
-npm install #如果yarn start出error的話 加這一行重新試看看
+npm update #如果yarn start出error的話 加這一行重新試看看
+yarn
 ```
 
 #### Step 2. 開啟前端
