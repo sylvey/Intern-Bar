@@ -547,6 +547,7 @@ function EditPost(props){
                             <div className="flex marginTopS marginLeftS">
                               <p>工作地點</p>
                               <Dropdown>
+                                
                                 <Dropdown.Toggle style= {{borderStyle: "solid", borderRadius:0, borderColor: "#9E9D9D", marginLeft:"20px" }} 
                                                  variant="transparentBackground" id="dropdown-basic" >
                                   {city.city_name}
@@ -554,7 +555,8 @@ function EditPost(props){
                                 <Dropdown.Menu>
                                   {
                                     allCities? allCities.map((item)=>(
-                                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>
+                                      item.city_name !== "臺灣"?
+                                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>:null
                                     )):null
                                   }
                                 </Dropdown.Menu>

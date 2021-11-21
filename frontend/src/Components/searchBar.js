@@ -17,7 +17,8 @@ const SearchBar = ({setPosts}) =>{
     const [allCities, setAllCities] = useState();
     const [allDists, setAllDists] = useState();
 
-    const handleSearch = async()=>{
+    const handleSearch = ()=>{
+      console.log(city.city_name,dist.district_name)
       const fetchData = async()=>{
         let res;
         try {
@@ -123,7 +124,8 @@ const SearchBar = ({setPosts}) =>{
                 <Dropdown.Menu>
                   {
                     allCities? allCities.map((item)=>(
-                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>
+                      item.city_name !== "臺灣"?
+                      <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>:null
                     )):null
                   }
                 </Dropdown.Menu>

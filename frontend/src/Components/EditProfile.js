@@ -419,7 +419,8 @@ function EditProfile(props){
                       <Dropdown.Menu>
                         {
                           allCities? allCities.map((item)=>(
-                            <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>
+                            item.city_name !== "臺灣"?
+                            <Dropdown.Item onClick = {()=>setCity(item)}>{item.city_name}</Dropdown.Item>:null
                           )):null
                         }
                       </Dropdown.Menu>
