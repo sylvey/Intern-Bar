@@ -4,7 +4,6 @@ django-cors-headers==3.8.0
 djangorestframework==3.12.4
 psycopg2-binary==2.9.1
 python-decouple==3.4
-psycopg2==2.9.2
 pandas
 sqlalchemy==1.4.27
 requests==2.26.0
