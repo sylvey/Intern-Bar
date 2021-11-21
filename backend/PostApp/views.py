@@ -91,20 +91,24 @@ def post_search(request):
 
 
 
-        if len(district) != 0:
-            temp_dis = Post.objects.filter(experience__pos__place__district_name__icontains = district)
-            if len(post_list) == 0:
-                post_list = temp_dis
-            else:
-                post_list = post_list.intersection(temp_dis)
-
-        
         if len(city) != 0: 
             temp_city = Post.objects.filter(experience__pos__place__city_id__city_name__icontains = city)
-            if len(post_list) == 0:
-                post_list = temp_city
+
+
+            if len(district) == 0 or district == "-":
+                if len(post_list) == 0:
+                    post_list = temp_city
+                else:
+                    post_list = post_list.intersection(temp_city)
+
+
             else:
-                post_list = post_list.intersection(temp_city)
+                temp_dis = Post.objects.filter(experience__pos__place__district_name__icontains = district)
+
+                if len(post_list) == 0:
+                    post_list = temp_dis
+                else:
+                    post_list = post_list.intersection(temp_dis)
 
 
 
