@@ -107,22 +107,10 @@ zipp                3.6.0
 
 #### Step 3.
 
-安裝完套件後複製 `.env.example` 的內容到 `.env`。
-
-```shell
-# for mac
-cp .env.example .env
-```
-
-```shell
-# for windows
-copy .env.example .env
-```
-
-接著可以將 `.env` 當中的變數改成符合你電腦資料庫的值。
+接著可以新增名稱為 .env 的檔案於 backend資料夾，複製以下內容並將 `.env` 當中的變數改成符合電腦資料庫的值。
 我們該專案創建的資料庫名 NAME 為 `project`，而 PORT 為 `5432`。
 
-```shell
+```.env
 SECRET_KEY={aaaaaaaaa}
 DEBUG=True
 ALLOWED_HOSTS=.localhost,127.0.0.1
