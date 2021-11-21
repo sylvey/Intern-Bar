@@ -188,7 +188,7 @@ cd frontend
 yarn install
 yarn
 ```
-上面出error的話，重新試看看這一個。
+yarn start出error的話，這一個步驟開始重新做看看。
 ```shell
 npm install @babel/helper-compilation-targets --save-dev
 npm update #如果yarn start出error的話 加這一行重新試看看
